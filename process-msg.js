@@ -22,6 +22,9 @@ messageInput.addEventListener('keypress', (event) => {
 });
 
 async function sendMessage(message) {
+    addMessageToLog('You', message);
+    messageInput.value = '';
+
     try {
         const response = await fetch('https://api.openai.com/v1/chat/completions', {
             method: 'POST',
@@ -53,9 +56,6 @@ async function sendMessage(message) {
         console.error('Error:', error);
         addMessageToLog('Error', error.message);
     }
-
-    addMessageToLog('You', message);
-    messageInput.value = '';
 }
 
 function addMessageToLog(sender, message) {
