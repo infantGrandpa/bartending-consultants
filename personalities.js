@@ -45,8 +45,11 @@ const PERSONALITIES = {
     }
 }
 
-export function getSystemPrompt(personalityKey) {
-    const personality = PERSONALITIES[personalityKey];
+export function getSystemPrompt(personality) {
     const personalityPrompt = personality.systemPrompt;
     return `${commonSystemPrompt} ${personalityPrompt}`
+}
+
+export function getPersonality(personalityKey) {
+    return PERSONALITIES[personalityKey];
 }
