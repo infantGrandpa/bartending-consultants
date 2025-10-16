@@ -1,6 +1,8 @@
-﻿import {getSystemPrompt} from "./personalities.js"
+﻿import {getPersonality, getSystemPrompt} from "./personalities.js"
 
 let currentConversationId = '';
+let personalityKey = "flirty"
+let currentPersonality = null
 
 const sendButton = document.getElementById('sendButton');
 const responseLog = document.getElementById('responseLog');
@@ -24,7 +26,8 @@ messageInput.addEventListener('keypress', (event) => {
 });
 
 async function createConversation(userMessage) {
-    const systemPrompt = getSystemPrompt("salty");
+    currentPersonality = getPersonality(personalityKey)
+    const systemPrompt = getSystemPrompt(currentPersonality);
 
     const response = await fetch('https://api.openai.com/v1/conversations', {
         method: 'POST',
@@ -33,7 +36,7 @@ async function createConversation(userMessage) {
             'Authorization': `Bearer ${openAiApiKey}`
         },
         body: JSON.stringify({
-            metadata: {personality: "salty"},
+            metadata: {personality: personalityKey},
             items: [
                 {
                     type: 'message',
@@ -85,8 +88,7 @@ async function addResponseToConversation(message) {
 
     console.log(data)
     const reply = data.output[0].content[0].text;
-    addMessageToLog("Bartender", reply);
-    console.log("AI:", reply);
+    addMessageToLog(currentPersonality.displayName, reply);
 }
 
 async function sendMessage(message) {
