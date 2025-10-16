@@ -64,8 +64,6 @@ async function createConversation(userMessage) {
 }
 
 async function addResponseToConversation(message) {
-    addMessageToLog('You', message)
-
     const response = await fetch('https://api.openai.com/v1/responses', {
         method: 'POST',
         headers: {
@@ -97,8 +95,15 @@ async function sendMessage(message) {
         currentConversationId = await createConversation(message);
     }
 
+    addMessageToLog('You', message);
+    clearMessageInput();
+
     console.log(`Conversation ID: ${currentConversationId}`);
     await addResponseToConversation(message, currentConversationId);
+}
+
+function clearMessageInput() {
+    messageInput.value = '';
 }
 
 function addMessageToLog(sender, message) {
