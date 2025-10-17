@@ -1,6 +1,6 @@
-import {disableSendButton, enableSendButton} from "./process-msg";
+import {addMessageToLog, disableSendButton, enableSendButton} from "./element-controller.js";
 
-let openAiApiKey = localStorage.getItem('openai_api_key');
+export let openAiApiKey = localStorage.getItem('openai_api_key');
 
 const apiKeySetup = document.getElementById('apiKeySetup');
 const apiKeyInput = document.getElementById('apiKeyInput');
