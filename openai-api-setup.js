@@ -1,3 +1,4 @@
+import {disableSendButton, enableSendButton} from "./process-msg";
 
 let openAiApiKey = localStorage.getItem('openai_api_key');
 
@@ -10,13 +11,11 @@ const saveApiKeyButton = document.getElementById('saveApiKeyButton');
 function checkApiKeyStatus() {
     if (!openAiApiKey) {
         apiKeySetup.classList.remove('hidden');
-        sendButton.disabled = true;
-        sendButton.classList.add('opacity-50', 'cursor-not-allowed');
+        disableSendButton();
     } else {
         apiKeySetup.classList.add('hidden');
         clearApiKeyButton.classList.remove('hidden');
-        sendButton.disabled = false;
-        sendButton.classList.remove('opacity-50', 'cursor-not-allowed');
+        enableSendButton();
     }
 }
 

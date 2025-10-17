@@ -106,6 +106,16 @@ function clearMessageInput() {
     messageInput.value = '';
 }
 
+export function enableSendButton() {
+    sendButton.disabled = false;
+    sendButton.classList.remove('opacity-50', 'cursor-not-allowed');
+}
+
+export function disableSendButton() {
+    sendButton.disabled = true;
+    sendButton.classList.add('opacity-50', 'cursor-not-allowed');
+}
+
 function addMessageToLog(sender, message) {
     // TODO: Update sender to be defined names rather than a string
     if (responseLog.querySelector('.text-gray-400.italic')) {
