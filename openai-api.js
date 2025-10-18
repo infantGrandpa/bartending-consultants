@@ -20,3 +20,37 @@ async function sendOpenAiRequest(endpoint, jsonBody) {
 
     return data
 }
+
+export async function createConversation(systemPrompt, userMessage, personalityKey) {
+    const requestBody = {
+        metadata: {personality: personalityKey},
+        items: [
+            {
+                type: 'message',
+                role: 'system',
+                content: systemPrompt
+            },
+            {
+                type: 'message',
+                role: 'user',
+                content: userMessage
+            }
+        ]
+    }
+
+    const conversation = await sendOpenAiRequest('conversations', requestBody);
+
+    console.log(`Conversation Created! Conversation ID: ${conversation.id}`);
+    return conversation.id;
+}
+
+export async function addResponseToConversation(message, conversationId) {
+    const requestBody = {
+        model: 'gpt-4o-mini',
+        conversation: conversationId,
+        input: message
+    }
+
+    const data = await sendOpenAiRequest('responses', requestBody)
+    return data.output[0].content[0].text;
+}
