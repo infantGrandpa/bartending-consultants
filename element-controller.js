@@ -1,4 +1,4 @@
-﻿import {sendMessage } from "./process-msg.js"
+﻿import {sendMessage} from "./process-msg.js"
 
 const sendButton = document.getElementById('sendButton');
 const responseLog = document.getElementById('responseLog');
