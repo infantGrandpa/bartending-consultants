@@ -15,7 +15,6 @@ export function disableSendButton() {
 }
 
 export function addMessageToLog(sender, message) {
-    // TODO: Update sender to be defined names rather than a string
     if (responseLog.querySelector('.text-gray-400.italic')) {
         responseLog.innerHTML = '';
     }
