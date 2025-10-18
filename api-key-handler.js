@@ -5,8 +5,8 @@ export let openAiApiKey = localStorage.getItem('openai_api_key');
 const apiKeySetup = document.getElementById('apiKeySetup');
 const apiKeyInput = document.getElementById('apiKeyInput');
 
-const clearApiKeyButton = document.getElementById('clearApiKeyButton');
-const saveApiKeyButton = document.getElementById('saveApiKeyButton');
+const clearApiKeysButton = document.getElementById('clearApiKeysButton');
+const saveApiKeysButton = document.getElementById('saveApiKeysButton');
 
 function checkApiKeyStatus() {
     if (!openAiApiKey) {
@@ -14,14 +14,14 @@ function checkApiKeyStatus() {
         hideMessageArea();
     } else {
         apiKeySetup.classList.add('hidden');
-        clearApiKeyButton.classList.remove('hidden');
+        clearApiKeysButton.classList.remove('hidden');
         showMessageArea();
     }
 }
 
 checkApiKeyStatus();
 
-saveApiKeyButton.addEventListener('click', () => {
+saveApiKeysButton.addEventListener('click', () => {
     const apiKey = apiKeyInput.value.trim();
     if (!apiKey) {
         alert('Please enter an API key');
@@ -34,7 +34,7 @@ saveApiKeyButton.addEventListener('click', () => {
     addMessageToLog('System', 'API key saved successfully!');
 });
 
-clearApiKeyButton.addEventListener('click', () => {
+clearApiKeysButton.addEventListener('click', () => {
     if (confirm('Are you sure you want to clear your stored API key?')) {
         localStorage.removeItem('openai_api_key');
         openAiApiKey = null;
