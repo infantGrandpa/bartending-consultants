@@ -10,28 +10,30 @@
 <div class="max-w-2xl mx-auto">
     <h1 class="text-3xl font-bold mb-8">AI Bartender</h1>
 
-    <!-- Response Log -->
-    <div class="bg-gray-800 rounded-lg p-6 mb-6 min-h-[300px]" id="responseLog">
-        <p class="text-gray-400 italic">Messages will appear here...</p>
-    </div>
+    <div id="messageArea">
+        <!-- Response Log -->
+        <div class="bg-gray-800 rounded-lg p-6 mb-6 min-h-[300px]" id="responseLog">
+            <p class="text-gray-400 italic">Messages will appear here...</p>
+        </div>
 
-    <!-- Input Area -->
-    <div class="mb-4">
-        <label for="messageInput" class="block text-sm font-semibold mb-2">Your Message:</label>
-        <input
-                type="text"
-                id="messageInput"
-                class="w-full bg-gray-800 text-white p-4 rounded-lg border border-gray-700 focus:border-blue-500 focus:outline-none"
-                placeholder="Type your message here..."
-        >
-    </div>
+        <!-- Input Area -->
+        <div class="mb-4">
+            <label for="messageInput" class="block text-sm font-semibold mb-2">Your Message:</label>
+            <input
+                    type="text"
+                    id="messageInput"
+                    class="w-full bg-gray-800 text-white p-4 rounded-lg border border-gray-700 focus:border-blue-500 focus:outline-none"
+                    placeholder="Type your message here..."
+            >
+        </div>
 
-    <!-- Send Button -->
-    <button
-            id="sendButton"
-            class="bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-lg font-semibold w-full">
-        Send Message
-    </button>
+        <!-- Send Button -->
+        <button
+                id="sendButton"
+                class="bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-lg font-semibold w-full">
+            Send Message
+        </button>
+    </div>
 
     <!-- API Key Setup (only shows if no key stored) -->
     <div id="apiKeySetup" class="mt-8 bg-gray-800 rounded-lg p-6 hidden">

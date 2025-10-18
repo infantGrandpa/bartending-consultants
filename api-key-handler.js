@@ -1,4 +1,4 @@
-﻿import {addMessageToLog, disableSendButton, enableSendButton} from "./element-controller.js";
+﻿import {addMessageToLog, hideMessageArea, showMessageArea} from "./element-controller.js";
 
 export let openAiApiKey = localStorage.getItem('openai_api_key');
 
@@ -11,11 +11,11 @@ const saveApiKeyButton = document.getElementById('saveApiKeyButton');
 function checkApiKeyStatus() {
     if (!openAiApiKey) {
         apiKeySetup.classList.remove('hidden');
-        disableSendButton();
+        hideMessageArea();
     } else {
         apiKeySetup.classList.add('hidden');
         clearApiKeyButton.classList.remove('hidden');
-        enableSendButton();
+        showMessageArea();
     }
 }
 

@@ -3,6 +3,7 @@
 const sendButton = document.getElementById('sendButton');
 const responseLog = document.getElementById('responseLog');
 const messageInput = document.getElementById('messageInput');
+const messageArea = document.getElementById('messageArea');
 
 export function enableSendButton() {
     sendButton.disabled = false;
@@ -12,6 +13,14 @@ export function enableSendButton() {
 export function disableSendButton() {
     sendButton.disabled = true;
     sendButton.classList.add('opacity-50', 'cursor-not-allowed');
+}
+
+export function showMessageArea() {
+    messageArea.classList.remove('hidden');
+}
+
+export function hideMessageArea() {
+    messageArea.classList.add('hidden');
 }
 
 export function addMessageToLog(sender, message) {
