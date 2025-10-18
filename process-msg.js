@@ -25,11 +25,12 @@ export async function sendMessage(message) {
     const reply = await addResponseToConversation(message, currentConversationId);
 
     addMessageToLog(currentPersonality.displayName, reply);
-    await speakResponse(reply,"JBFqnCBsd6RMkjVDRZzb");
+    await speakResponse(reply,"JBFqnCBsd6RMkjVDRZzb");      //TODO: get voiceId from personality
 }
 
 
 async function speakResponse(responseMessage, voiceId) {
+    // TODO: Extract ElevenLabs request
     const response = await fetch(`https://api.elevenlabs.io/v1/text-to-speech/${voiceId}`, {
         method: 'POST',
         headers: {
@@ -38,7 +39,7 @@ async function speakResponse(responseMessage, voiceId) {
         },
         body: JSON.stringify({
             text: responseMessage,
-            model_id: 'eleven_monolingual_v1',
+            model_id: 'eleven_monolingual_v1',      // TODO: Check if this is the model we actually want to use
             voice_settings: {
                 stability: 0.5,
                 similarity_boost: 0.75
