@@ -63,7 +63,7 @@ saveApiKeysButton.addEventListener('click', () => {
     elevenLabsApiKeyInput.value = '';
 
     checkApiKeyStatus();
-    addMessageToLog('System', 'API key saved successfully!');
+    addMessageToLog('System', 'API keys saved successfully!');
 });
 
 clearApiKeysButton.addEventListener('click', () => {
