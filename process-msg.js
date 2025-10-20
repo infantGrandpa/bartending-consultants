@@ -5,7 +5,7 @@ import {elevenLabsApiKey} from "./api-key-handler.js"
 import {playAudioBlob} from "./audio-handler.js";
 
 let currentConversationId = '';
-let personalityKey = "showman"
+let personalityKey = "flirty"
 let currentPersonality = null
 
 
@@ -39,7 +39,7 @@ async function speakResponse(responseMessage, voiceId) {
         },
         body: JSON.stringify({
             text: responseMessage,
-            model_id: 'eleven_monolingual_v1',      // TODO: Check if this is the model we actually want to use
+            model_id: 'eleven_flash_v2_5',
             voice_settings: {
                 stability: 0.5,
                 similarity_boost: 0.75
