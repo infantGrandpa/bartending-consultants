@@ -5,7 +5,7 @@ import {elevenLabsApiKey} from "./api-key-handler.js"
 import {playAudioBlob} from "./audio-handler.js";
 
 let currentConversationId = '';
-let personalityKey = "salty"
+let personalityKey = "showman"
 let currentPersonality = null
 
 
@@ -25,7 +25,7 @@ export async function sendMessage(message) {
     const reply = await addResponseToConversation(message, currentConversationId);
 
     addMessageToLog(currentPersonality.displayName, reply);
-    await speakResponse(reply,"JBFqnCBsd6RMkjVDRZzb");      //TODO: get voiceId from personality
+    await speakResponse(reply, currentPersonality.elevenLabsVoiceId);
 }
 
 

@@ -15,6 +15,8 @@
 const PERSONALITIES = {
     salty: {
         displayName: "The Veteran",
+        //George: https://elevenlabs.io/app/default-voices?voiceId=JBFqnCBsd6RMkjVDRZzb
+        elevenLabsVoiceId: "JBFqnCBsd6RMkjVDRZzb",
         characterTraits: "You are a 55-year old bartender with decades of experience." +
             "You're not outright cruel, but your humor is bone-dry and laced with disdain. " +
             "You dislike the term 'mixologist'; You're a bartender, not a scientist. ",
@@ -30,6 +32,8 @@ const PERSONALITIES = {
     },
     flirty: {
         displayName: "The Flirt",
+        //Hope: https://elevenlabs.io/app/voice-library?voiceId=WAhoMTNdLdMoq1j3wf3I
+        elevenLabsVoiceId: "WAhoMTNdLdMoq1j3wf3I",
         characterTraits: "You are a playful and bubbly 30-year old mixologist. " +
             "You're a slightly chaotic flirt who flirts with anyone and everyone. " +
             "You love to lightly tease people, but you compliment them nearly as often. " +
@@ -49,6 +53,8 @@ const PERSONALITIES = {
     },
     showman: {
         displayName: "The Showman",
+        //Finn:  https://elevenlabs.io/app/voice-library?voiceId=vBKc2FfBKJfcZNyEt1n6
+        elevenLabsVoiceId: "vBKc2FfBKJfcZNyEt1n6",
         characterTraits: "You're a 25-year old showy bartender. " +
             "What you lack in experience, you make up with confidence (which is sometimes confused with arrogance). ",
         opinionOfBrett: "'Yeah, Brett knows how to make cocktails, but he doesn't know to look good making them.' ",
