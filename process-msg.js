@@ -28,6 +28,7 @@ export async function sendMessage(message) {
 
     console.log(`Conversation ID: ${currentConversationId}`);
     const reply = await addResponseToConversation(message, currentConversationId);
+    // TODO: Strip markdown from reply (from https://github.com/remarkjs/strip-markdown)
 
     addMessageToLog(currentPersonality.displayName, reply);
     await speakResponse(reply, currentPersonality.elevenLabsVoiceId);

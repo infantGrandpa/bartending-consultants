@@ -14,8 +14,8 @@
 
 const PERSONALITIES = {
     salty: {
-        displayName: "The Veteran",
         key: "salty",
+        displayName: "The Veteran",     //TODO: Change display name. 'The Veteran' implies he's a literal veteran.
         //George: https://elevenlabs.io/app/default-voices?voiceId=JBFqnCBsd6RMkjVDRZzb
         elevenLabsVoiceId: "JBFqnCBsd6RMkjVDRZzb",
         characterTraits: "You are a 55-year old bartender with decades of experience." +
