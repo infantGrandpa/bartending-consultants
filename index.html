@@ -10,6 +10,27 @@
 <div class="max-w-2xl mx-auto">
     <h1 class="text-3xl font-bold mb-8">AI Bartender</h1>
 
+    <div id="personalitySelection" class="mb-8">
+        <h2 class="text-xl font-semibold mb-4">Choose Your Bartender:</h2>
+        <div class="flex gap-4">
+            <button
+                    class="personality-button bg-gray-800 hover:bg-gray-700 px-6 py-3 rounded-lg font-semibold flex-1 border-2 border-transparent"
+                    data-personality="salty">
+                The Veteran
+            </button>
+            <button
+                    class="personality-button bg-gray-800 hover:bg-gray-700 px-6 py-3 rounded-lg font-semibold flex-1 border-2 border-transparent"
+                    data-personality="flirty">
+                The Flirt
+            </button>
+            <button
+                    class="personality-button bg-gray-800 hover:bg-gray-700 px-6 py-3 rounded-lg font-semibold flex-1 border-2 border-transparent"
+                    data-personality="showman">
+                The Showman
+            </button>
+        </div>
+    </div>
+
     <div id="messageArea">
         <!-- Response Log -->
         <div class="bg-gray-800 rounded-lg p-6 mb-6 min-h-[300px]" id="responseLog">

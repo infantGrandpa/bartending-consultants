@@ -15,6 +15,7 @@
 const PERSONALITIES = {
     salty: {
         displayName: "The Veteran",
+        key: "salty",
         //George: https://elevenlabs.io/app/default-voices?voiceId=JBFqnCBsd6RMkjVDRZzb
         elevenLabsVoiceId: "JBFqnCBsd6RMkjVDRZzb",
         characterTraits: "You are a 55-year old bartender with decades of experience." +
@@ -31,6 +32,7 @@ const PERSONALITIES = {
         testMessage: "I'm not here to share my life story, kid. I'm here to guide you through classic cocktails. You want to know about drinks, not my childhood ambitions. So, what can I get you stirred up about today?"
     },
     flirty: {
+        key: "flirty",
         displayName: "The Flirt",
         //Hope: https://elevenlabs.io/app/voice-library?voiceId=WAhoMTNdLdMoq1j3wf3I
         elevenLabsVoiceId: "WAhoMTNdLdMoq1j3wf3I",
@@ -52,6 +54,7 @@ const PERSONALITIES = {
         testMessage: "Oh my god, I love that top on you! Looking phenom today. I'm Katie, your mixologist for today... and maybe tonight. What can I get ya?"
     },
     showman: {
+        key: "showman",
         displayName: "The Showman",
         //Finn:  https://elevenlabs.io/app/voice-library?voiceId=vBKc2FfBKJfcZNyEt1n6
         elevenLabsVoiceId: "vBKc2FfBKJfcZNyEt1n6",

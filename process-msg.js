@@ -5,17 +5,22 @@ import {elevenLabsApiKey} from "./api-key-handler.js"
 import {playAudioBlob} from "./audio-handler.js";
 
 let currentConversationId = '';
-let personalityKey = "flirty"
 let currentPersonality = null
 
+export function changePersonality(newPersonalityKey) {
+    currentPersonality = getPersonality(newPersonalityKey);
+    console.log(`Current Personality: ${currentPersonality.key} | ${currentPersonality.displayName}`)
+}
 
 export async function sendMessage(message) {
-    currentPersonality = getPersonality(personalityKey)
+    if (!currentPersonality) {
+        throw new Error("Personality not set. Select a personality.")
+    }
 
     if (!currentConversationId) {
         console.log(`No conversation ID found. Creating a new conversation...`);
         const systemPrompt = getSystemPrompt(currentPersonality);
-        currentConversationId = await createConversation(systemPrompt, message, personalityKey);
+        currentConversationId = await createConversation(systemPrompt, message, currentPersonality.key);
     }
 
     addMessageToLog('You', message);

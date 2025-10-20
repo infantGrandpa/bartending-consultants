@@ -1,9 +1,29 @@
-﻿import {sendMessage} from "./process-msg.js"
+﻿import {changePersonality, sendMessage} from "./process-msg.js"
 
 const sendButton = document.getElementById('sendButton');
 const responseLog = document.getElementById('responseLog');
 const messageInput = document.getElementById('messageInput');
 const messageArea = document.getElementById('messageArea');
+
+const personalityButtons = document.querySelectorAll('.personality-button');
+
+personalityButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        // Remove selected state from all buttons
+        personalityButtons.forEach(btn => {
+            btn.classList.remove('border-blue-500');
+            btn.classList.add('border-transparent');
+        });
+
+        // Add selected state to clicked button
+        button.classList.remove('border-transparent');
+        button.classList.add('border-blue-500');
+
+        // Get personality value and call your function
+        const selectedPersonality = button.getAttribute('data-personality');
+        changePersonality(selectedPersonality);
+    });
+});
 
 export function enableSendButton() {
     sendButton.disabled = false;
