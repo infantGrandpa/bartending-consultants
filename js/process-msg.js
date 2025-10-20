@@ -7,6 +7,8 @@ import {playAudioBlob} from "./audio-handler.js";
 let currentConversationId = '';
 let currentPersonality = null
 
+const speakMessage = false;
+
 export function changePersonality(newPersonalityKey) {
     currentPersonality = getPersonality(newPersonalityKey);
 }
@@ -29,7 +31,11 @@ export async function sendMessage(message) {
     // TODO: Strip markdown from reply (from https://github.com/remarkjs/strip-markdown)
 
     addMessageToLog(currentPersonality.displayName, reply);
-    await speakResponse(reply, currentPersonality.elevenLabsVoiceId);
+    if (speakMessage) {
+        // TODO: Add button to UI for speaking message aloud.
+        // We're turning this off to save on API usage
+        await speakResponse(reply, currentPersonality.elevenLabsVoiceId);
+    }
 }
 
 
