@@ -9,7 +9,6 @@ let currentPersonality = null
 
 export function changePersonality(newPersonalityKey) {
     currentPersonality = getPersonality(newPersonalityKey);
-    console.log(`Current Personality: ${currentPersonality.key} | ${currentPersonality.displayName}`)
 }
 
 export async function sendMessage(message) {
@@ -26,7 +25,6 @@ export async function sendMessage(message) {
     addMessageToLog('You', message);
     clearMessageInput();
 
-    console.log(`Conversation ID: ${currentConversationId}`);
     const reply = await addResponseToConversation(message, currentConversationId);
     // TODO: Strip markdown from reply (from https://github.com/remarkjs/strip-markdown)
 

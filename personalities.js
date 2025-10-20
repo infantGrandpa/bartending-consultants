@@ -78,7 +78,6 @@ export function getSystemPrompt(personality) {
     fullPrompt += `\n[COCKTAIL STYLE]\n${personality.cocktailStyle}`;
     fullPrompt += `\n[DIALOGUE STYLE]\n${personality.dialogueStyle}`;
 
-    console.log(fullPrompt)
     return fullPrompt;
 }
 

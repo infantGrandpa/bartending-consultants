@@ -75,6 +75,5 @@ clearApiKeysButton.addEventListener('click', () => {
         elevenLabsApiKey = null;
 
         checkApiKeyStatus();
-        console.log('API Keys cleared.')
     }
 });

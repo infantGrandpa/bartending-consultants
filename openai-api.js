@@ -39,8 +39,6 @@ export async function createConversation(systemPrompt, userMessage, personalityK
     }
 
     const conversation = await sendOpenAiRequest('conversations', requestBody);
-
-    console.log(`Conversation Created! Conversation ID: ${conversation.id}`);
     return conversation.id;
 }
 
