@@ -13,6 +13,14 @@ export function changePersonality(newPersonalityKey) {
     currentPersonality = getPersonality(newPersonalityKey);
 }
 
+export function getCurrentPersonality() {
+    return currentPersonality;
+}
+
+export function resetPersonality() {
+    currentPersonality = null;
+}
+
 export async function sendMessage(message) {
     if (!currentPersonality) {
         throw new Error("Personality not set. Select a personality.")
