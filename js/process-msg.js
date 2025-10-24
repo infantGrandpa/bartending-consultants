@@ -49,12 +49,12 @@ export async function sendMessage(message) {
     let reply = await addResponseToConversation(message, currentConversationId);
     reply = stripMarkdownFromString(reply);
 
-    addMessageToLog(currentPersonality.displayName, reply);
     if (speakMessage) {
         // TODO: Add button to UI for speaking message aloud.
         // We're turning this off to save on API usage
         await speakResponse(reply, currentPersonality.elevenLabsVoiceId);
     }
+    addMessageToLog(currentPersonality.displayName, reply);
 }
 
 
