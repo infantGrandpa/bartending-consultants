@@ -1,5 +1,5 @@
 ﻿import {getPersonality, getSystemPrompt} from "./personalities.js"
-import {addMessageToLog, clearMessageInput} from "./element-controller.js";
+import {addMessageToLog, changeBartenderImage, clearMessageInput} from "./element-controller.js";
 import {addResponseToConversation, createConversation} from "./openai-api.js";
 import {elevenLabsApiKey} from "./api-key-handler.js"
 import {playAudioBlob} from "./audio-handler.js";
@@ -12,6 +12,7 @@ const speakMessage = false;
 
 export function changePersonality(newPersonalityKey) {
     currentPersonality = getPersonality(newPersonalityKey);
+    changeBartenderImage(currentPersonality.imagePath);
 }
 
 export function getCurrentPersonality() {

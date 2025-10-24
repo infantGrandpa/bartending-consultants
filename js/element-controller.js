@@ -4,6 +4,7 @@ const sendButton = document.getElementById('sendButton');
 const responseLog = document.getElementById('responseLog');
 const messageInput = document.getElementById('messageInput');
 const messageArea = document.getElementById('messageArea');
+const bartenderImage = document.getElementById('bartenderImage')
 
 const personalityButtons = document.querySelectorAll('.personality-button');
 
@@ -82,6 +83,10 @@ export function addMessageToLog(sender, message) {
 
     responseLog.appendChild(messageElement);
     responseLog.scrollTop = responseLog.scrollHeight;
+}
+
+export function changeBartenderImage(newSrc) {
+    bartenderImage.src = newSrc;
 }
 
 export function clearMessageInput() {
