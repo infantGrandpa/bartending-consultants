@@ -6,89 +6,100 @@
     <title>Bartending Consultants</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-900 text-white min-h-screen p-8">
-<div class="max-w-2xl mx-auto">
-    <h1 class="text-3xl font-bold mb-8">AI Bartender</h1>
+<body class="bg-gray-900 text-white min-h-screen">
 
-    <div id="personalitySelection" class="mb-8">
-        <h2 class="text-xl font-semibold mb-4">Choose Your Bartender:</h2>
-        <div class="flex gap-4">
-            <button
-                    class="personality-button bg-gray-800 hover:bg-gray-700 px-6 py-3 rounded-lg font-semibold flex-1 border-2 border-transparent"
-                    data-personality="salty">
-                The Veteran
-            </button>
-            <button
-                    class="personality-button bg-gray-800 hover:bg-gray-700 px-6 py-3 rounded-lg font-semibold flex-1 border-2 border-transparent"
-                    data-personality="flirty">
-                The Flirt
-            </button>
-            <button
-                    class="personality-button bg-gray-800 hover:bg-gray-700 px-6 py-3 rounded-lg font-semibold flex-1 border-2 border-transparent"
-                    data-personality="showman">
-                The Showman
-            </button>
+<div class="grid grid-cols-3">
+    <div class="p-8 min-h-screen border-e-2 border-gray-800 border-solid bg-gray-950">
+
+        <div id="personalitySelection" class="mb-8">
+            <h2 class="text-xl font-semibold mb-4">Choose Your Bartender:</h2>
+            <div class="flex gap-4">
+                <button
+                        class="personality-button bg-gray-800 hover:bg-gray-700 px-6 py-3 rounded-lg font-semibold flex-1 border-2 border-transparent"
+                        data-personality="salty">
+                    The Veteran
+                </button>
+                <button
+                        class="personality-button bg-gray-800 hover:bg-gray-700 px-6 py-3 rounded-lg font-semibold flex-1 border-2 border-transparent"
+                        data-personality="flirty">
+                    The Flirt
+                </button>
+                <button
+                        class="personality-button bg-gray-800 hover:bg-gray-700 px-6 py-3 rounded-lg font-semibold flex-1 border-2 border-transparent"
+                        data-personality="showman">
+                    The Showman
+                </button>
+            </div>
+        </div>
+
+        <div>
+            <img id="bartenderImage" src="https://placehold.co/600x400"/>
         </div>
     </div>
+    <div class="p-4 min-h-screen col-span-2">
+        <h1 class="text-3xl font-bold mb-8 text-center">Bartending Consultants</h1>
 
-    <div id="messageArea">
-        <!-- Response Log -->
-        <div class="bg-gray-800 rounded-lg p-6 mb-6 min-h-[300px]" id="responseLog">
-            <p class="text-gray-400 italic">Messages will appear here...</p>
+        <div id="messageArea">
+            <!-- Response Log -->
+            <div class="bg-gray-800 rounded-lg p-6 mb-6 min-h-full" id="responseLog">
+                <p class="text-gray-400 italic">Messages will appear here...</p>
+            </div>
+
+            <!-- Input Area -->
+            <div class="mb-4">
+                <label for="messageInput" class="block text-sm font-semibold mb-2">Your Message:</label>
+                <input
+                        type="text"
+                        id="messageInput"
+                        class="w-full bg-gray-800 text-white p-4 rounded-lg border border-gray-700 focus:border-blue-500 focus:outline-none"
+                        placeholder="Type your message here..."
+                >
+            </div>
+
+            <!-- Send Button -->
+            <button
+                    id="sendButton"
+                    class="bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-lg font-semibold w-full">
+                Send Message
+            </button>
         </div>
 
-        <!-- Input Area -->
-        <div class="mb-4">
-            <label for="messageInput" class="block text-sm font-semibold mb-2">Your Message:</label>
+        <!-- API Key Setup (only shows if no key stored) -->
+        <div id="apiKeySetup" class="mt-8 bg-gray-800 rounded-lg p-6 hidden">
+            <h2 class="text-xl font-semibold mb-4">API Key Setup</h2>
+            <p class="text-gray-400 mb-4">Enter your API keys. It will be stored locally in your browser.</p>
+            <label for="openaiApiKeyInput">OpenAI API Key</label>
             <input
-                    type="text"
-                    id="messageInput"
-                    class="w-full bg-gray-800 text-white p-4 rounded-lg border border-gray-700 focus:border-blue-500 focus:outline-none"
-                    placeholder="Type your message here..."
+                    type="password"
+                    id="openaiApiKeyInput"
+                    class="w-full bg-gray-700 text-white p-3 rounded-lg border border-gray-600 focus:border-blue-500 focus:outline-none mb-4"
+                    placeholder="sk-..."
             >
+            <label for="elevenLabsApiKeyInput">ElevenLabs API Key</label>
+            <input
+                    type="password"
+                    id="elevenLabsApiKeyInput"
+                    class="w-full bg-gray-700 text-white p-3 rounded-lg border border-gray-600 focus:border-blue-500 focus:outline-none mb-4"
+                    placeholder="sk_..."
+            >
+            <button
+                    id="saveApiKeysButton"
+                    class="bg-green-600 hover:bg-green-700 px-6 py-3 rounded-lg font-semibold w-full">
+                Save API Keys
+            </button>
         </div>
 
-        <!-- Send Button -->
+        <!-- Clear API Key Button -->
         <button
-                id="sendButton"
-                class="bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-lg font-semibold w-full">
-            Send Message
+                id="clearApiKeysButton"
+                class="mt-4 bg-red-600 hover:bg-red-700 px-4 py-2 rounded-lg text-sm w-full hidden">
+            Clear Stored API Keys
         </button>
     </div>
-
-    <!-- API Key Setup (only shows if no key stored) -->
-    <div id="apiKeySetup" class="mt-8 bg-gray-800 rounded-lg p-6 hidden">
-        <h2 class="text-xl font-semibold mb-4">API Key Setup</h2>
-        <p class="text-gray-400 mb-4">Enter your API keys. It will be stored locally in your browser.</p>
-        <label for="openaiApiKeyInput">OpenAI API Key</label>
-        <input
-                type="password"
-                id="openaiApiKeyInput"
-                class="w-full bg-gray-700 text-white p-3 rounded-lg border border-gray-600 focus:border-blue-500 focus:outline-none mb-4"
-                placeholder="sk-..."
-        >
-        <label for="elevenLabsApiKeyInput">ElevenLabs API Key</label>
-        <input
-                type="password"
-                id="elevenLabsApiKeyInput"
-                class="w-full bg-gray-700 text-white p-3 rounded-lg border border-gray-600 focus:border-blue-500 focus:outline-none mb-4"
-                placeholder="sk_..."
-        >
-        <button
-                id="saveApiKeysButton"
-                class="bg-green-600 hover:bg-green-700 px-6 py-3 rounded-lg font-semibold w-full">
-            Save API Keys
-        </button>
-    </div>
-
-    <!-- Clear API Key Button -->
-    <button
-            id="clearApiKeysButton"
-            class="mt-4 bg-red-600 hover:bg-red-700 px-4 py-2 rounded-lg text-sm w-full hidden">
-        Clear Stored API Keys
-    </button>
 </div>
 
+
+</body>
 <script type="module" src="js/openai-api.js"></script>
 <script type="module" src="js/api-key-handler.js"></script>
 <script type="module" src="js/process-msg.js"></script>
@@ -96,5 +107,4 @@
 <script type="module" src="js/element-controller.js"></script>
 <script type="module" src="js/audio-handler.js"></script>
 <script type="module" src="js/utils.js"></script>
-</body>
 </html>
