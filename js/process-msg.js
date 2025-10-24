@@ -13,6 +13,7 @@ const speakMessage = false;
 export function changePersonality(newPersonalityKey) {
     currentPersonality = getPersonality(newPersonalityKey);
     changeBartenderImage(currentPersonality.imagePath);
+    clearExistingConversation();
 }
 
 export function getCurrentPersonality() {
@@ -25,6 +26,10 @@ export function resetPersonality() {
 
 export function isConversationOngoing() {
     return !!currentConversationId;
+}
+
+function clearExistingConversation() {
+    currentConversationId = '';
 }
 
 export async function sendMessage(message) {
