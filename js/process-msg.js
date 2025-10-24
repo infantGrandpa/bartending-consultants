@@ -3,6 +3,7 @@ import {addMessageToLog, clearMessageInput} from "./element-controller.js";
 import {addResponseToConversation, createConversation} from "./openai-api.js";
 import {elevenLabsApiKey} from "./api-key-handler.js"
 import {playAudioBlob} from "./audio-handler.js";
+import {stripMarkdownFromString} from "./utils.js";
 
 let currentConversationId = '';
 let currentPersonality = null
@@ -35,8 +36,8 @@ export async function sendMessage(message) {
     addMessageToLog('You', message);
     clearMessageInput();
 
-    const reply = await addResponseToConversation(message, currentConversationId);
-    // TODO: Strip markdown from reply (from https://github.com/remarkjs/strip-markdown)
+    let reply = await addResponseToConversation(message, currentConversationId);
+    reply = stripMarkdownFromString(reply);
 
     addMessageToLog(currentPersonality.displayName, reply);
     if (speakMessage) {
