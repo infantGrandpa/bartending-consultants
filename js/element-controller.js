@@ -41,6 +41,8 @@ personalityButtons.forEach(button => {
         } else {
             disableSendButton();
         }
+
+        initializeResponseLog();
     });
 });
 
@@ -96,6 +98,22 @@ export function addMessageToLog(sender, message) {
     responseLog.appendChild(messageElement);
     responseLog.scrollTop = responseLog.scrollHeight;
 }
+
+const defaultLogHTML = `
+    <p class="text-gray-400 italic">What kind of drink are you looking for? Tell me about:</p>
+    <ul class="text-gray-400 italic list-disc list-inside">
+        <li>Your preferred spirits (rum, whiskey, gin, etc.)</li>
+        <li>Your preferred flavors (fruity, smokey, sour, etc.)</li>
+        <li>Your preferred weight (light and refreshing, standard body, spirit forward, etc)</li>
+        <li>Flavors and spirits you do NOT like</li>
+    </ul>
+`;
+
+export function initializeResponseLog() {
+    responseLog.innerHTML = defaultLogHTML;
+}
+
+document.addEventListener('DOMContentLoaded', initializeResponseLog);
 
 export function changeBartenderImage(newSrc) {
     bartenderImage.src = newSrc;
