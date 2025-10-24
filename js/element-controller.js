@@ -1,4 +1,4 @@
-﻿import {changePersonality, getCurrentPersonality, sendMessage} from "./process-msg.js"
+﻿import {changePersonality, getCurrentPersonality, isConversationOngoing, sendMessage} from "./process-msg.js"
 
 const sendButton = document.getElementById('sendButton');
 const responseLog = document.getElementById('responseLog');
@@ -10,6 +10,20 @@ const personalityButtons = document.querySelectorAll('.personality-button');
 
 personalityButtons.forEach(button => {
     button.addEventListener('click', () => {
+        const selectedPersonality = button.getAttribute('data-personality');
+
+        const currentPersonality = getCurrentPersonality();
+        if (currentPersonality && selectedPersonality === currentPersonality.key) {
+            return;
+        }
+
+        if (isConversationOngoing()) {
+            const userConfirmed = confirm('Changing personality will start a new conversation. Continue?');
+            if (!userConfirmed) {
+                return;
+            }
+        }
+
         // Remove selected state from all buttons
         personalityButtons.forEach(btn => {
             btn.classList.remove('border-blue-500');
@@ -20,8 +34,6 @@ personalityButtons.forEach(button => {
         button.classList.remove('border-transparent');
         button.classList.add('border-blue-500');
 
-        // Get personality value and call your function
-        const selectedPersonality = button.getAttribute('data-personality');
         changePersonality(selectedPersonality);
 
         if (selectedPersonality) {

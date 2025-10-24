@@ -23,6 +23,10 @@ export function resetPersonality() {
     currentPersonality = null;
 }
 
+export function isConversationOngoing() {
+    return !!currentConversationId;
+}
+
 export async function sendMessage(message) {
     if (!currentPersonality) {
         throw new Error("Personality not set. Select a personality.")
