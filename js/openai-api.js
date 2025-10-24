@@ -44,7 +44,7 @@ export async function createConversation(systemPrompt, userMessage, personalityK
 
 export async function addResponseToConversation(message, conversationId) {
     const requestBody = {
-        model: 'gpt-4o-mini',
+        model: 'gpt-4.1',
         conversation: conversationId,
         input: message
     }
