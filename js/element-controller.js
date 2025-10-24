@@ -45,12 +45,12 @@ document.addEventListener('DOMContentLoaded', initializeSendButtonState);
 
 export function enableSendButton() {
     sendButton.disabled = false;
-    sendButton.classList.remove('opacity-50', 'cursor-not-allowed');
+    sendButton.classList.remove('opacity-30', 'cursor-not-allowed');
 }
 
 export function disableSendButton() {
     sendButton.disabled = true;
-    sendButton.classList.add('opacity-50', 'cursor-not-allowed');
+    sendButton.classList.add('opacity-30', 'cursor-not-allowed');
 }
 
 export function showMessageArea() {

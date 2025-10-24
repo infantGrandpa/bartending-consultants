@@ -83,21 +83,23 @@
 
             <!-- Input Area -->
             <div class="mb-4">
-                <label for="messageInput" class="block text-sm font-semibold mb-2">Your Message:</label>
-                <input
-                        type="text"
-                        id="messageInput"
-                        class="w-full bg-gray-800 text-white p-4 rounded-lg border border-gray-700 focus:border-blue-500 focus:outline-none"
-                        placeholder="Type your message here..."
-                >
+                <div class="relative">
+                    <input
+                            type="text"
+                            id="messageInput"
+                            class="w-full bg-gray-800 text-white p-4 pr-12 rounded-lg border border-gray-700 focus:border-blue-500 focus:outline-none"
+                            placeholder="Type your message here..."
+                    >
+                    <button
+                            id="sendButton"
+                            class="absolute right-2 top-1/2 -translate-y-1/2 bg-blue-600 hover:bg-blue-700 p-2 rounded-lg">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="22" y1="2" x2="11" y2="13"></line>
+                            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                        </svg>
+                    </button>
+                </div>
             </div>
-
-            <!-- Send Button -->
-            <button
-                    id="sendButton"
-                    class="bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-lg font-semibold w-full">
-                Send Message
-            </button>
         </div>
     </div>
 </div>
