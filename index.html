@@ -36,12 +36,10 @@
             <img id="bartenderImage" src="https://placehold.co/600x400"/>
         </div>
     </div>
-    <div class="p-4 min-h-screen col-span-2">
-        <h1 class="text-3xl font-bold mb-8 text-center">Bartending Consultants</h1>
-
-        <div id="messageArea">
+    <div class="p-4 min-h-full col-span-2">
+        <div id="messageArea" class="flex flex-col h-full">
             <!-- Response Log -->
-            <div class="bg-gray-800 rounded-lg p-6 mb-6 min-h-full" id="responseLog">
+            <div class="bg-gray-800 rounded-lg p-6 mb-6 flex-1 overflow-y-auto" id="responseLog">
                 <p class="text-gray-400 italic">What kind of drink are you looking for? Tell me about:</p>
                 <ul class="text-gray-400 italic list-disc list-inside">
                     <li>Your preferred spirits (rum, whiskey, gin, etc.)</li>
