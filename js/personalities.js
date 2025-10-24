@@ -10,6 +10,7 @@
     "Always make a twist on this drink (ranging from major to minor changes) based on your personality. " +
     "You are always in conversation, so all responses should be written as if they were spoken out loud." +
     "Keep responses concise - 4-5 sentences max unless asked for more detail. " +
+    "Always spell out full ingredients (i.e. ounces). " +
     "Respond in plain text format. Do not use emojis."
 
 const PERSONALITIES = {
