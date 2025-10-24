@@ -8,7 +8,7 @@ import {stripMarkdownFromString} from "./utils.js";
 let currentConversationId = '';
 let currentPersonality = null
 
-const speakMessage = false;
+const speakMessage = true;
 
 export function changePersonality(newPersonalityKey) {
     currentPersonality = getPersonality(newPersonalityKey);
