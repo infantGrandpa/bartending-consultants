@@ -9,7 +9,7 @@
 <body class="bg-gray-900 text-white min-h-screen">
 
 <div class="grid grid-cols-3">
-    <div class="p-8 min-h-screen border-e-2 border-gray-800 border-solid bg-gray-950 shadow-2xl shadow-black">
+    <div class="p-8 min-h-screen border-e-2 border-gray-800 border-solid bg-gray-950 shadow-2xl shadow-black flex flex-col h-full justify-between">
 
         <div id="personalitySelection" class="mb-8">
             <h2 class="text-xl font-semibold mb-4">Choose Your Bartender:</h2>
@@ -33,7 +33,8 @@
         </div>
 
         <div>
-            <img id="bartenderImage" src="https://placehold.co/574x861/030712/white?text=Choose+a+Bartender&font=roboto" alt="Bartender Image"/>
+            <img id="bartenderImage" src="https://placehold.co/574x861/030712/white?text=Choose+a+Bartender&font=roboto"
+                 alt="Bartender Image" class="w-full max-h-[700px] object-contain"/>
         </div>
 
         <!-- API Key Setup (only shows if no key stored) -->
@@ -93,7 +94,8 @@
                     <button
                             id="sendButton"
                             class="absolute right-2 top-1/2 -translate-y-1/2 bg-blue-600 hover:bg-blue-700 p-2 rounded-lg">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <line x1="22" y1="2" x2="11" y2="13"></line>
                             <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
                         </svg>
