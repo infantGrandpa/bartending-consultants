@@ -46,7 +46,9 @@ export async function sendMessage(message) {
     addMessageToLog('You', message);
     clearMessageInput();
 
-    let reply = await addResponseToConversation(message, currentConversationId);
+    const responseString = await addResponseToConversation(message, currentConversationId);
+    const response = JSON.parse(responseString);
+    let reply = response.message;
     reply = stripMarkdownFromString(reply);
 
     if (speakMessage) {
