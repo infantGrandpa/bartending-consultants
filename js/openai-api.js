@@ -40,7 +40,13 @@ export async function createConversation(systemPrompt, userMessage, personalityK
         ]
     }
 
-    const conversation = await sendOpenAiRequest('conversations', requestBody);
+    let conversation;
+    if (isDevEnv()) {
+        conversation = {id: "123456"}
+        console.log(`DEV MODE: Dummy Conversation created.`);
+    } else {
+        conversation = await sendOpenAiRequest('conversations', requestBody);
+    }
     return conversation.id;
 }
 
