@@ -51,8 +51,6 @@ export async function sendMessage(message) {
     let reply = response.message;
     reply = stripMarkdownFromString(reply);
 
-    const drink = response.drink;
-    updateDrinkDetails(drink);
 
     if (speakMessage) {
         // TODO: Add button to UI for speaking message aloud.
@@ -64,6 +62,9 @@ export async function sendMessage(message) {
         }
     }
     addMessageToLog(currentPersonality.displayName, reply);
+
+    const drink = response.drink;
+    updateDrinkDetails(drink);
 }
 
 

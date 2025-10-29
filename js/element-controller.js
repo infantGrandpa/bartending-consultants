@@ -142,4 +142,15 @@ messageInput.addEventListener('keypress', (event) => {
 
 export function updateDrinkDetails(drink) {
     console.log(drink);
+    addMessageToLog("Drink Name", drink.name);
+
+    const ingredientsString = drink.ingredients
+        .map(ingredientItem => `${ingredientItem.ingredient}: ${ingredientItem.amount}`)
+        .join('\n');
+
+    const instructionsString = drink.instructions
+        .map((instructionItem, index) => `${index + 1}. ${instructionItem.step}`)
+        .join('\n');
+    addMessageToLog("Ingredients", ingredientsString);
+    addMessageToLog("Instructions", instructionsString);
 }
