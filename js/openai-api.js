@@ -52,6 +52,7 @@ export async function createConversation(systemPrompt, userMessage, personalityK
 
 export async function addResponseToConversation(message, conversationId) {
     if (isDevEnv()) {
+        console.log('DEV MODE: Generating mock response...');
         return generateMockResponse(message);
     }
 
