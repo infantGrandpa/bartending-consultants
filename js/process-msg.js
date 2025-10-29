@@ -54,7 +54,9 @@ export async function sendMessage(message) {
     if (speakMessage) {
         // TODO: Add button to UI for speaking message aloud.
         // We're turning this off to save on API usage
-        if (!isDevEnv()) {
+        if (isDevEnv()) {
+            console.log("DEV MODE: No text to speech.");
+        } else {
             await speakResponse(reply, currentPersonality.elevenLabsVoiceId);
         }
     }
