@@ -1,17 +1,19 @@
 ﻿const drinkResponseSchema = {
     message: "string",
-    drinkName: "string",
-    ingredients: [
-        {
-            ingredient: "string",
-            amount: "string"
-        }
-    ],
-    instructions: [
-        {
-            step: "string"
-        }
-    ]
+    drink: {
+        name: "string",
+        ingredients: [
+            {
+                ingredient: "string",
+                amount: "string"
+            }
+        ],
+        instructions: [
+            {
+                step: "string"
+            }
+        ]
+    }
 };
 
 const commonSystemPrompt =
