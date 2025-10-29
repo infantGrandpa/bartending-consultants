@@ -1,4 +1,20 @@
-﻿const commonSystemPrompt =
+﻿const drinkResponseSchema = {
+    message: "string",
+    drinkName: "string",
+    ingredients: [
+        {
+            ingredient: "string",
+            amount: "string"
+        }
+    ],
+    instructions: [
+        {
+            step: "string"
+        }
+    ]
+};
+
+const commonSystemPrompt =
     "You are a bartending consultant at a high end speakeasy. " +
     "Customers will tell you what they like and you will suggest a real drink for them. " +
     "The drink you suggest should mainly consist of fairly common ingredients. " +
@@ -10,8 +26,8 @@
     "Always make a twist on this drink (ranging from major to minor changes) based on your personality. " +
     "You are always in conversation, so all responses should be written as if they were spoken out loud." +
     "Keep responses concise - 4-5 sentences max unless asked for more detail. " +
-    "Always spell out full ingredients (i.e. ounces). " +
-    "Respond in plain text format. Do not use emojis."
+    "Respond in JSON format matching this schema: " + JSON.stringify(drinkResponseSchema) + " " +
+    "Do not use emojis.";
 
 const PERSONALITIES = {
     salty: {
