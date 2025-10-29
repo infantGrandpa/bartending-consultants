@@ -3,7 +3,7 @@ import {addMessageToLog, changeBartenderImage, clearMessageInput} from "./elemen
 import {addResponseToConversation, createConversation} from "./openai-api.js";
 import {elevenLabsApiKey} from "./api-key-handler.js"
 import {playAudioBlob} from "./audio-handler.js";
-import {stripMarkdownFromString} from "./utils.js";
+import {isDevEnv, stripMarkdownFromString} from "./utils.js";
 
 let currentConversationId = '';
 let currentPersonality = null
@@ -52,7 +52,9 @@ export async function sendMessage(message) {
     if (speakMessage) {
         // TODO: Add button to UI for speaking message aloud.
         // We're turning this off to save on API usage
-        await speakResponse(reply, currentPersonality.elevenLabsVoiceId);
+        if (!isDevEnv()) {
+            await speakResponse(reply, currentPersonality.elevenLabsVoiceId);
+        }
     }
     addMessageToLog(currentPersonality.displayName, reply);
 }

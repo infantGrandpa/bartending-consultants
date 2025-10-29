@@ -1,4 +1,5 @@
 import {openAiApiKey} from "./api-key-handler.js";
+import {isDevEnv} from "./utils.js";
 
 async function sendOpenAiRequest(endpoint, jsonBody) {
     const requestUrl = `https://api.openai.com/v1/${endpoint}`
@@ -43,8 +44,10 @@ export async function createConversation(systemPrompt, userMessage, personalityK
 }
 
 export async function addResponseToConversation(message, conversationId) {
+    const model = isDevEnv() ? 'gpt-4o-mini' : 'gpt-4.1';
+
     const requestBody = {
-        model: 'gpt-4.1',
+        model: model,
         conversation: conversationId,
         input: message
     }
