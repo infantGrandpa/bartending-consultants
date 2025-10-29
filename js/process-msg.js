@@ -1,5 +1,5 @@
 ﻿import {getPersonality, getSystemPrompt} from "./personalities.js"
-import {addMessageToLog, changeBartenderImage, clearMessageInput} from "./element-controller.js";
+import {addMessageToLog, changeBartenderImage, clearMessageInput, updateDrinkDetails} from "./element-controller.js";
 import {addResponseToConversation, createConversation} from "./openai-api.js";
 import {elevenLabsApiKey} from "./api-key-handler.js"
 import {playAudioBlob} from "./audio-handler.js";
@@ -50,6 +50,9 @@ export async function sendMessage(message) {
     const response = JSON.parse(responseString);
     let reply = response.message;
     reply = stripMarkdownFromString(reply);
+
+    const drink = response.drink;
+    updateDrinkDetails(drink);
 
     if (speakMessage) {
         // TODO: Add button to UI for speaking message aloud.

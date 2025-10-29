@@ -139,3 +139,7 @@ messageInput.addEventListener('keypress', (event) => {
         sendButton.click();
     }
 });
+
+export function updateDrinkDetails(drink) {
+    console.log(drink);
+}
