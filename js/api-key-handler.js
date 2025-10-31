@@ -3,14 +3,33 @@
 export let openAiApiKey = localStorage.getItem('openai_api_key');
 export let elevenLabsApiKey = localStorage.getItem('elevenlabs_api_key')
 
-const apiKeySetup = document.getElementById('apiKeySetup');
-const openaiApiKeyInput = document.getElementById('openaiApiKeyInput');
-const elevenLabsApiKeyInput = document.getElementById('elevenLabsApiKeyInput');
+let openaiApiKeyInput = null;
+let elevenLabsApiKeyInput = null;
 
-const clearApiKeysButton = document.getElementById('clearApiKeysButton');
-const saveApiKeysButton = document.getElementById('saveApiKeysButton');
+let clearApiKeysButton = null;
+let saveApiKeysButton = null;
 
-function checkApiKeyStatus() {
+document.addEventListener('DOMContentLoaded',  async () => {
+    await loadHTMLFragment('./html/api-keys.html', 'apiKeysContainer');
+
+    openaiApiKeyInput = document.getElementById('openaiApiKeyInput');
+    elevenLabsApiKeyInput = document.getElementById('elevenLabsApiKeyInput');
+
+    clearApiKeysButton = document.getElementById('clearApiKeysButton');
+    saveApiKeysButton = document.getElementById('saveApiKeysButton');
+
+    saveApiKeysButton.addEventListener('click', () => {
+        saveApiKeys();
+    });
+
+    clearApiKeysButton.addEventListener('click', () => {
+        clearSavedApiKeys();
+    });
+
+    checkApiKeyStatus();
+});
+
+export function checkApiKeyStatus() {
     if (!openAiApiKey || !elevenLabsApiKey) {
         apiKeySetup.classList.remove('hidden');
         clearApiKeysButton.classList.add('hidden');
@@ -49,7 +68,7 @@ function getElevenLabsKeyFromInput() {
     return true;
 }
 
-saveApiKeysButton.addEventListener('click', () => {
+function saveApiKeys() {
     let success = getOpenAiKeyFromInput();
     if (success) {
         success = getElevenLabsKeyFromInput();
@@ -64,9 +83,9 @@ saveApiKeysButton.addEventListener('click', () => {
 
     checkApiKeyStatus();
     addMessageToLog('System', 'API keys saved successfully!');
-});
+}
 
-clearApiKeysButton.addEventListener('click', () => {
+function clearSavedApiKeys() {
     if (confirm('Are you sure you want to clear your stored API key?')) {
         localStorage.removeItem('openai_api_key');
         openAiApiKey = null;
@@ -76,4 +95,4 @@ clearApiKeysButton.addEventListener('click', () => {
 
         checkApiKeyStatus();
     }
-});
+}

@@ -56,7 +56,7 @@ function initializeSendButtonState() {
     }
 }
 
-document.addEventListener('DOMContentLoaded', initializeSendButtonState);
+
 
 export function enableSendButton() {
     sendButton.disabled = false;
