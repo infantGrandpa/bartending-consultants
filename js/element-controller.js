@@ -11,6 +11,10 @@ let clearApiKeysButton = null;
 
 const personalityButtons = document.querySelectorAll('.personality-button');
 
+document.addEventListener('DOMContentLoaded',  () => {
+    initializeSendButtonState();
+});
+
 personalityButtons.forEach(button => {
     button.addEventListener('click', () => {
         const selectedPersonality = button.getAttribute('data-personality');

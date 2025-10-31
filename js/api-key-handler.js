@@ -46,8 +46,6 @@ export function checkApiKeyStatus() {
     }
 }
 
-checkApiKeyStatus();
-
 function getOpenAiKeyFromInput() {
     const apiKeyValue = openaiApiKeyInput.value.trim();
     if (!apiKeyValue) {
