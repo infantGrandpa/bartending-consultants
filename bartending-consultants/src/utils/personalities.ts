@@ -43,7 +43,7 @@ const commonSystemPrompt =
     "Respond in JSON format matching this schema: " + JSON.stringify(drinkResponseSchema) + " " +
     "Do not use emojis.";
 
-const PERSONALITIES = {
+export const PERSONALITIES = {
     salty: {
         key: "salty",
         displayName: "The Classic",
