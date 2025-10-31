@@ -1,5 +1,6 @@
 ﻿import PersonalitySelection from "./PersonalitySelection";
 import BartenderImage from "./BartenderDetails";
+import ApiKeysPanel from "./ApiKeys";
 
 export default function Sidebar() {
     return (
@@ -8,6 +9,7 @@ export default function Sidebar() {
                 <PersonalitySelection />
                 <BartenderImage />
             </div>
+            <ApiKeysPanel />
         </div>
     );
 }
