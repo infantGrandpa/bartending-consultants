@@ -180,3 +180,15 @@ export function updateDrinkDetails(drink) {
     addMessageToLog("Ingredients", ingredientsString);
     addMessageToLog("Instructions", instructionsString);
 }
+
+export async function loadHTMLFragment(fragmentPath, targetContainerId){
+    console.log(`Loading ${fragmentPath} into ${targetContainerId}...`);
+
+    const response = await fetch(fragmentPath);
+    const htmlContent = await response.text();
+
+    const targetContainer = document.getElementById(targetContainerId);
+    targetContainer.insertAdjacentHTML('beforeend', htmlContent)
+    ;
+    console.log(`Success loading ${fragmentPath} into ${targetContainerId}!`);
+}
