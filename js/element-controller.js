@@ -6,6 +6,9 @@ const messageInput = document.getElementById('messageInput');
 const messageArea = document.getElementById('messageArea');
 const bartenderImage = document.getElementById('bartenderImage')
 
+let apiKeySetup = null;
+let clearApiKeysButton = null;
+
 const personalityButtons = document.querySelectorAll('.personality-button');
 
 personalityButtons.forEach(button => {
@@ -74,6 +77,29 @@ export function showMessageArea() {
 
 export function hideMessageArea() {
     messageArea.classList.add('hidden');
+}
+
+function getApiKeyElements() {
+    if (!apiKeySetup) {
+        apiKeySetup =document.getElementById('apiKeySetup');
+    }
+    if (!clearApiKeysButton) {
+        clearApiKeysButton = document.getElementById('clearApiKeysButton');
+    }
+}
+
+export function showApiKeySetup() {
+    getApiKeyElements();
+
+    apiKeySetup.classList.remove('hidden');
+    clearApiKeysButton.classList.add('hidden');
+}
+
+export function hideApiKeySetup() {
+    getApiKeyElements();
+
+    apiKeySetup.classList.add('hidden');
+    clearApiKeysButton.classList.remove('hidden');
 }
 
 export function addMessageToLog(sender, message) {

@@ -1,4 +1,11 @@
-﻿import {addMessageToLog, hideMessageArea, showMessageArea} from "./element-controller.js";
+﻿import {
+    addMessageToLog,
+    hideApiKeySetup,
+    hideMessageArea,
+    loadHTMLFragment,
+    showApiKeySetup,
+    showMessageArea
+} from "./element-controller.js";
 
 export let openAiApiKey = localStorage.getItem('openai_api_key');
 export let elevenLabsApiKey = localStorage.getItem('elevenlabs_api_key')
@@ -31,12 +38,10 @@ document.addEventListener('DOMContentLoaded',  async () => {
 
 export function checkApiKeyStatus() {
     if (!openAiApiKey || !elevenLabsApiKey) {
-        apiKeySetup.classList.remove('hidden');
-        clearApiKeysButton.classList.add('hidden');
+        showApiKeySetup();
         hideMessageArea();
     } else {
-        apiKeySetup.classList.add('hidden');
-        clearApiKeysButton.classList.remove('hidden');
+        hideApiKeySetup();
         showMessageArea();
     }
 }
