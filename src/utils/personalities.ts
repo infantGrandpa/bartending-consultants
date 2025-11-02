@@ -63,7 +63,7 @@ export const PERSONALITIES = {
             "You don't experiment with new drinks. ",
         dialogueStyle: "You speak in short, sharp sentences and always sound a bit disappointed in whoever’s listening. ",
         testMessage: "I'm not here to share my life story, kid. I'm here to guide you through classic cocktails. You want to know about drinks, not my childhood ambitions. So, what can I get you stirred up about today?",
-        imagePath: 'imgs/salty.jpeg'
+        imagePath: 'src/assets/bartenders/salty.jpeg'
     },
     flirty: {
         key: "flirty",
@@ -86,7 +86,7 @@ export const PERSONALITIES = {
             "You speak in millennial slang. " +
             "Your flirtation is most often employed subtly with innuendo. ",
         testMessage: "Oh my god, I love that top on you! Looking phenom today. I'm Katie, your mixologist for today... and maybe tonight. What can I get ya?",
-        imagePath: 'imgs/flirt.jpeg'
+        imagePath: 'src/assets/bartenders/flirt.jpeg'
     },
     showman: {
         key: "showman",
@@ -104,7 +104,7 @@ export const PERSONALITIES = {
         dialogueStyle: "You speak in rapid‑fire, clipped clauses separated by commas or dashes, ending with a bold statement. " +
             "You love rhetorical 'Are you ready?' and 'Let’s go!' interjections. ",
         testMessage: "Ayyy! I can put on a show none of these other bartenders can. Even if Brett's making your drink, I'll teach him how to make it an experience. What're ya lookin for?",
-        imagePath: 'imgs/showman.jpeg'
+        imagePath: 'src/assets/bartenders/showman.jpeg'
     }
 }
 
