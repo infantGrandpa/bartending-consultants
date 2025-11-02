@@ -1,17 +1,13 @@
-﻿import {PERSONALITIES, type Personality} from "../utils/personalities.ts";
-import {useState} from "react";import {Button, Flex} from "@radix-ui/themes";
+﻿import {PERSONALITIES} from "../utils/personalities.ts";
+import {Button, Flex} from "@radix-ui/themes";
+import {usePersonality} from "../providers/PersonalityProvider.tsx";
 
-interface Props {
-    onSelect?: (personality: Personality) => void;
-}
-
-export default function PersonalitySelection({onSelect}: Props) {
-    const [selectedKey, setSelectedKey] = useState<string | null>(null);
+export default function PersonalitySelection() {
+    const {selectedPersonality, setSelectedPersonality} = usePersonality();
 
     const handleSelect = (key: string | keyof typeof PERSONALITIES) => {
         const convertedKey: keyof typeof PERSONALITIES = key as keyof typeof PERSONALITIES;
-        setSelectedKey(key);
-        if (onSelect) onSelect(PERSONALITIES[convertedKey]);
+        setSelectedPersonality(PERSONALITIES[convertedKey]);
     };
 
     return (
@@ -21,7 +17,7 @@ export default function PersonalitySelection({onSelect}: Props) {
                     key={p.key}
                     onClick={() => handleSelect(p.key)}
                     data-personality={p.key}
-                    variant={p.key == selectedKey ? "solid" : "outline"}
+                    variant={p == selectedPersonality ? "solid" : "outline"}
                 >
                     {p.displayName}
                 </Button>
