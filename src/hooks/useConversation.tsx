@@ -1,5 +1,5 @@
 ﻿import {useState} from "react";
-import {getSystemPrompt} from "../utils/personalities.ts";
+import {getSystemPrompt} from "../utils/bartenders.ts";
 import {addResponseToConversation, createConversation} from "../api/openai.ts";
 import {stripMarkdownFromString} from "../utils/utils.ts";
 

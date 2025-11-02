@@ -1,11 +1,12 @@
 ﻿import {Card, Heading, Inset} from "@radix-ui/themes";
-import {usePersonality} from "../providers/PersonalityProvider.tsx";
+import {useBartender} from "../providers/BartenderProvider.tsx";
+import BartenderDataList from "./BartenderDataList.tsx";
 
 export default function BartenderDetails() {
-    const {selectedPersonality} = usePersonality();
+    const {selectedBartender} = useBartender();
 
     const placeholderImageUrl: string = "https://placehold.co/574x861/030712/white?text=Choose+a+Bartender&font=roboto"
-    const imageUrl: string = selectedPersonality?.imagePath ?? placeholderImageUrl;
+    const imageUrl: string = selectedBartender?.profile.imagePath ?? placeholderImageUrl;
 
 
     return (
@@ -13,7 +14,7 @@ export default function BartenderDetails() {
             <Inset clip="padding-box" side="top" pb="current">
                 <img
                     src={imageUrl}
-                    alt={`${selectedPersonality?.displayName} Bartender`}
+                    alt={`${selectedBartender?.profile.displayName} Bartender`}
                     style={{
                         display: "block",
                         objectFit: "cover",
@@ -23,7 +24,8 @@ export default function BartenderDetails() {
                     }}
                 />
             </Inset>
-            <Heading as="h3" size="4">{selectedPersonality?.displayName}</Heading>
+            <Heading as="h3" size="4">{selectedBartender?.profile.displayName}</Heading>
+            <BartenderDataList />
         </Card>
     );
 }
