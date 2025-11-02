@@ -1,79 +1,14 @@
-﻿<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Bartending Consultants</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://kit.fontawesome.com/4a90f28fd7.js" crossorigin="anonymous"></script>
 </head>
 <body class="bg-gray-900 text-white min-h-screen">
-
-<div class="grid grid-cols-3">
-    <div class="p-8 min-h-screen border-e-2 border-gray-800 border-solid bg-gray-950 shadow-2xl shadow-black flex flex-col h-full justify-between">
-
-        <div id="personalitySelection" class="mb-8">
-            <h2 class="text-xl font-semibold mb-4">Choose Your Bartender:</h2>
-            <div class="flex gap-4">
-                <button
-                        class="personality-button bg-gray-800 hover:bg-gray-700 px-6 py-3 rounded-lg font-semibold flex-1 border-2 border-transparent"
-                        data-personality="salty">
-                    The Classic
-                </button>
-                <button
-                        class="personality-button bg-gray-800 hover:bg-gray-700 px-6 py-3 rounded-lg font-semibold flex-1 border-2 border-transparent"
-                        data-personality="flirty">
-                    The Flirt
-                </button>
-                <button
-                        class="personality-button bg-gray-800 hover:bg-gray-700 px-6 py-3 rounded-lg font-semibold flex-1 border-2 border-transparent"
-                        data-personality="showman">
-                    The Showman
-                </button>
-            </div>
-        </div>
-
-        <div>
-            <img id="bartenderImage" src="https://placehold.co/574x861/030712/white?text=Choose+a+Bartender&font=roboto"
-                 alt="Bartender Image" class="w-full max-h-[1000px] object-contain"/>
-        </div>
-
-        <div id="apiKeysContainer"></div>
-    </div>
-    <div class="p-4 min-h-full col-span-2">
-        <div id="messageArea" class="flex flex-col h-full">
-            <!-- Response Log -->
-            <div class="bg-gray-800 rounded-lg p-6 mb-6 flex-1 overflow-y-auto" id="responseLog">
-
-            </div>
-
-            <!-- Input Area -->
-            <div class="mb-4">
-                <div class="relative">
-                    <input
-                            type="text"
-                            id="messageInput"
-                            class="w-full bg-gray-800 text-white p-4 pr-12 rounded-lg border border-gray-700 focus:border-blue-500 focus:outline-none"
-                            placeholder="Type your message here..."
-                    >
-                    <button
-                            id="sendButton"
-                            class="absolute right-2 top-1/2 -translate-y-1/2 bg-blue-600 hover:bg-blue-700 p-2 rounded-lg">
-                        <i class="fa-solid fa-paper-plane"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-
+<div id="root"></div>
+<script type="module" src="/src/main.tsx"></script>
 </body>
-<script type="module" src="js/openai-api.js"></script>
-<script type="module" src="js/api-key-handler.js"></script>
-<script type="module" src="js/process-msg.js"></script>
-<script type="module" src="js/personalities.js"></script>
-<script type="module" src="js/element-controller.js"></script>
-<script type="module" src="js/audio-handler.js"></script>
-<script type="module" src="js/utils.js"></script>
 </html>
