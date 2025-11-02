@@ -6,7 +6,7 @@ import { Theme } from "@radix-ui/themes";
 
 export default function App() {
     return (
-        <Theme>
+        <Theme accentColor="violet" appearance="dark" grayColor="mauve" radius="large" scaling="110%">
             <ApiKeyProvider>
                 <div className="grid grid-cols-3 min-h-screen">
                     <Sidebar/>
