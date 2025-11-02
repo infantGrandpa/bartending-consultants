@@ -1,5 +1,5 @@
 ﻿import {PERSONALITIES, type Personality} from "../utils/personalities.ts";
-import {useState} from "react";
+import {useState} from "react";import {Button, Flex} from "@radix-ui/themes";
 
 interface Props {
     onSelect?: (personality: Personality) => void;
@@ -15,24 +15,17 @@ export default function PersonalitySelection({onSelect}: Props) {
     };
 
     return (
-        <div className="mb-8">
-            <h2 className="text-xl font-semibold mb-4">Choose Your Bartender:</h2>
-            <div className="flex gap-4">
-                {Object.values(PERSONALITIES).map((p) => (
-                    <button
-                        key={p.key}
-                        onClick={() => handleSelect(p.key)}
-                        data-personality={p.key}
-                        className={`personality-button bg-gray-800 hover:bg-gray-700 px-6 py-3 rounded-lg font-semibold flex-1 border-2 border-transparent ${
-                            selectedKey === p.key
-                                ? "border-blue-500"
-                                : ""
-                        }`}
-                    >
-                        {p.displayName}
-                    </button>
-                ))}
-            </div>
-        </div>
+        <Flex justify="between" gap="3">
+            {Object.values(PERSONALITIES).map((p) => (
+                <Button
+                    key={p.key}
+                    onClick={() => handleSelect(p.key)}
+                    data-personality={p.key}
+                    variant={p.key == selectedKey ? "solid" : "outline"}
+                >
+                    {p.displayName}
+                </Button>
+            ))}
+        </Flex>
     );
 }
