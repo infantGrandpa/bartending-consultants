@@ -2,7 +2,7 @@
 import {useBartender} from "../providers/BartenderProvider.tsx";
 import BartenderDataList from "./BartenderDataList.tsx";
 
-export default function BartenderDetails() {
+export default function BartenderCard() {
     const {selectedBartender} = useBartender();
 
     const placeholderImageUrl: string = "https://placehold.co/574x861/030712/white?text=Choose+a+Bartender&font=roboto"
