@@ -1,4 +1,4 @@
-﻿import {Card, Heading, Inset} from "@radix-ui/themes";
+﻿import {Card, Heading, Inset, Text} from "@radix-ui/themes";
 import {useBartender} from "../providers/BartenderProvider.tsx";
 import BartenderDataList from "./BartenderDataList.tsx";
 
@@ -26,6 +26,7 @@ export default function BartenderCard() {
             </Inset>
             <Heading as="h3" size="4">{selectedBartender?.profile.displayName}</Heading>
             <BartenderDataList />
+            <Text as="p">{selectedBartender?.profile.aboutMe}</Text>
         </Card>
     );
 }
