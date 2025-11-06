@@ -14,7 +14,8 @@ export default function MessageInput() {
         }}>
             <TextArea placeholder="Type your message here..." variant="soft" resize="vertical" style={{
                 backgroundColor: "initial",
-                flexGrow: "1"
+                flexGrow: "1",
+                minHeight: "96.8px"
             }}></TextArea>
             <Flex direction="column" m="2" gap="2" justify="end">
                 <IconButton variant="solid">
