@@ -15,8 +15,7 @@ export default function MessageInput({onSendMessage}: Props) {
             return;
         }
 
-        console.log(`Message: ${trimmedMessage}`)
-        //TODO: await onSendMessage(trimmedMessage);
+        await onSendMessage(trimmedMessage);
 
         setMessage("");
     }
