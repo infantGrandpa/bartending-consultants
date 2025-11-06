@@ -7,21 +7,21 @@ export default function BartenderDataList() {
     const profile = selectedBartender?.profile;
 
     return (
-        <DataList.Root>
-            <DataList.Item align="center">
-                <DataList.Label minWidth="88px">Name</DataList.Label>
+        <DataList.Root size="1" >
+            <DataList.Item>
+                <DataList.Label>Name</DataList.Label>
                 <DataList.Value>{profile?.firstName}</DataList.Value>
             </DataList.Item>
-            <DataList.Item align="center">
-                <DataList.Label minWidth="88px">Age</DataList.Label>
+            <DataList.Item>
+                <DataList.Label>Age</DataList.Label>
                 <DataList.Value>{profile?.age}</DataList.Value>
             </DataList.Item>
-            <DataList.Item align="center">
-                <DataList.Label minWidth="88px">Hometown</DataList.Label>
+            <DataList.Item>
+                <DataList.Label>Hometown</DataList.Label>
                 <DataList.Value>{profile?.hometown}</DataList.Value>
             </DataList.Item>
-            <DataList.Item align="center">
-                <DataList.Label minWidth="88px">Pronouns</DataList.Label>
+            <DataList.Item>
+                <DataList.Label>Pronouns</DataList.Label>
                 <DataList.Value>{profile?.pronouns}</DataList.Value>
             </DataList.Item>
         </DataList.Root>

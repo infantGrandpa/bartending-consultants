@@ -17,18 +17,15 @@ export default function BartenderCard() {
                         src={imageUrl}
                         alt={`${selectedBartender?.profile.displayName} Bartender`}
                         style={{
-                            display: "block",
                             objectFit: "cover",
-                            width: "100%",
-                            height: "100%",
-                            backgroundColor: "var(--gray-5)",
+                            height: "100%"
                         }}
                     />
                 </Inset>
-                <Box>
+                <Box minWidth="350px">
                     <Heading as="h3" size="4">{selectedBartender?.profile.displayName}</Heading>
                     <BartenderDataList/>
-                    <Text as="p">{selectedBartender?.profile.aboutMe}</Text>
+                    <Text as="p" size="2" mt={"3"}>{selectedBartender?.profile.aboutMe}</Text>
                 </Box>
             </Flex>
         </Card>
