@@ -4,13 +4,14 @@
 interface Props {
     message: string;
     sender: string;
+    onLeftSide: boolean;
 }
 
-export default function Message({message, sender}: Props) {
+export default function Message({message, sender, onLeftSide}: Props) {
     return (
-        <Card>
-            <Text as="div" size="2" weight="bold">{sender}</Text>
-            <Text as="div" size="2" color="gray">{message}</Text>
+        <Card style={{width: "40%", alignSelf: onLeftSide ? "start" : "end"}}>
+            <Text as="div" size="2" weight="bold" align={onLeftSide ? "left" : "right"}>{sender}</Text>
+            <Text as="div" size="2" color="gray" align={onLeftSide ? "left" : "right"}>{message}</Text>
         </Card>
     );
 }
