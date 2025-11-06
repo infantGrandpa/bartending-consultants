@@ -8,7 +8,7 @@ export default function BartenderCard() {
     const placeholderImageUrl: string = "https://placehold.co/574x861/030712/white?text=Choose+a+Bartender&font=roboto"
     const imageUrl: string = selectedBartender?.profile.imagePath ?? placeholderImageUrl;
 
-
+    //TODO: Fix bug where the image disappears on small screens
     return (
         <Card>
             <Flex>
