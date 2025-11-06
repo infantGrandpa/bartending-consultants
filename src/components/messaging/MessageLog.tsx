@@ -1,10 +1,10 @@
-﻿export default function MessageLog() {
+﻿import {Flex, ScrollArea} from "@radix-ui/themes";
+
+export default function MessageLog() {
     return (
-        <div
-            id="responseLog"
-            className="bg-gray-800 rounded-lg p-6 mb-6 flex-1 overflow-y-auto"
-        >
-            {/* Will populate messages dynamically later */}
-        </div>
+        <ScrollArea scrollbars="vertical">
+            <Flex direction="column" gap="3">
+            </Flex>
+        </ScrollArea>
     );
 }
