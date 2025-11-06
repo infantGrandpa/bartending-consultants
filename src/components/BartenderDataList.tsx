@@ -6,8 +6,9 @@ export default function BartenderDataList() {
 
     const profile = selectedBartender?.profile;
 
+    //TODO: Figure out how to make the gap between each item smaller
     return (
-        <DataList.Root size="1" >
+        <DataList.Root size="1">
             <DataList.Item>
                 <DataList.Label>Name</DataList.Label>
                 <DataList.Value>{profile?.firstName}</DataList.Value>
