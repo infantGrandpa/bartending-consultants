@@ -1,18 +1,29 @@
-﻿export default function MessageInput() {
+﻿import {Flex, IconButton, TextArea} from "@radix-ui/themes";
+
+export default function MessageInput() {
+    //TODO: Setup messages to work.
+    //TODO: Allow speech to text dictation
+
     return (
-        <div className="mb-4 relative">
-            <input
-                type="text"
-                id="messageInput"
-                className="w-full bg-gray-800 text-white p-4 pr-12 rounded-lg border border-gray-700 focus:border-blue-500 focus:outline-none"
-                placeholder="Type your message here..."
-            />
-            <button
-                id="sendButton"
-                className="absolute right-2 top-1/2 -translate-y-1/2 bg-blue-600 hover:bg-blue-700 p-2 rounded-lg"
-            >
-                <i className="fa-solid fa-paper-plane"></i>
-            </button>
-        </div>
+        <Flex style={{
+            backgroundColor: "var(--color-surface)",
+            border: "solid 1px var(--base-card-classic-border-color)",
+            boxShadow: "inset 0 0 0 var(--text-field-border-width) var(--gray-a7)",
+            color: "var(--gray-12)",
+            borderRadius: "var(--radius-2)"
+        }}>
+            <TextArea placeholder="Type your message here..." variant="soft" resize="vertical" style={{
+                backgroundColor: "initial",
+                flexGrow: "1"
+            }}></TextArea>
+            <Flex direction="column" m="2" gap="2" justify="end">
+                <IconButton variant="solid">
+                    <i className="fa-solid fa-paper-plane"></i>
+                </IconButton>
+                <IconButton variant="outline">
+                    <i className="fa-solid fa-microphone"></i>
+                </IconButton>
+            </Flex>
+        </Flex>
     );
 }
