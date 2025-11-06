@@ -145,6 +145,7 @@ export const bartenders: Record<string, Bartender> = {
     }
 }
 
+//TODO: Make this a function on each bartender?
 export function getSystemPrompt(bartender: Bartender) {
     let fullPrompt = commonSystemPrompt;
 
