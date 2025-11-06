@@ -5,7 +5,7 @@ import BartenderCard from "./bartenders/BartenderCard.tsx";
 
 export default function Sidebar() {
     return (
-        <Flex direction="column" m="4">
+        <Flex direction="column">
             <BartenderSelection />
             <BartenderCard />
             <ApiKeysPanel />

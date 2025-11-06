@@ -11,7 +11,7 @@ export default function App() {
                panelBackground="translucent">
             <ApiKeyProvider>
                 <BartenderProvider>
-                    <Grid columns="3" gap="3">
+                    <Grid columns="3" gap="4" p="6">
                         <Sidebar/>
                         <MessagingPanel/>
                     </Grid>

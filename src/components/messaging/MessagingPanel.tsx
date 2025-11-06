@@ -1,11 +1,13 @@
 ﻿import MessageArea from "./MessageArea.tsx";
 import MessageInput from "./MessageInput.tsx";
+import {Container} from "@radix-ui/themes";
 
 export default function MessagingPanel() {
     return (
-        <div className="p-4 col-span-2 flex flex-col h-full">
+        <Container gridColumn="span 2">
             <MessageArea />
             <MessageInput />
         </div>
+        </Container>
     );
 }
