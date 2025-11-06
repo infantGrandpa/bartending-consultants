@@ -1,6 +1,6 @@
 ﻿import MessageLog from "./MessageLog.tsx";
 import MessageInput from "./MessageInput.tsx";
-import {Container, Em, Text} from "@radix-ui/themes";
+import {Em, Flex, Text} from "@radix-ui/themes";
 import {useBartender} from "../../providers/BartenderProvider.tsx";
 import {useState} from "react";
 import {getSystemPrompt} from "../../utils/bartenders.ts";
@@ -31,14 +31,18 @@ export default function MessagingPanel() {
     }
 
     return (
-        <Container gridColumn="span 2">
-            <MessageLog />
-            <MessageInput onSendMessage={handleSendMessage}/>
-            <Text as="p" size={"1"} align="right" style={{
-                paddingTop: "0.25rem",
-                color: "gray",
-                fontSize: "0.7rem"
-            }}><Em>ID: {conversationId}</Em></Text>
-        </Container>
+        <Flex direction="column" gridColumn="span 2" justify="end">
+            <MessageLog/>
+            <Flex direction="column">
+                <MessageInput onSendMessage={handleSendMessage}/>
+                <Text as="p" size={"1"} align="right" style={{
+                    paddingTop: "0.25rem",
+                    color: "gray",
+                    fontSize: "0.7rem"
+                }}>
+                    <Em>ID: {conversationId}</Em>
+                </Text>
+            </Flex>
+        </Flex>
     );
 }
