@@ -1,6 +1,6 @@
-﻿import {bartenders} from "../utils/bartenders.ts";
+﻿import {bartenders} from "../../utils/bartenders.ts";
 import {Button, Flex} from "@radix-ui/themes";
-import {useBartender} from "../providers/BartenderProvider.tsx";
+import {useBartender} from "../../providers/BartenderProvider.tsx";
 
 export default function BartenderSelection() {
     const {selectedBartender, setSelectedBartender} = useBartender();

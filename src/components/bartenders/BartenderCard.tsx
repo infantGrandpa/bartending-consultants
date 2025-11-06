@@ -1,5 +1,5 @@
 ﻿import {Box, Card, Flex, Heading, Inset, Text} from "@radix-ui/themes";
-import {useBartender} from "../providers/BartenderProvider.tsx";
+import {useBartender} from "../../providers/BartenderProvider.tsx";
 import BartenderDataList from "./BartenderDataList.tsx";
 
 export default function BartenderCard() {

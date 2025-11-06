@@ -1,5 +1,5 @@
 import Sidebar from "./components/Sidebar";
-import MessagingPanel from "./components/MessagingPanel";
+import MessagingPanel from "./components/messaging/MessagingPanel.tsx";
 import {ApiKeyProvider} from "./hooks/useApiKeys.tsx";
 import "@radix-ui/themes/styles.css";
 import {Grid, Theme} from "@radix-ui/themes";

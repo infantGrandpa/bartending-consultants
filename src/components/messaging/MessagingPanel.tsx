@@ -1,5 +1,5 @@
-﻿import MessageArea from "./MessageArea";
-import MessageInput from "./MessageInput";
+﻿import MessageArea from "./MessageArea.tsx";
+import MessageInput from "./MessageInput.tsx";
 
 export default function MessagingPanel() {
     return (

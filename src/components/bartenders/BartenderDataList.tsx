@@ -1,5 +1,5 @@
 ﻿import {DataList} from "@radix-ui/themes";
-import {useBartender} from "../providers/BartenderProvider.tsx";
+import {useBartender} from "../../providers/BartenderProvider.tsx";
 
 export default function BartenderDataList() {
     const {selectedBartender} = useBartender();
