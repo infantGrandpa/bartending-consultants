@@ -1,4 +1,4 @@
-﻿export default function MessageArea() {
+﻿export default function MessageLog() {
     return (
         <div
             id="responseLog"

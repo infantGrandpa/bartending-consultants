@@ -1,4 +1,4 @@
-﻿import MessageArea from "./MessageArea.tsx";
+﻿import MessageLog from "./MessageLog.tsx";
 import MessageInput from "./MessageInput.tsx";
 import {Container, Em, Text} from "@radix-ui/themes";
 import {useBartender} from "../../providers/BartenderProvider.tsx";
@@ -32,7 +32,7 @@ export default function MessagingPanel() {
 
     return (
         <Container gridColumn="span 2">
-            <MessageArea />
+            <MessageLog />
             <MessageInput onSendMessage={handleSendMessage}/>
             <Text as="p" size={"1"} align="right" style={{
                 paddingTop: "0.25rem",
