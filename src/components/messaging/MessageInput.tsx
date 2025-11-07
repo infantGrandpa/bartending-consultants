@@ -1,5 +1,6 @@
 ﻿import {Flex, IconButton, TextArea} from "@radix-ui/themes";
 import {useState} from "react";
+import {useBartender} from "../../providers/BartenderProvider.tsx";
 
 interface Props {
     onSendMessage: (message: string) => Promise<void>;
@@ -7,6 +8,7 @@ interface Props {
 
 export default function MessageInput({onSendMessage}: Props) {
     const [message, setMessage] = useState<string>("");
+    const {selectedBartender} = useBartender();
 
     const handleSendButtonClick = async () => {
         const trimmedMessage = message.trim();
@@ -22,6 +24,7 @@ export default function MessageInput({onSendMessage}: Props) {
 
     //TODO: Allow speech to text dictation
     //TODO: Change the Input to be sticky
+    //TODO: Add some feedback to explain they need to choose a bartender?
 
     return (
         <Flex style={{
@@ -47,7 +50,7 @@ export default function MessageInput({onSendMessage}: Props) {
                 <IconButton
                     variant="solid"
                     onClick={handleSendButtonClick}
-                    disabled={message.trim().length === 0}
+                    disabled={(!selectedBartender) || (message.trim().length === 0)}
                 >
                     <i className="fa-solid fa-paper-plane"></i>
                 </IconButton>
