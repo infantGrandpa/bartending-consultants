@@ -32,6 +32,13 @@ export default function MessagingPanel() {
         setConversationId(newConversationId);
     }
 
+    const addMessageToLog = (message: Message)=> {
+        setMessageLog((previousMessages: Message[]) => [
+            ...previousMessages,
+            message
+        ]);
+    }
+
     const handleSendMessage = async (messageContent: string)=> {
         if (!selectedBartender) {
             throw new Error("Please select a bartender.")
@@ -41,10 +48,7 @@ export default function MessagingPanel() {
             await initializeConversation(messageContent);
         }
 
-        setMessageLog((previousMessages: Message[]) => [
-            ...previousMessages,
-            { sender: 'You', content: message, senderIsUser: true }
-        ]);
+        addMessageToLog({sender: "You", content: messageContent, senderIsUser: true});
 
         console.log(`Bartender Selected: ${selectedBartender.profile.displayName}`)
         console.log(`Message: ${message}`)
