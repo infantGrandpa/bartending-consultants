@@ -6,9 +6,16 @@ import {useState} from "react";
 import {getSystemPrompt} from "../../utils/bartenders.ts";
 import {createConversation} from "../../api/openai.ts";
 
+export interface Message {
+    sender: string;
+    content: string;
+    senderIsUser: boolean;
+}
+
 export default function MessagingPanel() {
     const {selectedBartender} = useBartender();
     const [conversationId, setConversationId] = useState<string | null>(null);
+    const [messageLog, setMessageLog] = useState<Message[]>([]);
 
     const handleSendMessage = async (message: string)=> {
         if (!selectedBartender) {
@@ -26,13 +33,18 @@ export default function MessagingPanel() {
             setConversationId(newConversationId);
         }
 
+        setMessageLog((previousMessages: Message[]) => [
+            ...previousMessages,
+            { sender: 'You', content: message, senderIsUser: true }
+        ]);
+
         console.log(`Bartender Selected: ${selectedBartender.profile.displayName}`)
         console.log(`Message: ${message}`)
     }
 
     return (
         <Flex direction="column" gridColumn="span 2" justify="end">
-            <MessageLog/>
+            <MessageLog messages={messageLog}/>
             <Flex direction="column">
                 <MessageInput onSendMessage={handleSendMessage}/>
                 <Text as="p" size={"1"} align="right" style={{
