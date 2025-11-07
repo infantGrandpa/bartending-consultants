@@ -53,6 +53,11 @@ export default function MessagingPanel() {
             await initializeConversation(messageContent);
         }
 
+        //TODO: Figure out a way to not require a second check (TypeScript is cranky without it)
+        if (!conversationId) {
+            throw new Error("Unexpected error: Conversation ID is still null after initializing conversation.")
+        }
+
         addMessageToLog({sender: "You", content: messageContent, senderIsUser: true});
 
         const responseString: string = await addResponseToConversation(messageContent, conversationId, openaiKey);
