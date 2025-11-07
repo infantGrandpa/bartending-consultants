@@ -1,5 +1,5 @@
 ﻿import {Flex, ScrollArea} from "@radix-ui/themes";
-import Message from "./Message.tsx";
+import MessageBubble from "./MessageBubble.tsx";
 
 export default function MessageLog() {
     const numberOfMessages: number = 15;
@@ -35,6 +35,7 @@ export default function MessageLog() {
                         message={sampleMessages[index % sampleMessages.length]}
                         sender={sampleSenders[index % sampleSenders.length]}
                         onLeftSide={index % sampleSenders.length !== 0}
+                    <MessageBubble
                         key={index}
                     />
                 ))}

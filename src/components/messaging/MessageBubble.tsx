@@ -7,7 +7,7 @@ interface Props {
     onLeftSide: boolean;
 }
 
-export default function Message({message, sender, onLeftSide}: Props) {
+export default function MessageBubble({message, sender, onLeftSide}: Props) {
     return (
         <Card style={{minWidth: "40%", maxWidth: "60%", alignSelf: onLeftSide ? "start" : "end"}}>
             <Text as="div" size="2" weight="bold" align={onLeftSide ? "left" : "right"}>{sender}</Text>
