@@ -3,8 +3,9 @@ import MessageInput from "./MessageInput.tsx";
 import {Em, Flex, Text} from "@radix-ui/themes";
 import {useBartender} from "../../providers/BartenderProvider.tsx";
 import {useState} from "react";
-import {getSystemPrompt} from "../../utils/bartenders.ts";
-import {createConversation} from "../../api/openai.ts";
+import {getSystemPrompt, DrinkResponseSchema} from "../../utils/bartenders.ts";
+import {addResponseToConversation, createConversation} from "../../api/openai.ts";
+import {stripMarkdownFromString} from "../../utils/utils.ts";
 
 export interface Message {
     sender: string;
@@ -50,8 +51,14 @@ export default function MessagingPanel() {
 
         addMessageToLog({sender: "You", content: messageContent, senderIsUser: true});
 
-        console.log(`Bartender Selected: ${selectedBartender.profile.displayName}`)
-        console.log(`Message: ${message}`)
+        const responseString: string = await addResponseToConversation(messageContent, conversationId);
+        const response: typeof DrinkResponseSchema = JSON.parse(responseString);
+        let reply = response.message;
+        reply = stripMarkdownFromString(reply)
+
+        //TODO: Speak Message
+
+        addMessageToLog({sender: selectedBartender.profile.displayName, content: reply, senderIsUser: false});
     }
 
     return (

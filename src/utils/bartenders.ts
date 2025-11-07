@@ -1,4 +1,4 @@
-﻿const drinkResponseSchema = {
+﻿export const DrinkResponseSchema = {
     message: "string",
     drink: {
         name: "string",
@@ -52,7 +52,7 @@ const commonSystemPrompt =
     "Always make a twist on this drink (ranging from major to minor changes) based on your personality. " +
     "You are always in conversation, so all responses should be written as if they were spoken out loud." +
     "Keep responses concise - 4-5 sentences max unless asked for more detail. " +
-    "Respond in JSON format matching this schema: " + JSON.stringify(drinkResponseSchema) + " " +
+    "Respond in JSON format matching this schema: " + JSON.stringify(DrinkResponseSchema) + " " +
     "Do not use emojis.";
 
 export const bartenders: Record<string, Bartender> = {
