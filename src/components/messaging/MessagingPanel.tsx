@@ -17,20 +17,28 @@ export default function MessagingPanel() {
     const [conversationId, setConversationId] = useState<string | null>(null);
     const [messageLog, setMessageLog] = useState<Message[]>([]);
 
-    const handleSendMessage = async (message: string)=> {
+    const initializeConversation = async (message: string)=> {
+        if (!selectedBartender) {
+            return;
+        }
+
+        console.log("Conversation ID not set. Creating a new conversation...");
+        const systemPrompt = getSystemPrompt(selectedBartender);
+        const newConversationId = await createConversation(
+            systemPrompt,
+            message,
+            selectedBartender.key
+        );
+        setConversationId(newConversationId);
+    }
+
+    const handleSendMessage = async (messageContent: string)=> {
         if (!selectedBartender) {
             throw new Error("Please select a bartender.")
         }
 
         if (!conversationId) {
-            console.log("Conversation ID not set. Creating a new conversation...");
-            const systemPrompt = getSystemPrompt(selectedBartender);
-            const newConversationId = await createConversation(
-                systemPrompt,
-                message,
-                selectedBartender.key
-            );
-            setConversationId(newConversationId);
+            await initializeConversation(messageContent);
         }
 
         setMessageLog((previousMessages: Message[]) => [
