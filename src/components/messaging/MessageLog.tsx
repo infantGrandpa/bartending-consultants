@@ -23,8 +23,12 @@ export default function MessageLog() {
         "Bruce just rage-transformed because someone ate his yogurt from the fridge. It was me. Worth it."
     ];
 
+    //TODO: Change this scroll area to be the entire page; everything else should be static
+    // This way we don't have to deal with the weirdness of 2 scrollbars when things go wrong.
+    // For example, the Messages themselves would be scrollable, but the Input would be sticky at the bottom.
+    // Take inspo from ChatGPT and Claude
     return (
-        <ScrollArea scrollbars="vertical">
+        <ScrollArea scrollbars="vertical" style={{height: "700px"}}>
             <Flex direction="column" gap="3">
                 {Array.from({ length: numberOfMessages }).map((_, index) => (
                     <Message

@@ -21,6 +21,7 @@ export default function MessageInput({onSendMessage}: Props) {
     }
 
     //TODO: Allow speech to text dictation
+    //TODO: Change the Input to be sticky
 
     return (
         <Flex style={{
