@@ -1,10 +1,7 @@
 ﻿import {isDevEnv} from "../utils/utils.ts";
-import {useApiKeys} from "../hooks/useApiKeys.tsx";
 
-
-async function sendOpenAiRequest(endpoint: string, jsonBody: any) {
-    const { openaiKey } = useApiKeys();
-
+//TODO: Figure out a way we can do this without passing the API key around
+async function sendOpenAiRequest(endpoint: string, jsonBody: any, openaiKey: string) {
     const requestUrl = `https://api.openai.com/v1/${endpoint}`
     const response = await fetch(requestUrl, {
         method: 'POST',
@@ -25,7 +22,7 @@ async function sendOpenAiRequest(endpoint: string, jsonBody: any) {
     return data
 }
 
-export async function createConversation(systemPrompt: string, userMessage: string, personalityKey: string) {
+export async function createConversation(systemPrompt: string, userMessage: string, personalityKey: string, openAiKey: string) {
     const requestBody = {
         metadata: {personality: personalityKey},
         items: [
@@ -47,12 +44,12 @@ export async function createConversation(systemPrompt: string, userMessage: stri
         conversation = {id: "123456"}
         console.log(`DEV MODE: Dummy Conversation created.`);
     } else {
-        conversation = await sendOpenAiRequest('conversations', requestBody);
+        conversation = await sendOpenAiRequest('conversations', requestBody, openAiKey);
     }
     return conversation.id;
 }
 
-export async function addResponseToConversation(message: string, conversationId:string) {
+export async function addResponseToConversation(message: string, conversationId:string, openAiKey: string) {
     if (isDevEnv()) {
         console.log('DEV MODE: Generating mock response...');
         return generateMockResponse(message);
@@ -64,7 +61,7 @@ export async function addResponseToConversation(message: string, conversationId:
         input: message
     }
 
-    const data = await sendOpenAiRequest('responses', requestBody)
+    const data = await sendOpenAiRequest('responses', requestBody, openAiKey)
     return data.output[0].content[0].text;
 }
 

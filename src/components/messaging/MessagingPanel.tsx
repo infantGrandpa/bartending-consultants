@@ -6,6 +6,7 @@ import {useState} from "react";
 import {getSystemPrompt, DrinkResponseSchema} from "../../utils/bartenders.ts";
 import {addResponseToConversation, createConversation} from "../../api/openai.ts";
 import {stripMarkdownFromString} from "../../utils/utils.ts";
+import {useApiKeys} from "../../hooks/useApiKeys.tsx";
 
 export interface Message {
     sender: string;
@@ -18,6 +19,8 @@ export default function MessagingPanel() {
     const [conversationId, setConversationId] = useState<string | null>(null);
     const [messageLog, setMessageLog] = useState<Message[]>([]);
 
+    const {openaiKey} = useApiKeys();
+
     const initializeConversation = async (message: string)=> {
         if (!selectedBartender) {
             return;
@@ -28,7 +31,8 @@ export default function MessagingPanel() {
         const newConversationId = await createConversation(
             systemPrompt,
             message,
-            selectedBartender.key
+            selectedBartender.key,
+            openaiKey
         );
         setConversationId(newConversationId);
     }
@@ -51,7 +55,7 @@ export default function MessagingPanel() {
 
         addMessageToLog({sender: "You", content: messageContent, senderIsUser: true});
 
-        const responseString: string = await addResponseToConversation(messageContent, conversationId);
+        const responseString: string = await addResponseToConversation(messageContent, conversationId, openaiKey);
         const response: typeof DrinkResponseSchema = JSON.parse(responseString);
         let reply = response.message;
         reply = stripMarkdownFromString(reply)
