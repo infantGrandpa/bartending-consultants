@@ -11,7 +11,7 @@ export default function BartenderSelection() {
     };
 
     return (
-        <Flex justify="between" gap="3">
+        <Flex justify="between" gap="3" mb="4">
             {Object.values(bartenders).map((p) => (
                 <Button
                     key={p.key}
