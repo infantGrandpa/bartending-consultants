@@ -13,7 +13,7 @@ export default function ApiKeyInput({id, labelText, placeholder, onChange}:Props
     return (
         <Box mt="3">
             <Label.Root htmlFor={id}>
-                <Text as="div" size="3">{labelText}</Text>
+                <Text as="div" size="3" mb="1">{labelText}</Text>
             </Label.Root>
             <TextField.Root type="password" placeholder={placeholder} id={id} onChange={onChange}/>
         </Box>
