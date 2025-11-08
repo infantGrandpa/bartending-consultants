@@ -93,7 +93,7 @@ export default function ApiKeysPanel() {
                 onChange={(e: any) => setElevenLabsKey(e.target.value)}
             />
             <Flex mt="4" justify="center">
-                <Button onClick={handleSave}>
+                <Button onClick={handleSave} disabled={!(openaiKey && elevenLabsKey)}>
                     Save API Keys
                     <i className="fa-solid fa-floppy-disk"></i>
                 </Button>
