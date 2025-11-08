@@ -16,14 +16,14 @@ export interface Message {
 
 export default function MessagingPanel() {
     const {selectedBartender} = useBartender();
-    const [conversationId, setConversationId] = useState<string | null>(null);
+    const [conversationId, setConversationId] = useState<string>("");
     const [messageLog, setMessageLog] = useState<Message[]>([]);
 
     const {openaiKey} = useApiKeys();
 
-    const initializeConversation = async (message: string)=> {
+    const initializeConversation = async (message: string): Promise<string> => {
         if (!selectedBartender) {
-            return;
+            throw new Error("No bartender selected.");
         }
 
         console.log("Conversation ID not set. Creating a new conversation...");
@@ -35,6 +35,8 @@ export default function MessagingPanel() {
             openaiKey
         );
         setConversationId(newConversationId);
+
+        return newConversationId;
     }
 
     const addMessageToLog = (message: Message)=> {
@@ -49,18 +51,14 @@ export default function MessagingPanel() {
             throw new Error("Please select a bartender.")
         }
 
-        if (!conversationId) {
-            await initializeConversation(messageContent);
-        }
-
-        //TODO: Figure out a way to not require a second check (TypeScript is cranky without it)
-        if (!conversationId) {
-            throw new Error("Unexpected error: Conversation ID is still null after initializing conversation.")
+        let activeConversationId = conversationId;
+        if (!activeConversationId) {
+            activeConversationId = await initializeConversation(messageContent);
         }
 
         addMessageToLog({sender: "You", content: messageContent, senderIsUser: true});
 
-        const responseString: string = await addResponseToConversation(messageContent, conversationId, openaiKey);
+        const responseString: string = await addResponseToConversation(messageContent, activeConversationId, openaiKey);
         const response: typeof DrinkResponseSchema = JSON.parse(responseString);
         let reply = response.message;
         reply = stripMarkdownFromString(reply)
