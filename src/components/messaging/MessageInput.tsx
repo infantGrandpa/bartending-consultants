@@ -27,13 +27,7 @@ export default function MessageInput({onSendMessage}: Props) {
     //TODO: Add some feedback to explain they need to choose a bartender?
 
     return (
-        <Flex style={{
-            backgroundColor: "var(--color-surface)",
-            border: "solid 1px var(--base-card-classic-border-color)",
-            boxShadow: "inset 0 0 0 var(--text-field-border-width) var(--gray-a7)",
-            color: "var(--gray-12)",
-            borderRadius: "var(--radius-2)"
-        }}>
+        <Flex className="input-box">
             <TextArea
                 placeholder="Type your message here..."
                 variant="soft"
