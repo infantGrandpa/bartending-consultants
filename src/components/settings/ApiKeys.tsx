@@ -5,6 +5,7 @@ import ApiKeyInput from "./ApiKeyInput.tsx";
 export default function ApiKeysPanel() {
     const [openaiKey, setOpenaiKey] = useState("");
     const [elevenLabsKey, setElevenLabsKey] = useState("");
+    const [areKeysSaved, setAreKeysSaved] = useState<boolean>(false);
 
     useEffect(() => {
         const storedOpenAI = localStorage.getItem("openaiApiKey") || "";
@@ -19,6 +20,8 @@ export default function ApiKeysPanel() {
             console.log(`Saved Eleven Key found. Setting it to: ${storedEleven}`);
             setElevenLabsKey(storedEleven);
         }
+
+        setAreKeysSaved(Boolean(storedOpenAI && storedEleven));
     }, []);
 
     const handleSave = () => {
@@ -28,6 +31,8 @@ export default function ApiKeysPanel() {
         if (openaiKey) localStorage.setItem("openaiApiKey", openaiKey);
         if (elevenLabsKey) localStorage.setItem("elevenLabsApiKey", elevenLabsKey);
         //TODO: Set Keys in useApiKeys
+
+        setAreKeysSaved(true);
     };
 
     const handleClear = () => {
@@ -35,7 +40,17 @@ export default function ApiKeysPanel() {
         localStorage.removeItem("elevenLabsApiKey");
         setOpenaiKey("");
         setElevenLabsKey("");
+
+        setAreKeysSaved(false);
     };
+
+    if (areKeysSaved) {
+        return (
+            <Button color="red" variant="outline" onClick={handleClear}>
+                Clear API Keys
+            </Button>
+        )
+    }
 
     return (
         <Card>
