@@ -3,7 +3,7 @@ import {AlertDialog, Button, Card, Flex, Heading, Text} from "@radix-ui/themes";
 import ApiKeyInput from "./ApiKeyInput.tsx";
 import {useApiKeys} from "../../hooks/useApiKeys.tsx";
 
-export default function ApiKeysPanel() {
+export default function ApiKeysCard() {
     const { saveApiKeys, clearApiKeys, areKeysSaved } = useApiKeys();
     const [openaiKey, setOpenaiKey] = useState("");
     const [elevenLabsKey, setElevenLabsKey] = useState("");

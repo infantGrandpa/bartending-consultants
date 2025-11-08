@@ -1,5 +1,5 @@
 ﻿import BartenderSelection from "./bartenders/BartenderSelection.tsx";
-import ApiKeysPanel from "./settings/ApiKeys.tsx";
+import ApiKeysCard from "./settings/ApiKeysCard.tsx";
 import {Flex} from "@radix-ui/themes";
 import BartenderCard from "./bartenders/BartenderCard.tsx";
 
@@ -10,7 +10,7 @@ export default function Sidebar() {
         }}>
             <BartenderSelection />
             <BartenderCard />
-            <ApiKeysPanel />
+            <ApiKeysCard />
         </Flex>
     );
 }
