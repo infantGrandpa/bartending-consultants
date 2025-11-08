@@ -1,27 +1,33 @@
-﻿import { useState, useEffect } from "react";
+﻿import {useState, useEffect} from "react";
+import {Button, Card, Flex, Heading, Text} from "@radix-ui/themes";
+import ApiKeyInput from "./ApiKeyInput.tsx";
 
 export default function ApiKeysPanel() {
     const [openaiKey, setOpenaiKey] = useState("");
     const [elevenLabsKey, setElevenLabsKey] = useState("");
-    const [isVisible, setIsVisible] = useState(false);
 
     useEffect(() => {
         const storedOpenAI = localStorage.getItem("openaiApiKey") || "";
         const storedEleven = localStorage.getItem("elevenLabsApiKey") || "";
 
-        if (storedOpenAI || storedEleven) {
+        if (storedOpenAI) {
+            console.log(`Saved OpenAI Key found. Setting it to: ${storedOpenAI}`);
             setOpenaiKey(storedOpenAI);
+        }
+
+        if (storedEleven) {
+            console.log(`Saved Eleven Key found. Setting it to: ${storedEleven}`);
             setElevenLabsKey(storedEleven);
-            setIsVisible(false);
-        } else {
-            setIsVisible(true);
         }
     }, []);
 
     const handleSave = () => {
+        console.log("Saving API Keys...");
+        console.log(`OpenAI Key: ${openaiKey}`);
+        console.log(`ElevenLabs Key: ${elevenLabsKey}`);
         if (openaiKey) localStorage.setItem("openaiApiKey", openaiKey);
         if (elevenLabsKey) localStorage.setItem("elevenLabsApiKey", elevenLabsKey);
-        setIsVisible(false);
+        //TODO: Set Keys in useApiKeys
     };
 
     const handleClear = () => {
@@ -29,59 +35,30 @@ export default function ApiKeysPanel() {
         localStorage.removeItem("elevenLabsApiKey");
         setOpenaiKey("");
         setElevenLabsKey("");
-        setIsVisible(true);
     };
 
     return (
-        <div className="mt-8">
-            {isVisible && (
-                <div className="bg-gray-800 rounded-lg p-6">
-                    <h2 className="text-xl font-semibold mb-4">API Key Setup</h2>
-                    <p className="text-gray-400 mb-4">
-                        Enter your API keys. They’ll be stored locally in your browser.
-                    </p>
-
-                    <label htmlFor="openaiApiKeyInput" className="block mb-1">
-                        OpenAI API Key
-                    </label>
-                    <input
-                        type="password"
-                        id="openaiApiKeyInput"
-                        className="w-full bg-gray-700 text-white p-3 rounded-lg border border-gray-600 focus:border-blue-500 focus:outline-none mb-4"
-                        placeholder="sk-..."
-                        value={openaiKey}
-                        onChange={(e) => setOpenaiKey(e.target.value)}
-                    />
-
-                    <label htmlFor="elevenLabsApiKeyInput" className="block mb-1">
-                        ElevenLabs API Key
-                    </label>
-                    <input
-                        type="password"
-                        id="elevenLabsApiKeyInput"
-                        className="w-full bg-gray-700 text-white p-3 rounded-lg border border-gray-600 focus:border-blue-500 focus:outline-none mb-4"
-                        placeholder="sk_..."
-                        value={elevenLabsKey}
-                        onChange={(e) => setElevenLabsKey(e.target.value)}
-                    />
-
-                    <button
-                        onClick={handleSave}
-                        className="bg-green-600 hover:bg-green-700 px-6 py-3 rounded-lg font-semibold w-full"
-                    >
-                        Save API Keys
-                    </button>
-                </div>
-            )}
-
-            {!isVisible && (
-                <button
-                    onClick={handleClear}
-                    className="mt-4 bg-red-600 hover:bg-red-700 px-4 py-2 rounded-lg text-sm w-full"
-                >
-                    Clear Stored API Keys
-                </button>
-            )}
-        </div>
+        <Card>
+            <Heading as="h2" size="5" mb="1">API Key Setup</Heading>
+            <Text as="p">Enter your API keys. They'll be stored locally in your browser.</Text>
+            <ApiKeyInput
+                id={"openaiApiKeyInput"}
+                labelText={"OpenAI API Key"}
+                placeholder={"sk-..."}
+                onChange={(e: any) => setOpenaiKey(e.target.value)}
+            />
+            <ApiKeyInput
+                id={"elevenLabsApiKeyInput"}
+                labelText={"ElevenLabs API Key"}
+                placeholder={"sk_..."}
+                onChange={(e: any) => setElevenLabsKey(e.target.value)}
+            />
+            <Flex mt="4" justify="center">
+                <Button onClick={handleSave}>
+                    Save API Keys
+                    <i className="fa-solid fa-floppy-disk"></i>
+                </Button>
+            </Flex>
+        </Card>
     );
 }
