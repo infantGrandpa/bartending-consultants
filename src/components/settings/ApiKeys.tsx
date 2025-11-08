@@ -1,5 +1,5 @@
 ﻿import {useState, useEffect} from "react";
-import {Button, Card, Flex, Heading, Text} from "@radix-ui/themes";
+import {AlertDialog, Button, Card, Flex, Heading, Text} from "@radix-ui/themes";
 import ApiKeyInput from "./ApiKeyInput.tsx";
 
 export default function ApiKeysPanel() {
@@ -46,9 +46,33 @@ export default function ApiKeysPanel() {
 
     if (areKeysSaved) {
         return (
-            <Button color="red" variant="outline" onClick={handleClear}>
-                Clear API Keys
-            </Button>
+            <AlertDialog.Root>
+                <AlertDialog.Trigger>
+                    <Button color="red" variant="outline">
+                        Clear API Keys
+                    </Button>
+                </AlertDialog.Trigger>
+                <AlertDialog.Content>
+                    <AlertDialog.Title>Clear Saved API Keys</AlertDialog.Title>
+                    <AlertDialog.Description>
+                        You cannot undo this action. If you want to connect with these awesome bartenders again, you'll
+                        need to reenter your API keys.
+                    </AlertDialog.Description>
+
+                    <Flex gap="3" mt="4" justify="end">
+                        <AlertDialog.Cancel>
+                            <Button variant="soft" color="gray">
+                                Cancel
+                            </Button>
+                        </AlertDialog.Cancel>
+                        <AlertDialog.Action>
+                            <Button color="red" onClick={handleClear}>
+                                Clear Keys
+                            </Button>
+                        </AlertDialog.Action>
+                    </Flex>
+                </AlertDialog.Content>
+            </AlertDialog.Root>
         )
     }
 
