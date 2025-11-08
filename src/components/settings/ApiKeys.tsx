@@ -1,11 +1,12 @@
 ﻿import {useState, useEffect} from "react";
 import {AlertDialog, Button, Card, Flex, Heading, Text} from "@radix-ui/themes";
 import ApiKeyInput from "./ApiKeyInput.tsx";
+import {useApiKeys} from "../../hooks/useApiKeys.tsx";
 
 export default function ApiKeysPanel() {
+    const { saveApiKeys, clearApiKeys, areKeysSaved } = useApiKeys();
     const [openaiKey, setOpenaiKey] = useState("");
     const [elevenLabsKey, setElevenLabsKey] = useState("");
-    const [areKeysSaved, setAreKeysSaved] = useState<boolean>(false);
 
     useEffect(() => {
         const storedOpenAI = localStorage.getItem("openaiApiKey") || "";
@@ -20,28 +21,24 @@ export default function ApiKeysPanel() {
             console.log(`Saved Eleven Key found. Setting it to: ${storedEleven}`);
             setElevenLabsKey(storedEleven);
         }
-
-        setAreKeysSaved(Boolean(storedOpenAI && storedEleven));
     }, []);
 
     const handleSave = () => {
-        console.log("Saving API Keys...");
-        console.log(`OpenAI Key: ${openaiKey}`);
-        console.log(`ElevenLabs Key: ${elevenLabsKey}`);
-        if (openaiKey) localStorage.setItem("openaiApiKey", openaiKey);
-        if (elevenLabsKey) localStorage.setItem("elevenLabsApiKey", elevenLabsKey);
-        //TODO: Set Keys in useApiKeys
+        if (!openaiKey) {
+            throw new Error("Open AI API Key is empty.")
+        }
 
-        setAreKeysSaved(true);
+        if (!elevenLabsKey) {
+            throw new Error("ElevenLabs API Key is empty.")
+        }
+
+        saveApiKeys(openaiKey, elevenLabsKey);
     };
 
     const handleClear = () => {
-        localStorage.removeItem("openaiApiKey");
-        localStorage.removeItem("elevenLabsApiKey");
         setOpenaiKey("");
         setElevenLabsKey("");
-
-        setAreKeysSaved(false);
+        clearApiKeys();
     };
 
     if (areKeysSaved) {

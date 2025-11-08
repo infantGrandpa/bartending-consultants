@@ -5,13 +5,18 @@ interface ApiKeyContextType {
     elevenLabsKey: string;
     setOpenaiKey: (key: string) => void;
     setElevenLabsKey: (key: string) => void;
+    saveApiKeys: (openaiKey: string, elevenLabsKey: string) => void;
+    clearApiKeys: () => void;
+    areKeysSaved: boolean;
 }
 
 const ApiKeyContext = createContext<ApiKeyContextType | undefined>(undefined);
 
-export const ApiKeyProvider = ({ children }: { children: ReactNode }) => {
-    const [openaiKey, setOpenaiKey] = useState("");
-    const [elevenLabsKey, setElevenLabsKey] = useState("");
+export const ApiKeyProvider = ({children}: { children: ReactNode }) => {
+    const [openaiKey, setOpenaiKey] = useState<string>("");
+    const [elevenLabsKey, setElevenLabsKey] = useState<string>("");
+    const [areKeysSaved, setAreKeysSaved] = useState<boolean>(false);
+
 
     useEffect(() => {
         const storedOpenAI = localStorage.getItem("openaiApiKey") || "";
@@ -19,7 +24,41 @@ export const ApiKeyProvider = ({ children }: { children: ReactNode }) => {
 
         setOpenaiKey(storedOpenAI);
         setElevenLabsKey(storedEleven);
+        setAreKeysSaved(Boolean(storedOpenAI && storedEleven))
     }, []);
+
+    useEffect(() => {
+        console.log(`openaiKey: ${openaiKey}`);
+        console.log(`elevenLabsKey: ${elevenLabsKey}`);
+    }, [openaiKey, elevenLabsKey]);
+
+    const saveApiKeys = (newOpenAiKey: string, newElevenLabsKey: string) => {
+        console.log("Saving API Keys...");
+        if (newOpenAiKey) {
+            localStorage.setItem("openaiApiKey", openaiKey);
+            setOpenaiKey(newOpenAiKey);
+        }
+
+        if (newElevenLabsKey) {
+            localStorage.setItem("elevenLabsApiKey", newElevenLabsKey);
+            setElevenLabsKey(newElevenLabsKey);
+        }
+
+        setAreKeysSaved(true);
+        console.log(`OpenAI Key: ${openaiKey}`);
+        console.log(`ElevenLabs Key: ${elevenLabsKey}`);
+    }
+
+    const clearApiKeys = () => {
+        console.log("Clearing API Keys...")
+        localStorage.removeItem("openaiApiKey");
+        localStorage.removeItem("elevenLabsApiKey");
+
+        setOpenaiKey("");
+        setElevenLabsKey("");
+
+        setAreKeysSaved(false);
+    }
 
     useEffect(() => {
         if (openaiKey) localStorage.setItem("openaiApiKey", openaiKey);
@@ -27,7 +66,8 @@ export const ApiKeyProvider = ({ children }: { children: ReactNode }) => {
     }, [openaiKey, elevenLabsKey]);
 
     return (
-        <ApiKeyContext.Provider value={{ openaiKey, elevenLabsKey, setOpenaiKey, setElevenLabsKey }}>
+        <ApiKeyContext.Provider
+            value={{openaiKey, elevenLabsKey, setOpenaiKey, setElevenLabsKey, saveApiKeys, clearApiKeys, areKeysSaved}}>
             {children}
         </ApiKeyContext.Provider>
     );
