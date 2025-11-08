@@ -7,7 +7,7 @@ import {getSystemPrompt} from "../../utils/bartenders.ts";
 import {addResponseToConversation, createConversation} from "../../api/openai.ts";
 import {stripMarkdownFromString} from "../../utils/utils.ts";
 import {useApiKeys} from "../../hooks/useApiKeys.tsx";
-import type {ResponseSchema} from "../../utils/responseSchema.ts";
+import type {Drink, ResponseSchema} from "../../utils/responseSchema.ts";
 
 export interface Message {
     sender: string;
@@ -47,6 +47,18 @@ export default function MessagingPanel() {
         ]);
     }
 
+    const sendMessage = async (message: string, conversation: string) => {
+        const responseString: string = await addResponseToConversation(message, conversation, openaiKey);
+        const response: ResponseSchema = JSON.parse(responseString);
+        let reply: string = response.message;
+        reply = stripMarkdownFromString(reply)
+
+        const drink: Drink = response.drink;
+
+        return {reply, drink};
+
+    }
+
     const handleSendMessage = async (messageContent: string)=> {
         if (!selectedBartender) {
             throw new Error("Please select a bartender.")
@@ -59,14 +71,12 @@ export default function MessagingPanel() {
 
         addMessageToLog({sender: "You", content: messageContent, senderIsUser: true});
 
-        const responseString: string = await addResponseToConversation(messageContent, activeConversationId, openaiKey);
-        const response: ResponseSchema = JSON.parse(responseString);
-        let reply = response.message;
-        reply = stripMarkdownFromString(reply)
+        const {reply, drink} = await sendMessage(messageContent, activeConversationId);
 
         //TODO: Speak Message
 
         addMessageToLog({sender: selectedBartender.profile.displayName, content: reply, senderIsUser: false});
+        addMessageToLog({sender: selectedBartender.profile.displayName, content: JSON.stringify(drink), senderIsUser: false})
     }
 
     return (
