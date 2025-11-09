@@ -34,6 +34,12 @@ export default function MessageInput({onSendMessage}: Props) {
                 resize="vertical"
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
+                onKeyDown={(e) => {
+                    if (e.key === 'Enter' && !e.shiftKey) {
+                        e.preventDefault();
+                        handleSendButtonClick();
+                    }
+                }}
                 style={{
                     backgroundColor: "initial",
                     flexGrow: "1",
