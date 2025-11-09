@@ -5,7 +5,7 @@
             <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 2000 1500'>
                 <rect fill='#000000' width='2000' height='1500'/>
                 <defs>
-                    <ellipse fill='none' stroke-width='200' stroke-opacity='0.05' id='a' rx='600' ry='450'/>
+                    <ellipse fill='none' strokeWidth='200' strokeOpacity='0.05' id='a' rx='600' ry='450'/>
                 </defs>
                 <g transform='scale(0.739)' style={{transformOrigin: "center"}}>
                     <g transform='rotate(153 0 0)' style={{transformOrigin: "center"}}>
