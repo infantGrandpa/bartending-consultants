@@ -27,13 +27,7 @@ export const ApiKeyProvider = ({children}: { children: ReactNode }) => {
         setAreKeysSaved(Boolean(storedOpenAI && storedEleven))
     }, []);
 
-    useEffect(() => {
-        console.log(`openaiKey: ${openaiKey}`);
-        console.log(`elevenLabsKey: ${elevenLabsKey}`);
-    }, [openaiKey, elevenLabsKey]);
-
     const saveApiKeys = (newOpenAiKey: string, newElevenLabsKey: string) => {
-        console.log("Saving API Keys...");
         if (newOpenAiKey) {
             localStorage.setItem("openaiApiKey", openaiKey);
             setOpenaiKey(newOpenAiKey);
@@ -45,12 +39,9 @@ export const ApiKeyProvider = ({children}: { children: ReactNode }) => {
         }
 
         setAreKeysSaved(true);
-        console.log(`OpenAI Key: ${openaiKey}`);
-        console.log(`ElevenLabs Key: ${elevenLabsKey}`);
     }
 
     const clearApiKeys = () => {
-        console.log("Clearing API Keys...")
         localStorage.removeItem("openaiApiKey");
         localStorage.removeItem("elevenLabsApiKey");
 

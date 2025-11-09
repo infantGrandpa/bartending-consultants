@@ -13,12 +13,10 @@ export default function ApiKeysCard() {
         const storedEleven = localStorage.getItem("elevenLabsApiKey") || "";
 
         if (storedOpenAI) {
-            console.log(`Saved OpenAI Key found. Setting it to: ${storedOpenAI}`);
             setOpenaiKey(storedOpenAI);
         }
 
         if (storedEleven) {
-            console.log(`Saved Eleven Key found. Setting it to: ${storedEleven}`);
             setElevenLabsKey(storedEleven);
         }
     }, []);
