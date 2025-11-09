@@ -4,7 +4,7 @@ import {ApiKeyProvider} from "./hooks/useApiKeys.tsx";
 import "@radix-ui/themes/styles.css";
 import {Grid, Theme} from "@radix-ui/themes";
 import {BartenderProvider} from "./providers/BartenderProvider.tsx";
-import {Background} from "./components/background.tsx";
+import {Background} from "./components/Background.tsx";
 
 export default function App() {
     return (
