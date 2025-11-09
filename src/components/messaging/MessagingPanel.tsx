@@ -8,6 +8,7 @@ import {addResponseToConversation, createConversation} from "../../api/openai.ts
 import {stripMarkdownFromString} from "../../utils/utils.ts";
 import {useApiKeys} from "../../hooks/useApiKeys.tsx";
 import type {Drink, ResponseSchema} from "../../utils/responseSchema.ts";
+import {speakMessage} from "../../api/elevenLabs.ts";
 
 export interface Message {
     sender: string;
@@ -20,7 +21,7 @@ export default function MessagingPanel() {
     const [conversationId, setConversationId] = useState<string>("");
     const [messageLog, setMessageLog] = useState<Message[]>([]);
 
-    const {openaiKey} = useApiKeys();
+    const {openaiKey, elevenLabsKey} = useApiKeys();
 
     const initializeConversation = async (message: string): Promise<string> => {
         if (!selectedBartender) {
@@ -59,6 +60,14 @@ export default function MessagingPanel() {
 
     }
 
+    const speakReply = async (reply: string) => {
+        if (selectedBartender?.elevenLabsVoiceId) {
+            await speakMessage(reply, selectedBartender.elevenLabsVoiceId, elevenLabsKey);
+        } else {
+            console.log(`Unable to Speak Message: No ElevenLabs voice ID for selected Bartender (${selectedBartender?.profile.displayName}).`)
+        }
+    }
+
     const handleSendMessage = async (messageContent: string)=> {
         if (!selectedBartender) {
             throw new Error("Please select a bartender.")
@@ -73,7 +82,7 @@ export default function MessagingPanel() {
 
         const {reply, drink} = await sendMessage(messageContent, activeConversationId);
 
-        //TODO: Speak Message
+        await speakReply(reply);
 
         addMessageToLog({sender: selectedBartender.profile.displayName, content: reply, senderIsUser: false});
         addMessageToLog({sender: selectedBartender.profile.displayName, content: JSON.stringify(drink), senderIsUser: false})
