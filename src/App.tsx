@@ -4,6 +4,7 @@ import {ApiKeyProvider} from "./hooks/useApiKeys.tsx";
 import "@radix-ui/themes/styles.css";
 import {Grid, Theme} from "@radix-ui/themes";
 import {BartenderProvider} from "./providers/BartenderProvider.tsx";
+import {Background} from "./components/background.tsx";
 
 export default function App() {
     return (
@@ -11,6 +12,7 @@ export default function App() {
                panelBackground="translucent">
             <ApiKeyProvider>
                 <BartenderProvider>
+                    <Background />
                     <Grid columns="3" gap="4" p="6" height="100vh">
                         <Sidebar/>
                         <MessagingPanel/>

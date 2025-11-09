@@ -1,4 +1,9 @@
-﻿.input-box {
+﻿:root {
+    --ba-main-color: #6e56cf;
+    --ba-grey-color: #6f6d78;
+}
+
+.input-box {
     background-color: var(--color-surface);
     border: solid 1px var(--base-card-classic-border-color);
     box-shadow: inset 0 0 0 var(--text-field-border-width) var(--gray-a7);
