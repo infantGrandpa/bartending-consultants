@@ -5,20 +5,18 @@
 };
 
 export type Drink = {
-    drink: {
-        name: string;
-        ingredients: [
-            {
-                ingredient: string;
-                amount: string;
-            }
-        ]
-        instructions: [
-            {
-                step: string;
-            }
-        ];
-    };
+    name: string;
+    ingredients: [
+        {
+            ingredient: string;
+            amount: string;
+        }
+    ]
+    instructions: [
+        {
+            step: string;
+        }
+    ];
 }
 
 // TODO: Figure out a way to automate generating this example.
