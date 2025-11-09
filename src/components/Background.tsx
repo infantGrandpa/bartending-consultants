@@ -1,4 +1,5 @@
 ﻿export function Background() {
+    // TODO: Create place for better attribution. Currently, the link doesn't show up on the page anywhere.
     return (
         <div className="absolute inset-0 -z-10 overflow-hidden">
             <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 2000 1500'>
@@ -38,7 +39,7 @@
                     </g>
                 </g>
             </svg>
+            <a href="https://www.svgbackgrounds.com/set/free-svg-backgrounds-and-patterns/">Free SVG Backgrounds and Patterns by SVGBackgrounds.com</a>
         </div>
-
     );
 }
