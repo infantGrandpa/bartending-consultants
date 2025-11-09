@@ -5,7 +5,7 @@ import {useBartender} from "../../providers/BartenderProvider.tsx";
 import {useState} from "react";
 import {getSystemPrompt} from "../../utils/bartenders.ts";
 import {addResponseToConversation, createConversation} from "../../api/openai.ts";
-import {stripMarkdownFromString} from "../../utils/utils.ts";
+import {isDevEnv, stripMarkdownFromString} from "../../utils/utils.ts";
 import {useApiKeys} from "../../hooks/useApiKeys.tsx";
 import type {Drink, ResponseSchema} from "../../utils/responseSchema.ts";
 import {speakMessage} from "../../api/elevenLabs.ts";
@@ -61,6 +61,11 @@ export default function MessagingPanel() {
     }
 
     const speakReply = async (reply: string) => {
+        if (isDevEnv()) {
+            console.log(`Pretend we read this out loud: ${reply}`);
+            return;
+        }
+
         if (selectedBartender?.elevenLabsVoiceId) {
             await speakMessage(reply, selectedBartender.elevenLabsVoiceId, elevenLabsKey);
         } else {
