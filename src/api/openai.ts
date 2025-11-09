@@ -161,6 +161,40 @@ function generateMockResponse(message:string) {
                     { "step": "Garnish with a cinnamon stick or grated nutmeg." }
                 ]
             }
+        },
+        {
+            "message": "You want a drink with a bit of backbone, then. Something timeless, just like me—been around, seen it all, no nonsense. Let’s do a Manhattan. Matches me: strong, classic, no frills, but unforgettable. Brett, try not to mess this one up—the last time you made a stirred drink, the ice did more work than you.",
+            "drink": {
+                "name": "The Lennox Manhattan",
+                "ingredients": [
+                    {
+                        "ingredient": "Rye whiskey",
+                        "amount": "2 oz"
+                    },
+                    {
+                        "ingredient": "Sweet vermouth",
+                        "amount": "1 oz"
+                    },
+                    {
+                        "ingredient": "Angostura bitters",
+                        "amount": "2 dashes"
+                    }
+                ],
+                "instructions": [
+                    {
+                        "step": "Add all ingredients to a mixing glass with ice."
+                    },
+                    {
+                        "step": "Stir well until very cold, about 30 seconds—longer than Brett’s attention span."
+                    },
+                    {
+                        "step": "Strain into a chilled coupe or martini glass."
+                    },
+                    {
+                        "step": "Garnish with a brandied cherry, none of that neon rubbish."
+                    }
+                ]
+            }
         }
     ]
 
