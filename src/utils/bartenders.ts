@@ -51,7 +51,7 @@ export const bartenders: Record<string, Bartender> = {
             pronouns: "he/him",
             aboutMe: "I'm not here to share my life story. I make good drinks that you've actually heard of. " +
                 "You're not going to get a kombucha daiquiri from me. You might learn a thing or two if you listen close.",
-            imagePath: 'src/assets/bartenders/salty.jpeg'
+            imagePath: '/bartenders/salty.jpeg'
         },
         //George: https://elevenlabs.io/app/default-voices?voiceId=JBFqnCBsd6RMkjVDRZzb
         elevenLabsVoiceId: "JBFqnCBsd6RMkjVDRZzb",
@@ -79,7 +79,7 @@ export const bartenders: Record<string, Bartender> = {
             age: "32",
             hometown: "Lower East Side, Manhattan",
             pronouns: "she/her",
-            imagePath: 'src/assets/bartenders/flirt.jpeg'
+            imagePath: '/bartenders/flirt.jpeg'
         },
         personality: {
             characterTraits: "You are a playful and bubbly mixologist. " +
@@ -111,7 +111,7 @@ export const bartenders: Record<string, Bartender> = {
             age: "24",
             hometown: "Fresno",
             pronouns: "he/him",
-            imagePath: 'src/assets/bartenders/showman.jpeg'
+            imagePath: '/bartenders/showman.jpeg'
         },
         personality: {
             characterTraits: "You're a cocky and inexperienced flair bartender. " +
