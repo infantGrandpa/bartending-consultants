@@ -1,8 +1,8 @@
-﻿import {createContext, useContext, useState, type ReactNode} from 'react';
+﻿import {createContext, useContext, useState, type ReactNode, useEffect} from 'react';
 
 interface DevSettingsContextValue {
     isDevMode: boolean;
-    setIsDevMode: (value: boolean) => void;
+    saveIsDevMode: (value: boolean) => void;
 }
 
 const DevSettingsContext = createContext<DevSettingsContextValue | undefined>(undefined);
@@ -10,8 +10,18 @@ const DevSettingsContext = createContext<DevSettingsContextValue | undefined>(un
 export function DevSettingsProvider({children}: {children: ReactNode}) {
     const [isDevMode, setIsDevMode] = useState<boolean>(false);
 
+    useEffect(() => {
+        const storedDevMode: string = localStorage.getItem("isDevMode") || String(false);
+        setIsDevMode(storedDevMode === "true");
+    }, []);
+
+    const saveIsDevMode = (newIsDevMode: boolean) => {
+        localStorage.setItem("isDevMode", String(newIsDevMode));
+        setIsDevMode(newIsDevMode);
+    }
+
     return (
-        <DevSettingsContext.Provider value={{isDevMode, setIsDevMode}}>
+        <DevSettingsContext.Provider value={{isDevMode, saveIsDevMode}}>
             {children}
         </DevSettingsContext.Provider>
     );

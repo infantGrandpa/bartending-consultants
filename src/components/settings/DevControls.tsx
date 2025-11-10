@@ -3,7 +3,7 @@ import {useDevSettings} from "../../providers/DevSettingsProvider.tsx";
 
 
 export default function DevControls() {
-    const {isDevMode, setIsDevMode} = useDevSettings();
+    const {isDevMode, saveIsDevMode} = useDevSettings();
 
     return (
         <Flex direction="column" gap="3" p="3">
@@ -12,7 +12,7 @@ export default function DevControls() {
                     <Switch
                         size="2"
                         checked={isDevMode}
-                        onClick={() => setIsDevMode(!isDevMode)}
+                        onClick={() => saveIsDevMode(!isDevMode)}
                     />
                     Dev Mode
                 </Flex>
