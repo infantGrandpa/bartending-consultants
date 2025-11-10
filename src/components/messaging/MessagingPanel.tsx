@@ -44,7 +44,7 @@ export default function MessagingPanel() {
         return newConversationId;
     }
 
-    const addMessageToLog = (message: Message)=> {
+    const addMessageToLog = (message: Message) => {
         setMessageLog((previousMessages: Message[]) => [
             ...previousMessages,
             message
@@ -97,7 +97,7 @@ export default function MessagingPanel() {
         return formattedText;
     }
 
-    const handleSendMessage = async (messageContent: string)=> {
+    const handleSendMessage = async (messageContent: string) => {
         if (!selectedBartender) {
             throw new Error("Please select a bartender.")
         }
