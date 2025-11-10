@@ -24,30 +24,29 @@ export default function DevControls() {
                     Dev Mode
                 </Flex>
             </Text>
-            {isDevMode &&
-                <>
-                    <Text as="label" size="3">
-                        <Flex gap="2">
-                            <Switch
-                                size="2"
-                                checked={useDummyMessages}
-                                onClick={() => saveUseDummyMessages(!useDummyMessages)}
-                            />
-                            Use Dummy Messages
-                        </Flex>
-                    </Text>
-                    <Text as="label" size="3">
-                        <Flex gap="2">
-                            <Switch
-                                size="2"
-                                checked={playDummyAudio}
-                                onClick={() => savePlayDummyAudio(!playDummyAudio)}
-                            />
-                            Play Dummy Audio
-                        </Flex>
-                    </Text>
-                </>
-            }
+            <Text as="label" size="3" color={isDevMode ? undefined : "gray" }>
+                <Flex gap="2">
+                    <Switch
+                        size="2"
+                        checked={useDummyMessages}
+                        onClick={() => saveUseDummyMessages(!useDummyMessages)}
+                        disabled={!isDevMode}
+                    />
+                    Use Dummy Messages
+                </Flex>
+            </Text>
+            <Text as="label" size="3" color={isDevMode ? undefined : "gray" }>
+                <Flex gap="2">
+                    <Switch
+                        size="2"
+                        checked={playDummyAudio}
+                        onClick={() => savePlayDummyAudio(!playDummyAudio)}
+                        disabled={!isDevMode}
+                    />
+                    Play Dummy Audio
+                </Flex>
+            </Text>
+
         </Flex>
     )
 }
