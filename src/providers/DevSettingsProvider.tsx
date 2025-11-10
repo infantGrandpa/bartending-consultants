@@ -29,6 +29,12 @@ export function DevSettingsProvider({children}: {children: ReactNode}) {
     const saveIsDevMode = (newIsDevMode: boolean) => {
         localStorage.setItem("isDevMode", String(newIsDevMode));
         setIsDevMode(newIsDevMode);
+
+        //Reset child settings to their defaults if dev mode is disabled
+        if(!newIsDevMode) {
+            saveUseDummyMessages(true);
+            savePlayDummyAudio(true);
+        }
     }
 
     const saveUseDummyMessages = (newUseDummyMessages: boolean) => {
