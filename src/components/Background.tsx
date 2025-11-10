@@ -1,7 +1,17 @@
 ﻿export function Background() {
     // TODO: Create place for better attribution. Currently, the link doesn't show up on the page anywhere.
     return (
-        <div className="absolute inset-0 -z-10 overflow-hidden">
+        <div
+            style={{
+                position: "absolute",
+                top: 0,
+                right: 0,
+                bottom: 0,
+                left: 0,
+                zIndex: -10,
+                overflow: "hidden",
+            }}
+        >
             <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 2000 1500'>
                 <rect fill='#000000' width='2000' height='1500'/>
                 <defs>

@@ -3,6 +3,11 @@
     --ba-grey-color: #6f6d78;
 }
 
+img {
+    max-width: 100%;
+    display: block;
+}
+
 .input-box {
     background-color: var(--color-surface);
     border: solid 1px var(--base-card-classic-border-color);
