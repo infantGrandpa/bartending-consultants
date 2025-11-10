@@ -17,7 +17,7 @@ export default function Settings() {
             </Dialog.Trigger>
 
 
-            <Dialog.Content maxWidth="500px">
+            <Dialog.Content maxWidth="500px" minHeight="400px">
                 <Dialog.Title>Settings</Dialog.Title>
                 <TabNav.Root>
                     <TabNav.Link
