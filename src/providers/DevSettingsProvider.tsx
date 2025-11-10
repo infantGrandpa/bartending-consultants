@@ -30,11 +30,9 @@ export function DevSettingsProvider({children}: {children: ReactNode}) {
         localStorage.setItem("isDevMode", String(newIsDevMode));
         setIsDevMode(newIsDevMode);
 
-        //Reset child settings to their defaults if dev mode is disabled
-        if(!newIsDevMode) {
-            saveUseDummyMessages(true);
-            savePlayDummyAudio(true);
-        }
+        // Match child settings to dev mode to ensure they're never on/off accidentally
+        saveUseDummyMessages(newIsDevMode);
+        savePlayDummyAudio(newIsDevMode);
     }
 
     const saveUseDummyMessages = (newUseDummyMessages: boolean) => {
@@ -48,13 +46,17 @@ export function DevSettingsProvider({children}: {children: ReactNode}) {
         setPlayDummyAudio(newPlayDummyAudio);
     }
 
+    // Ensure child settings are only true if dev mode is enabled
+    const actualUseDummyMessages: boolean = isDevMode && useDummyMessages;
+    const actualPlayDummyAudio: boolean = isDevMode && playDummyAudio;
+
     return (
         <DevSettingsContext.Provider value={{
             isDevMode,
             saveIsDevMode,
-            useDummyMessages,
+            useDummyMessages: actualUseDummyMessages,
             saveUseDummyMessages,
-            playDummyAudio,
+            playDummyAudio: actualPlayDummyAudio,
             savePlayDummyAudio
         }}>
             {children}
