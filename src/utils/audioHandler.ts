@@ -1,7 +1,7 @@
 ﻿
 let currentAudioElement = null;
 
-async function playAudio(audioUrl) {
+async function playAudio(audioUrl: string) {
     currentAudioElement = new Audio(audioUrl);
 
     currentAudioElement.onended = () => {
@@ -12,7 +12,7 @@ async function playAudio(audioUrl) {
     await currentAudioElement.play()
 }
 
-export async function playAudioBlob(audioBlob) {
+export async function playAudioBlob(audioBlob: Blob) {
     const audioUrl = URL.createObjectURL(audioBlob)
     await playAudio(audioUrl)
 }

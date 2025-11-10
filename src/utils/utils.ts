@@ -4,7 +4,7 @@ export function isDevEnv() {
     return isDev;
 }
 
-export function stripMarkdownFromString(inputString) {
+export function stripMarkdownFromString(inputString: string) {
     let strippedString = inputString;
 
     // Remove headers (# ## ### etc.)

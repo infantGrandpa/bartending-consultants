@@ -1,14 +1,13 @@
-import {openAiApiKey} from "./api-key-handler.js";
-import {isDevEnv} from "./utils.js";
+﻿import {isDevEnv} from "../utils/utils.ts";
 
-
-async function sendOpenAiRequest(endpoint, jsonBody) {
+//TODO: Figure out a way we can do this without passing the API key around
+async function sendOpenAiRequest(endpoint: string, jsonBody: any, openaiKey: string) {
     const requestUrl = `https://api.openai.com/v1/${endpoint}`
     const response = await fetch(requestUrl, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${openAiApiKey}`
+            'Authorization': `Bearer ${openaiKey}`
         },
         body: JSON.stringify(jsonBody)
     });
@@ -23,7 +22,7 @@ async function sendOpenAiRequest(endpoint, jsonBody) {
     return data
 }
 
-export async function createConversation(systemPrompt, userMessage, personalityKey) {
+export async function createConversation(systemPrompt: string, userMessage: string, personalityKey: string, openAiKey: string) {
     const requestBody = {
         metadata: {personality: personalityKey},
         items: [
@@ -45,12 +44,12 @@ export async function createConversation(systemPrompt, userMessage, personalityK
         conversation = {id: "123456"}
         console.log(`DEV MODE: Dummy Conversation created.`);
     } else {
-        conversation = await sendOpenAiRequest('conversations', requestBody);
+        conversation = await sendOpenAiRequest('conversations', requestBody, openAiKey);
     }
     return conversation.id;
 }
 
-export async function addResponseToConversation(message, conversationId) {
+export async function addResponseToConversation(message: string, conversationId:string, openAiKey: string) {
     if (isDevEnv()) {
         console.log('DEV MODE: Generating mock response...');
         return generateMockResponse(message);
@@ -62,11 +61,11 @@ export async function addResponseToConversation(message, conversationId) {
         input: message
     }
 
-    const data = await sendOpenAiRequest('responses', requestBody)
+    const data = await sendOpenAiRequest('responses', requestBody, openAiKey)
     return data.output[0].content[0].text;
 }
 
-function generateMockResponse(message) {
+function generateMockResponse(message:string) {
     const mockReplies = [
         {
             "message": "Ah, the Negroni — a classic Italian aperitivo that's equal parts bitter, sweet, and smooth. It’s a no-fuss drink that balances gin’s botanical punch with the orange warmth of Campari and the deep sweetness of vermouth. Stirred, never shaken, and best sipped slowly over a large cube.",
@@ -160,6 +159,40 @@ function generateMockResponse(message) {
                     { "step": "Pour in rum and top with hot water." },
                     { "step": "Stir until butter is melted and ingredients are combined." },
                     { "step": "Garnish with a cinnamon stick or grated nutmeg." }
+                ]
+            }
+        },
+        {
+            "message": "You want a drink with a bit of backbone, then. Something timeless, just like me—been around, seen it all, no nonsense. Let’s do a Manhattan. Matches me: strong, classic, no frills, but unforgettable. Brett, try not to mess this one up—the last time you made a stirred drink, the ice did more work than you.",
+            "drink": {
+                "name": "The Lennox Manhattan",
+                "ingredients": [
+                    {
+                        "ingredient": "Rye whiskey",
+                        "amount": "2 oz"
+                    },
+                    {
+                        "ingredient": "Sweet vermouth",
+                        "amount": "1 oz"
+                    },
+                    {
+                        "ingredient": "Angostura bitters",
+                        "amount": "2 dashes"
+                    }
+                ],
+                "instructions": [
+                    {
+                        "step": "Add all ingredients to a mixing glass with ice."
+                    },
+                    {
+                        "step": "Stir well until very cold, about 30 seconds—longer than Brett’s attention span."
+                    },
+                    {
+                        "step": "Strain into a chilled coupe or martini glass."
+                    },
+                    {
+                        "step": "Garnish with a brandied cherry, none of that neon rubbish."
+                    }
                 ]
             }
         }
