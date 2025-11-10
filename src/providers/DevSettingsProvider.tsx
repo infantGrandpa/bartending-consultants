@@ -11,7 +11,7 @@ interface DevSettingsContextValue {
 
 const DevSettingsContext = createContext<DevSettingsContextValue | undefined>(undefined);
 
-export function DevSettingsProvider({children}: {children: ReactNode}) {
+export function DevSettingsProvider({children}: { children: ReactNode }) {
     const [isDevMode, setIsDevMode] = useState<boolean>(false);
     const [useDummyMessages, setUseDummyMessages] = useState<boolean>(true);
     const [playDummyAudio, setPlayDummyAudio] = useState<boolean>(true);
@@ -38,7 +38,6 @@ export function DevSettingsProvider({children}: {children: ReactNode}) {
     const saveUseDummyMessages = (newUseDummyMessages: boolean) => {
         localStorage.setItem("useDummyMessages", String(newUseDummyMessages));
         setUseDummyMessages(newUseDummyMessages);
-        console.log(`Set useDummyMessages to: ${newUseDummyMessages}`)
     }
 
     const savePlayDummyAudio = (newPlayDummyAudio: boolean) => {
