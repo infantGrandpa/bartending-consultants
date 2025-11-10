@@ -4,7 +4,7 @@ import {useDevSettings} from "../../providers/DevSettingsProvider.tsx";
 
 
 export default function DevModeDetails() {
-    const {isDevMode} = useDevSettings();
+    const {isDevMode, useDummyMessages, playDummyAudio} = useDevSettings();
     const {openaiKey, elevenLabsKey} = useApiKeys();
 
     return (
@@ -20,6 +20,14 @@ export default function DevModeDetails() {
                 <Table.Row>
                     <Table.RowHeaderCell>Dev Mode</Table.RowHeaderCell>
                     <Table.Cell>{String(isDevMode)}</Table.Cell>
+                </Table.Row>
+                <Table.Row>
+                    <Table.RowHeaderCell>Use Dummy Messages</Table.RowHeaderCell>
+                    <Table.Cell>{String(useDummyMessages)}</Table.Cell>
+                </Table.Row>
+                <Table.Row>
+                    <Table.RowHeaderCell>Play Dummy Audio</Table.RowHeaderCell>
+                    <Table.Cell>{String(playDummyAudio)}</Table.Cell>
                 </Table.Row>
                 <Table.Row>
                     <Table.RowHeaderCell>OpenAI API Key</Table.RowHeaderCell>

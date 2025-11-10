@@ -3,7 +3,14 @@ import {useDevSettings} from "../../providers/DevSettingsProvider.tsx";
 
 
 export default function DevControls() {
-    const {isDevMode, saveIsDevMode} = useDevSettings();
+    const {
+        isDevMode,
+        saveIsDevMode,
+        useDummyMessages,
+        saveUseDummyMessages,
+        playDummyAudio,
+        savePlayDummyAudio
+    } = useDevSettings();
 
     return (
         <Flex direction="column" gap="3" p="3">
@@ -17,6 +24,30 @@ export default function DevControls() {
                     Dev Mode
                 </Flex>
             </Text>
+            {isDevMode &&
+                <>
+                    <Text as="label" size="3">
+                        <Flex gap="2">
+                            <Switch
+                                size="2"
+                                checked={useDummyMessages}
+                                onClick={() => saveUseDummyMessages(!useDummyMessages)}
+                            />
+                            Use Dummy Messages
+                        </Flex>
+                    </Text>
+                    <Text as="label" size="3">
+                        <Flex gap="2">
+                            <Switch
+                                size="2"
+                                checked={playDummyAudio}
+                                onClick={() => savePlayDummyAudio(!playDummyAudio)}
+                            />
+                            Play Dummy Audio
+                        </Flex>
+                    </Text>
+                </>
+            }
         </Flex>
     )
 }
