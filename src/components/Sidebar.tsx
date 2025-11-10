@@ -2,6 +2,7 @@
 import ApiKeysCard from "./settings/ApiKeysCard.tsx";
 import {Box, Flex} from "@radix-ui/themes";
 import BartenderCard from "./bartenders/BartenderCard.tsx";
+import DrinkDetails from "./DrinkDetails.tsx";
 
 export default function Sidebar() {
     return (
@@ -12,6 +13,7 @@ export default function Sidebar() {
                 <BartenderSelection />
                 <BartenderCard />
             </Box>
+            <DrinkDetails />
             <ApiKeysCard />
         </Flex>
     );
