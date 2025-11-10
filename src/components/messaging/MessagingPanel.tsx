@@ -6,7 +6,7 @@ import {useState} from "react";
 import {getSystemPrompt} from "../../utils/bartenders.ts";
 import {addResponseToConversation, createConversation} from "../../api/openai.ts";
 import {isDevEnv, stripMarkdownFromString} from "../../utils/utils.ts";
-import {useApiKeys} from "../../hooks/useApiKeys.tsx";
+import {useApiKeys} from "../../providers/ApiKeyProvider.tsx";
 import type {Drink, ResponseSchema} from "../../utils/responseSchema.ts";
 import {speakMessage} from "../../api/elevenLabs.ts";
 

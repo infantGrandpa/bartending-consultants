@@ -1,7 +1,7 @@
 ﻿import {useState, useEffect} from "react";
 import {AlertDialog, Button, Card, Flex, Heading, Text} from "@radix-ui/themes";
 import ApiKeyInput from "./ApiKeyInput.tsx";
-import {useApiKeys} from "../../hooks/useApiKeys.tsx";
+import {useApiKeys} from "../../providers/ApiKeyProvider.tsx";
 
 export default function ApiKeysCard() {
     const { saveApiKeys, clearApiKeys, areKeysSaved } = useApiKeys();
