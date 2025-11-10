@@ -15,7 +15,7 @@ This project uses OpenAI to generate responses for each bartender. It then uses 
 
 In the future, I plan to use Azure Speech to Text API to allow users to speak directly to the bartenders rather than typing.
 
-The project is built using React, Vite, and Radix UI. It also currently uses Tailwind (which I plan to remove) and FontAwesome (for icons).
+The project is built using React, Vite, and Radix UI. It also currently uses FontAwesome for icons.
 
 The background is generated from [SVG Backgrounds](https://www.svgbackgrounds.com/set/free-svg-backgrounds-and-patterns/).
 
