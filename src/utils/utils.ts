@@ -1,10 +1,4 @@
-﻿const isDev = true;
-
-export function isDevEnv() {
-    return isDev;
-}
-
-export function stripMarkdownFromString(inputString: string) {
+﻿export function stripMarkdownFromString(inputString: string) {
     let strippedString = inputString;
 
     // Remove headers (# ## ### etc.)

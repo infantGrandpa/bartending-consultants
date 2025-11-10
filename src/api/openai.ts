@@ -1,6 +1,4 @@
-﻿import {isDevEnv} from "../utils/utils.ts";
-
-//TODO: Figure out a way we can do this without passing the API key around
+﻿//TODO: Figure out a way we can do this without passing the API key around
 async function sendOpenAiRequest(endpoint: string, jsonBody: any, openaiKey: string) {
     const requestUrl = `https://api.openai.com/v1/${endpoint}`
     const response = await fetch(requestUrl, {
@@ -22,7 +20,7 @@ async function sendOpenAiRequest(endpoint: string, jsonBody: any, openaiKey: str
     return data
 }
 
-export async function createConversation(systemPrompt: string, userMessage: string, personalityKey: string, openAiKey: string) {
+export async function createConversation(systemPrompt: string, userMessage: string, personalityKey: string, openAiKey: string, useDummyMessages: boolean) {
     const requestBody = {
         metadata: {personality: personalityKey},
         items: [
@@ -40,7 +38,7 @@ export async function createConversation(systemPrompt: string, userMessage: stri
     }
 
     let conversation;
-    if (isDevEnv()) {
+    if (useDummyMessages) {
         conversation = {id: "123456"}
         console.log(`DEV MODE: Dummy Conversation created.`);
     } else {
@@ -49,8 +47,8 @@ export async function createConversation(systemPrompt: string, userMessage: stri
     return conversation.id;
 }
 
-export async function addResponseToConversation(message: string, conversationId:string, openAiKey: string) {
-    if (isDevEnv()) {
+export async function addResponseToConversation(message: string, conversationId:string, openAiKey: string, useDummyMessages: boolean) {
+    if (useDummyMessages) {
         console.log('DEV MODE: Generating mock response...');
         return generateMockResponse(message);
     }
