@@ -1,9 +1,9 @@
 ﻿import {Flex, Switch, Text} from "@radix-ui/themes";
-import {useState} from "react";
+import {useDevSettings} from "../../providers/DevSettingsProvider.tsx";
 
 
 export default function DevControls() {
-    const [isDevMode, setIsDevMode] = useState<boolean>(false);
+    const {isDevMode, setIsDevMode} = useDevSettings();
 
     return (
         <Flex direction="column" gap="3" p="3">
