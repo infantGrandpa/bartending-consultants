@@ -25,7 +25,6 @@ export default function MessagingPanel() {
     const {openaiKey, elevenLabsKey} = useApiKeys();
     const {settings} = useDevSettings()
 
-    //TODO: Add confirming step!
     useEffect(() => {
         console.log(`Bartender Changed to: ${selectedBartender?.profile.displayName}`)
         setMessageLog([]);
