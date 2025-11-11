@@ -1,6 +1,6 @@
-import {Callout, Flex, Strong, Table, Text} from "@radix-ui/themes";
-import {useApiKeys} from "../../providers/ApiKeyProvider.tsx";
-import {useDevSettings} from "../../providers/DevSettingsProvider.tsx";
+import {Flex, Table, Text} from "@radix-ui/themes";
+import {useApiKeys} from "../../../providers/ApiKeyProvider.tsx";
+import {useDevSettings} from "../../../providers/DevSettingsProvider.tsx";
 
 
 export default function DevModeDetails() {

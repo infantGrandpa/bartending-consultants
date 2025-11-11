@@ -4,7 +4,8 @@ import BartenderCard from "./bartenders/BartenderCard.tsx";
 import DrinkDetails from "./DrinkDetails.tsx";
 import Settings from "./settings/Settings.tsx";
 import {useDevSettings} from "../providers/DevSettingsProvider.tsx";
-import DevModeDetails from "./settings/DevModeDetails.tsx";
+import DevModeDetails from "./settings/developer/DevModeDetails.tsx";
+import DevModeWarning from "./settings/developer/DevModeWarning.tsx";
 
 export default function Sidebar() {
     const {isDevMode} = useDevSettings();

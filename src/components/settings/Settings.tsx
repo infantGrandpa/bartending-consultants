@@ -1,7 +1,7 @@
 ﻿import {Dialog, Flex, IconButton, TabNav} from "@radix-ui/themes";
 import ApiKeysSetup from "./ApiKeysSetup.tsx";
 import {useState} from "react";
-import DevControls from "./DevControls.tsx";
+import DevControls from "./developer/DevControls.tsx";
 
 type SettingsTab = 'api-keys' | 'developer';
 

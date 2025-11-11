@@ -1,5 +1,5 @@
 ﻿import {Flex, Switch, Text} from "@radix-ui/themes";
-import {useDevSettings} from "../../providers/DevSettingsProvider.tsx";
+import {useDevSettings} from "../../../providers/DevSettingsProvider";
 
 
 export default function DevControls() {
