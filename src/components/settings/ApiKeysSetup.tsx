@@ -4,38 +4,39 @@ import ApiKeyInput from "./ApiKeyInput.tsx";
 import {useApiKeys} from "../../providers/ApiKeyProvider.tsx";
 
 export default function ApiKeysSetup() {
-    const { saveApiKeys, clearApiKeys, areKeysSaved } = useApiKeys();
-    const [openaiKey, setOpenaiKey] = useState("");
-    const [elevenLabsKey, setElevenLabsKey] = useState("");
+    const {openaiKey, elevenLabsKey, saveApiKeys, clearApiKeys, areKeysSaved} = useApiKeys();
+    // Without separate state hooks, then typing in the field would save the keys.
+    const [tempOpenaiKey, setTempOpenaiKey] = useState("");
+    const [tempElevenLabsKey, setTempElevenLabsKey] = useState("");
 
     useEffect(() => {
-        const storedOpenAI = localStorage.getItem("openaiApiKey") || "";
-        const storedEleven = localStorage.getItem("elevenLabsApiKey") || "";
+        const storedOpenAI = openaiKey;
+        const storedEleven = elevenLabsKey;
 
         if (storedOpenAI) {
-            setOpenaiKey(storedOpenAI);
+            setTempOpenaiKey(storedOpenAI);
         }
 
         if (storedEleven) {
-            setElevenLabsKey(storedEleven);
+            setTempElevenLabsKey(storedEleven);
         }
     }, []);
 
     const handleSave = () => {
-        if (!openaiKey) {
+        if (!tempOpenaiKey) {
             throw new Error("Open AI API Key is empty.")
         }
 
-        if (!elevenLabsKey) {
+        if (!tempElevenLabsKey) {
             throw new Error("ElevenLabs API Key is empty.")
         }
 
-        saveApiKeys(openaiKey, elevenLabsKey);
+        saveApiKeys(tempOpenaiKey, tempElevenLabsKey);
     };
 
     const handleClear = () => {
-        setOpenaiKey("");
-        setElevenLabsKey("");
+        setTempOpenaiKey("");
+        setTempElevenLabsKey("");
         clearApiKeys();
     };
 
@@ -82,13 +83,15 @@ export default function ApiKeysSetup() {
                 id={"openaiApiKeyInput"}
                 labelText={"OpenAI API Key"}
                 placeholder={"sk-..."}
-                onChange={(e: any) => setOpenaiKey(e.target.value)}
+                onChange={(e: any) => setTempOpenaiKey(e.target.value)}
+                value={tempOpenaiKey}
             />
             <ApiKeyInput
                 id={"elevenLabsApiKeyInput"}
                 labelText={"ElevenLabs API Key"}
                 placeholder={"sk_..."}
-                onChange={(e: any) => setElevenLabsKey(e.target.value)}
+                onChange={(e: any) => setTempElevenLabsKey(e.target.value)}
+                value={tempElevenLabsKey}
             />
             <Flex mt="4" justify="center">
                 <Button onClick={handleSave} disabled={!(openaiKey && elevenLabsKey)}>
