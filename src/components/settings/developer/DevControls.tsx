@@ -25,6 +25,12 @@ export default function DevControls() {
                 label={"Play Dummy Audio"}
                 disabled={!settings.isDevMode}
             />
+            <LabelledSwitch
+                checked={settings.showVariableTable}
+                onCheckedChange={() => updateSetting('showVariableTable', !settings.showVariableTable)}
+                label={"Show Variable Table"}
+                disabled={!settings.isDevMode}
+            />
         </Flex>
     )
 }

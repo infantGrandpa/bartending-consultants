@@ -4,6 +4,7 @@ interface DevSettings {
     isDevMode: boolean;
     useDummyMessages: boolean;
     playDummyAudio: boolean;
+    showVariableTable: boolean;
 }
 
 interface DevSettingsContextValue {
@@ -17,6 +18,7 @@ const defaultSettings: DevSettings = {
     isDevMode: false,
     useDummyMessages: false,
     playDummyAudio: false,
+    showVariableTable: true
 };
 
 export function DevSettingsProvider({children}: { children: ReactNode }) {
@@ -26,7 +28,8 @@ export function DevSettingsProvider({children}: { children: ReactNode }) {
         const storedSettings: DevSettings = {
             isDevMode: localStorage.getItem("isDevMode") === "true",
             useDummyMessages: localStorage.getItem("useDummyMessages") === "true",
-            playDummyAudio: localStorage.getItem("playDummyAudio") === "true"
+            playDummyAudio: localStorage.getItem("playDummyAudio") === "true",
+            showVariableTable: localStorage.getItem("showVariableTable") ==="true"
         }
 
         setSettings(storedSettings);
@@ -44,7 +47,8 @@ export function DevSettingsProvider({children}: { children: ReactNode }) {
     const actualSettings: DevSettings = {
         isDevMode: settings.isDevMode,
         useDummyMessages: settings.isDevMode && settings.useDummyMessages,
-        playDummyAudio: settings.isDevMode && settings.playDummyAudio
+        playDummyAudio: settings.isDevMode && settings.playDummyAudio,
+        showVariableTable: settings.isDevMode && settings.showVariableTable
     }
 
     return (

@@ -7,6 +7,10 @@ export default function DevModeDetails() {
     const {settings} = useDevSettings();
     const {openaiKey, elevenLabsKey} = useApiKeys();
 
+    if (!settings.showVariableTable) {
+        return;
+    }
+
     return (
         <Flex direction="column" gap="3">
             <Table.Root variant="surface" layout="fixed" size="1">
