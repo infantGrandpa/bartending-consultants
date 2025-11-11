@@ -1,5 +1,6 @@
-﻿import {Flex, Switch, Text} from "@radix-ui/themes";
+﻿import {Flex} from "@radix-ui/themes";
 import {useDevSettings} from "../../../providers/DevSettingsProvider";
+import {LabelledSwitch} from "../LabelledSwitch.tsx";
 
 
 export default function DevControls() {
@@ -7,39 +8,23 @@ export default function DevControls() {
 
     return (
         <Flex direction="column" gap="3" p="3">
-            <Text as="label" size="3">
-                <Flex gap="2">
-                    <Switch
-                        size="2"
-                        checked={settings.isDevMode}
-                        onClick={() => updateSetting('isDevMode', !settings.isDevMode)}
-                    />
-                    Dev Mode
-                </Flex>
-            </Text>
-            <Text as="label" size="3" color={settings.isDevMode ? undefined : "gray" }>
-                <Flex gap="2">
-                    <Switch
-                        size="2"
-                        checked={settings.useDummyMessages}
-                        onClick={() => updateSetting('useDummyMessages', !settings.useDummyMessages)}
-                        disabled={!settings.isDevMode}
-                    />
-                    Use Dummy Messages
-                </Flex>
-            </Text>
-            <Text as="label" size="3" color={settings.isDevMode ? undefined : "gray" }>
-                <Flex gap="2">
-                    <Switch
-                        size="2"
-                        checked={settings.playDummyAudio}
-                        onClick={() => updateSetting('playDummyAudio', !settings.playDummyAudio)}
-                        disabled={!settings.isDevMode}
-                    />
-                    Play Dummy Audio
-                </Flex>
-            </Text>
-
+            <LabelledSwitch
+                checked={settings.isDevMode}
+                onCheckedChange={() => updateSetting('isDevMode', !settings.isDevMode)}
+                label={"Enable Dev Mode"}
+            />
+            <LabelledSwitch
+                checked={settings.useDummyMessages}
+                onCheckedChange={() => updateSetting('useDummyMessages', !settings.useDummyMessages)}
+                label={"Use Dummy Messages"}
+                disabled={!settings.isDevMode}
+            />
+            <LabelledSwitch
+                checked={settings.playDummyAudio}
+                onCheckedChange={() => updateSetting('playDummyAudio', !settings.playDummyAudio)}
+                label={"Play Dummy Audio"}
+                disabled={!settings.isDevMode}
+            />
         </Flex>
     )
 }
