@@ -3,3 +3,8 @@
     content: string;
     senderIsUser: boolean;
 }
+
+export interface ConversationHistory {
+    conversationId: string;
+    messages: Message[];
+}
