@@ -1,4 +1,4 @@
-﻿import {Dialog, IconButton, TabNav} from "@radix-ui/themes";
+﻿import {Dialog, Flex, Heading, IconButton, TabNav} from "@radix-ui/themes";
 import ApiKeysSetup from "./ApiKeysSetup.tsx";
 import {useState} from "react";
 import DevControls from "./DevControls.tsx";
@@ -18,7 +18,18 @@ export default function Settings() {
 
 
             <Dialog.Content maxWidth="500px" minHeight="400px">
-                <Dialog.Title>Settings</Dialog.Title>
+                <Flex justify="between" align="center">
+                    <Dialog.Title>
+                        <Heading as={"h3"} size={"6"}>
+                            Settings
+                        </Heading>
+                    </Dialog.Title>
+                    <Dialog.Close>
+                        <IconButton size="2" variant="ghost" radius="full" color="gray" >
+                            <i className="fa-solid fa-xmark"></i>
+                        </IconButton>
+                    </Dialog.Close>
+                </Flex>
                 <TabNav.Root>
                     <TabNav.Link
                         active={activeTab === 'api-keys'}
