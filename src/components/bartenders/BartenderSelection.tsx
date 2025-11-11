@@ -40,13 +40,13 @@ export default function BartenderSelection() {
                 <AlertDialog.Content>
                     <AlertDialog.Title>Erase Message History</AlertDialog.Title>
                     <AlertDialog.Description>
-                        <Text as="p" mb={"4"}>
+                        <Text>
                             Changing bartenders tenders will erase your message history and drink information.
                         </Text>
-                        <Text as="p">
-                            You cannot undo this action.
-                        </Text>
                     </AlertDialog.Description>
+                    <Text as="p" mt={"4"}>
+                        You cannot undo this action.
+                    </Text>
 
                     <Flex gap="3" mt="4" justify="end">
                         <AlertDialog.Cancel onClick={handleCancel}>

@@ -91,14 +91,14 @@ export default function ApiKeysSetup() {
                     <AlertDialog.Content>
                         <AlertDialog.Title>Clear Saved API Keys</AlertDialog.Title>
                         <AlertDialog.Description>
-                            <Text as="p" mb={"4"}>
+                            <Text>
                                 Are you sure? If you want to connect with these awesome bartenders again, you'll need to
                                 reenter your API keys.
                             </Text>
-                            <Text as="p">
-                                You cannot undo this action.
-                            </Text>
                         </AlertDialog.Description>
+                        <Text as="p" mt={"4"}>
+                            You cannot undo this action.
+                        </Text>
 
                         <Flex gap="3" mt="4" justify="end">
                             <AlertDialog.Cancel>
