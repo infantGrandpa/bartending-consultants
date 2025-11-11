@@ -72,22 +72,6 @@ export default function MessagingPanel() {
         }
     }
 
-    const formatDrinkAsPlainText = (drink: Drink): string => {
-        let formattedText = `${drink.name}\n\n`;
-
-        formattedText += 'Ingredients:\n';
-        drink.ingredients.forEach((item) => {
-            formattedText += `- ${item.amount} ${item.ingredient}\n`;
-        });
-
-        formattedText += '\nInstructions:\n';
-        drink.instructions.forEach((item, index) => {
-            formattedText += `${index + 1}. ${item.step}\n`;
-        });
-
-        return formattedText;
-    }
-
     const handleSendMessage = async (messageContent: string) => {
         if (!selectedBartender) {
             throw new Error("Please select a bartender.")
@@ -105,9 +89,6 @@ export default function MessagingPanel() {
         await speakReply(reply);
 
         addMessage({sender: selectedBartender.profile.displayName, content: reply, senderIsUser: false, drink: drink})
-
-        const drinkString: string = formatDrinkAsPlainText(drink);
-        addMessage({sender: selectedBartender.profile.displayName, content: drinkString, senderIsUser: false})
     }
 
     return (
