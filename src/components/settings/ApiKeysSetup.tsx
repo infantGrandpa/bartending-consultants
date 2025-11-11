@@ -72,9 +72,12 @@ export default function ApiKeysSetup() {
     }
 
     return (
-        <Card>
-            <Heading as="h2" size="5" mb="1">API Key Setup</Heading>
-            <Text as="p">Enter your API keys. They'll be stored locally in your browser.</Text>
+        <Flex direction="column">
+            <Text as="p" size="2" style={{
+                paddingTop: "0.5rem"
+            }}>
+                Enter your API keys. They'll be stored locally in your browser.
+            </Text>
             <ApiKeyInput
                 id={"openaiApiKeyInput"}
                 labelText={"OpenAI API Key"}
@@ -93,6 +96,6 @@ export default function ApiKeysSetup() {
                     <i className="fa-solid fa-floppy-disk"></i>
                 </Button>
             </Flex>
-        </Card>
+        </Flex>
     );
 }
