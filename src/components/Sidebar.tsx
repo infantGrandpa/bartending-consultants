@@ -20,7 +20,10 @@ export default function Sidebar() {
             </Box>
             <DrinkDetails />
             {isDevMode && <DevModeDetails />}
-            <Settings />
+            <Flex direction="row-reverse" justify="between" align="end" width="100%" gap="2">
+                <Settings />
+                {isDevMode && <DevModeWarning />}
+            </Flex>
         </Flex>
     );
 }

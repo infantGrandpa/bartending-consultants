@@ -48,15 +48,6 @@ export default function DevModeDetails() {
                     </Table.Row>
                 </Table.Body>
             </Table.Root>
-
-            <Callout.Root size="2" color="yellow" variant="soft" role="alert">
-                <Callout.Icon>
-                    <i className="fa-solid fa-triangle-exclamation"></i>
-                </Callout.Icon>
-                <Callout.Text>
-                    <Strong>Warning: </Strong>Developer Mode Enabled
-                </Callout.Text>
-            </Callout.Root>
         </Flex>
     )
 }
