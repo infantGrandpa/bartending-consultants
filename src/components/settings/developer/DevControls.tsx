@@ -1,6 +1,6 @@
 ﻿import {Flex} from "@radix-ui/themes";
 import {useDevSettings} from "../../../providers/DevSettingsProvider";
-import {LabelledSwitch} from "../LabelledSwitch.tsx";
+import {LabelledSwitch} from "../../blocks/LabelledSwitch.tsx";
 
 
 export default function DevControls() {
