@@ -2,7 +2,7 @@
 import MessageInput from "./MessageInput.tsx";
 import {Em, Flex, Text} from "@radix-ui/themes";
 import {useBartender} from "../../providers/BartenderProvider.tsx";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {getSystemPrompt} from "../../utils/bartenders.ts";
 import {addResponseToConversation, createConversation} from "../../api/openai.ts";
 import {stripMarkdownFromString} from "../../utils/utils.ts";
@@ -24,6 +24,13 @@ export default function MessagingPanel() {
 
     const {openaiKey, elevenLabsKey} = useApiKeys();
     const {useDummyMessages, playDummyAudio} = useDevSettings()
+
+    //TODO: Add confirming step!
+    useEffect(() => {
+        console.log(`Bartender Changed to: ${selectedBartender?.profile.displayName}`)
+        setMessageLog([]);
+        setConversationId("")
+    }, [selectedBartender]);
 
     const initializeConversation = async (message: string): Promise<string> => {
         if (!selectedBartender) {
