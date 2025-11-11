@@ -1,0 +1,57 @@
+import {Flex, Table, Text} from "@radix-ui/themes";
+import {useApiKeys} from "../../../providers/ApiKeyProvider.tsx";
+import {useDevSettings} from "../../../providers/DevSettingsProvider.tsx";
+
+
+export default function DevModeDetails() {
+    const {settings} = useDevSettings();
+    const {openaiKey, elevenLabsKey} = useApiKeys();
+
+    if (!settings.showVariableTable) {
+        return;
+    }
+
+    return (
+        <Flex direction="column" gap="3">
+            <Table.Root variant="surface" layout="fixed" size="1">
+                <Table.Header>
+                    <Table.Row>
+                        <Table.ColumnHeaderCell>Variable</Table.ColumnHeaderCell>
+                        <Table.ColumnHeaderCell>Value</Table.ColumnHeaderCell>
+                    </Table.Row>
+                </Table.Header>
+
+                <Table.Body>
+                    <Table.Row>
+                        <Table.RowHeaderCell>Dev Mode</Table.RowHeaderCell>
+                        <Table.Cell>{String(settings.isDevMode)}</Table.Cell>
+                    </Table.Row>
+                    <Table.Row>
+                        <Table.RowHeaderCell>Use Dummy Messages</Table.RowHeaderCell>
+                        <Table.Cell>{String(settings.useDummyMessages)}</Table.Cell>
+                    </Table.Row>
+                    <Table.Row>
+                        <Table.RowHeaderCell>Play Dummy Audio</Table.RowHeaderCell>
+                        <Table.Cell>{String(settings.playDummyAudio)}</Table.Cell>
+                    </Table.Row>
+                    <Table.Row>
+                        <Table.RowHeaderCell>OpenAI API Key</Table.RowHeaderCell>
+                        <Table.Cell>
+                            <Text wrap="nowrap" truncate={true}>
+                                {openaiKey}
+                            </Text>
+                        </Table.Cell>
+                    </Table.Row>
+                    <Table.Row>
+                        <Table.RowHeaderCell>ElevenLabs API Key</Table.RowHeaderCell>
+                        <Table.Cell>
+                            <Text wrap="nowrap" truncate={true}>
+                                {elevenLabsKey}
+                            </Text>
+                        </Table.Cell>
+                    </Table.Row>
+                </Table.Body>
+            </Table.Root>
+        </Flex>
+    )
+}

@@ -2,13 +2,14 @@
 import MessageInput from "./MessageInput.tsx";
 import {Em, Flex, Text} from "@radix-ui/themes";
 import {useBartender} from "../../providers/BartenderProvider.tsx";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {getSystemPrompt} from "../../utils/bartenders.ts";
 import {addResponseToConversation, createConversation} from "../../api/openai.ts";
-import {isDevEnv, stripMarkdownFromString} from "../../utils/utils.ts";
-import {useApiKeys} from "../../hooks/useApiKeys.tsx";
+import {stripMarkdownFromString} from "../../utils/utils.ts";
+import {useApiKeys} from "../../providers/ApiKeyProvider.tsx";
 import type {Drink, ResponseSchema} from "../../utils/responseSchema.ts";
 import {speakMessage} from "../../api/elevenLabs.ts";
+import {useDevSettings} from "../../providers/DevSettingsProvider.tsx";
 
 export interface Message {
     sender: string;
@@ -22,6 +23,14 @@ export default function MessagingPanel() {
     const [messageLog, setMessageLog] = useState<Message[]>([]);
 
     const {openaiKey, elevenLabsKey} = useApiKeys();
+    const {settings} = useDevSettings()
+
+    //TODO: Add confirming step!
+    useEffect(() => {
+        console.log(`Bartender Changed to: ${selectedBartender?.profile.displayName}`)
+        setMessageLog([]);
+        setConversationId("")
+    }, [selectedBartender]);
 
     const initializeConversation = async (message: string): Promise<string> => {
         if (!selectedBartender) {
@@ -34,14 +43,15 @@ export default function MessagingPanel() {
             systemPrompt,
             message,
             selectedBartender.key,
-            openaiKey
+            openaiKey,
+            settings.useDummyMessages
         );
         setConversationId(newConversationId);
 
         return newConversationId;
     }
 
-    const addMessageToLog = (message: Message)=> {
+    const addMessageToLog = (message: Message) => {
         setMessageLog((previousMessages: Message[]) => [
             ...previousMessages,
             message
@@ -49,7 +59,12 @@ export default function MessagingPanel() {
     }
 
     const sendMessage = async (message: string, conversation: string) => {
-        const responseString: string = await addResponseToConversation(message, conversation, openaiKey);
+        const responseString: string = await addResponseToConversation(
+            message,
+            conversation,
+            openaiKey,
+            settings.useDummyMessages
+        );
         const response: ResponseSchema = JSON.parse(responseString);
         let reply: string = response.message;
         reply = stripMarkdownFromString(reply)
@@ -61,7 +76,7 @@ export default function MessagingPanel() {
     }
 
     const speakReply = async (reply: string) => {
-        if (isDevEnv()) {
+        if (settings.playDummyAudio) {
             console.log(`Pretend we read this out loud: ${reply}`);
             return;
         }
@@ -89,7 +104,7 @@ export default function MessagingPanel() {
         return formattedText;
     }
 
-    const handleSendMessage = async (messageContent: string)=> {
+    const handleSendMessage = async (messageContent: string) => {
         if (!selectedBartender) {
             throw new Error("Please select a bartender.")
         }
