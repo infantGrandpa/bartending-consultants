@@ -1,5 +1,5 @@
 ﻿import {Dialog, IconButton, TabNav} from "@radix-ui/themes";
-import ApiKeysCard from "./ApiKeysCard.tsx";
+import ApiKeysSetup from "./ApiKeysSetup.tsx";
 import {useState} from "react";
 import DevControls from "./DevControls.tsx";
 
@@ -33,7 +33,7 @@ export default function Settings() {
                         Developer
                     </TabNav.Link>
                 </TabNav.Root>
-                {activeTab === 'api-keys' && <ApiKeysCard />}
+                {activeTab === 'api-keys' && <ApiKeysSetup />}
                 {activeTab === 'developer' && <DevControls />}
             </Dialog.Content>
         </Dialog.Root>
