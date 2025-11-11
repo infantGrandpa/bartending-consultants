@@ -16,9 +16,10 @@ export default function DrinkDetails() {
         <Card style={{
             width: "100%"
         }}>
-            <Heading as="h3" size="4" mb="2">{currentDrink.name}</Heading>
+            <Heading as="h3" size="5" mb="2">{currentDrink.name}</Heading>
+
             <Heading as="h4" size="3">Ingredients</Heading>
-            <DataList.Root size="1" my="2" style={{gap:"0.5rem"}}>
+            <DataList.Root size="1" my="2" style={{gap: "0.5rem"}}>
                 {currentDrink.ingredients.map((thisIngredient: Ingredient, index: number) => (
                     <DataList.Item key={index}>
                         <DataList.Label minWidth="12rem">{thisIngredient.ingredient}</DataList.Label>
@@ -26,6 +27,7 @@ export default function DrinkDetails() {
                     </DataList.Item>
                 ))}
             </DataList.Root>
+
             <Heading as="h4" size="3" mt="5">Instructions</Heading>
             <ol style={{fontSize: "var(--font-size-2)", paddingLeft: "1rem", marginTop: "0.5rem"}}>
                 {currentDrink.instructions.map((thisStep: string, index: number) => (
