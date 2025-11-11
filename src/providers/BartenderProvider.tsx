@@ -1,4 +1,4 @@
-﻿import type {Bartender} from "../utils/bartenders.ts";
+﻿import type {Bartender} from "../types/bartenders.ts";
 import {createContext, type ReactNode, useContext, useState} from "react";
 
 

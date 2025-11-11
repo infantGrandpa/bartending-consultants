@@ -1,4 +1,4 @@
-﻿import {type Bartender, bartenders} from "../../utils/bartenders.ts";
+﻿import {type Bartender, bartenders} from "../../types/bartenders.ts";
 import {AlertDialog, Button, Flex, Text} from "@radix-ui/themes";
 import {useBartender} from "../../providers/BartenderProvider.tsx";
 import {useState} from "react";

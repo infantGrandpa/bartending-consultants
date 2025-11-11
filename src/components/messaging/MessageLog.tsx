@@ -1,6 +1,6 @@
 ﻿import {Flex, ScrollArea} from "@radix-ui/themes";
 import MessageBubble from "./MessageBubble.tsx";
-import type {Message} from "./MessagingPanel.tsx";
+import type {Message} from "../../types/conversations.ts";
 
 interface Props {
     messages: Message[]
