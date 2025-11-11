@@ -18,10 +18,10 @@ export default function DrinkDetails() {
         }}>
             <Heading as="h3" size="4" mb="2">{currentDrink.name}</Heading>
             <Heading as="h4" size="3">Ingredients</Heading>
-            <DataList.Root size="1" my="2">
+            <DataList.Root size="1" my="2" style={{gap:"0.5rem"}}>
                 {currentDrink.ingredients.map((thisIngredient: Ingredient, index: number) => (
                     <DataList.Item key={index}>
-                        <DataList.Label>{thisIngredient.ingredient}</DataList.Label>
+                        <DataList.Label minWidth="12rem">{thisIngredient.ingredient}</DataList.Label>
                         <DataList.Value>{thisIngredient.amount}</DataList.Value>
                     </DataList.Item>
                 ))}
