@@ -47,7 +47,7 @@ export async function createConversation(systemPrompt: string, userMessage: stri
     return conversation.id;
 }
 
-export async function addResponseToConversation(message: string, conversationId:string, openAiKey: string, useDummyMessages: boolean) {
+export async function addResponseToConversation(message: string, conversationId: string, openAiKey: string, useDummyMessages: boolean) {
     if (useDummyMessages) {
         console.log('DEV MODE: Generating mock response...');
         return generateMockResponse(message);
@@ -63,7 +63,7 @@ export async function addResponseToConversation(message: string, conversationId:
     return data.output[0].content[0].text;
 }
 
-function generateMockResponse(message:string) {
+function generateMockResponse(message: string) {
     const mockReplies = [
         {
             "message": "Ah, the Negroni — a classic Italian aperitivo that's equal parts bitter, sweet, and smooth. It’s a no-fuss drink that balances gin’s botanical punch with the orange warmth of Campari and the deep sweetness of vermouth. Stirred, never shaken, and best sipped slowly over a large cube.",
