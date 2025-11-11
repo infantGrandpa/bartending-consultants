@@ -1,4 +1,4 @@
-import {Table, Text} from "@radix-ui/themes";
+import {Callout, Flex, Strong, Table, Text} from "@radix-ui/themes";
 import {useApiKeys} from "../../providers/ApiKeyProvider.tsx";
 import {useDevSettings} from "../../providers/DevSettingsProvider.tsx";
 
@@ -8,6 +8,7 @@ export default function DevModeDetails() {
     const {openaiKey, elevenLabsKey} = useApiKeys();
 
     return (
+        <Flex direction="column" gap="3">
         <Table.Root variant="surface" layout="fixed" size="1">
             <Table.Header>
                 <Table.Row>
@@ -47,5 +48,14 @@ export default function DevModeDetails() {
                 </Table.Row>
             </Table.Body>
         </Table.Root>
+            <Callout.Root size="2" color="yellow" variant="soft" role="alert">
+                <Callout.Icon>
+                    <i className="fa-solid fa-triangle-exclamation"></i>
+                </Callout.Icon>
+                <Callout.Text>
+                    <Strong>Warning: </Strong>Developer Mode Enabled
+                </Callout.Text>
+            </Callout.Root>
+        </Flex>
     )
 }
