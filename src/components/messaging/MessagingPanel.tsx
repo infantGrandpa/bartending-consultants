@@ -23,7 +23,7 @@ export default function MessagingPanel() {
     const [messageLog, setMessageLog] = useState<Message[]>([]);
 
     const {openaiKey, elevenLabsKey} = useApiKeys();
-    const {useDummyMessages, playDummyAudio} = useDevSettings()
+    const {settings} = useDevSettings()
 
     //TODO: Add confirming step!
     useEffect(() => {
@@ -44,7 +44,7 @@ export default function MessagingPanel() {
             message,
             selectedBartender.key,
             openaiKey,
-            useDummyMessages
+            settings.useDummyMessages
         );
         setConversationId(newConversationId);
 
@@ -63,7 +63,7 @@ export default function MessagingPanel() {
             message,
             conversation,
             openaiKey,
-            useDummyMessages
+            settings.useDummyMessages
         );
         const response: ResponseSchema = JSON.parse(responseString);
         let reply: string = response.message;
@@ -76,7 +76,7 @@ export default function MessagingPanel() {
     }
 
     const speakReply = async (reply: string) => {
-        if (playDummyAudio) {
+        if (settings.playDummyAudio) {
             console.log(`Pretend we read this out loud: ${reply}`);
             return;
         }

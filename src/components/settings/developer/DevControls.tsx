@@ -3,14 +3,7 @@ import {useDevSettings} from "../../../providers/DevSettingsProvider";
 
 
 export default function DevControls() {
-    const {
-        isDevMode,
-        saveIsDevMode,
-        useDummyMessages,
-        saveUseDummyMessages,
-        playDummyAudio,
-        savePlayDummyAudio
-    } = useDevSettings();
+    const {settings, updateSetting} = useDevSettings();
 
     return (
         <Flex direction="column" gap="3" p="3">
@@ -18,30 +11,30 @@ export default function DevControls() {
                 <Flex gap="2">
                     <Switch
                         size="2"
-                        checked={isDevMode}
-                        onClick={() => saveIsDevMode(!isDevMode)}
+                        checked={settings.isDevMode}
+                        onClick={() => updateSetting('isDevMode', !settings.isDevMode)}
                     />
                     Dev Mode
                 </Flex>
             </Text>
-            <Text as="label" size="3" color={isDevMode ? undefined : "gray" }>
+            <Text as="label" size="3" color={settings.isDevMode ? undefined : "gray" }>
                 <Flex gap="2">
                     <Switch
                         size="2"
-                        checked={useDummyMessages}
-                        onClick={() => saveUseDummyMessages(!useDummyMessages)}
-                        disabled={!isDevMode}
+                        checked={settings.useDummyMessages}
+                        onClick={() => updateSetting('useDummyMessages', !settings.useDummyMessages)}
+                        disabled={!settings.isDevMode}
                     />
                     Use Dummy Messages
                 </Flex>
             </Text>
-            <Text as="label" size="3" color={isDevMode ? undefined : "gray" }>
+            <Text as="label" size="3" color={settings.isDevMode ? undefined : "gray" }>
                 <Flex gap="2">
                     <Switch
                         size="2"
-                        checked={playDummyAudio}
-                        onClick={() => savePlayDummyAudio(!playDummyAudio)}
-                        disabled={!isDevMode}
+                        checked={settings.playDummyAudio}
+                        onClick={() => updateSetting('playDummyAudio', !settings.playDummyAudio)}
+                        disabled={!settings.isDevMode}
                     />
                     Play Dummy Audio
                 </Flex>

@@ -1,62 +1,56 @@
-﻿import {createContext, useContext, useState, type ReactNode, useEffect} from 'react';
+﻿import {createContext, type ReactNode, useContext, useEffect, useState} from 'react';
+
+interface DevSettings {
+    isDevMode: boolean;
+    useDummyMessages: boolean;
+    playDummyAudio: boolean;
+}
 
 interface DevSettingsContextValue {
-    isDevMode: boolean;
-    saveIsDevMode: (value: boolean) => void;
-    useDummyMessages: boolean;
-    saveUseDummyMessages: (value: boolean) => void;
-    playDummyAudio: boolean;
-    savePlayDummyAudio: (value: boolean) => void;
+    settings: DevSettings;
+    updateSetting: <K extends keyof DevSettings>(key: K, value: DevSettings[K]) => void;
 }
 
 const DevSettingsContext = createContext<DevSettingsContextValue | undefined>(undefined);
 
+const defaultSettings: DevSettings = {
+    isDevMode: false,
+    useDummyMessages: false,
+    playDummyAudio: false,
+};
+
 export function DevSettingsProvider({children}: { children: ReactNode }) {
-    const [isDevMode, setIsDevMode] = useState<boolean>(false);
-    const [useDummyMessages, setUseDummyMessages] = useState<boolean>(true);
-    const [playDummyAudio, setPlayDummyAudio] = useState<boolean>(true);
+    const [settings, setSettings] = useState<DevSettings>(defaultSettings);
 
     useEffect(() => {
-        const storedDevMode: string = localStorage.getItem("isDevMode") || String(false);
-        const storedDummyMessages: string = localStorage.getItem("useDummyMessages") || String(true);
-        const storedDummyAudio: string = localStorage.getItem("playDummyAudio") || String(true);
+        const storedSettings: DevSettings = {
+            isDevMode: localStorage.getItem("isDevMode") === "true",
+            useDummyMessages: localStorage.getItem("useDummyMessages") === "true",
+            playDummyAudio: localStorage.getItem("playDummyAudio") === "true"
+        }
 
-        setIsDevMode(storedDevMode === "true");
-        setUseDummyMessages(storedDummyMessages === "true");
-        setPlayDummyAudio(storedDummyAudio === "true");
+        setSettings(storedSettings);
     }, []);
 
-    const saveIsDevMode = (newIsDevMode: boolean) => {
-        localStorage.setItem("isDevMode", String(newIsDevMode));
-        setIsDevMode(newIsDevMode);
+    const updateSetting = <K extends keyof DevSettings>(key: K, value: DevSettings[K]) => {
+        localStorage.setItem(key, String(value));
 
-        // Match child settings to dev mode to ensure they're never on/off accidentally
-        saveUseDummyMessages(newIsDevMode);
-        savePlayDummyAudio(newIsDevMode);
-    }
-
-    const saveUseDummyMessages = (newUseDummyMessages: boolean) => {
-        localStorage.setItem("useDummyMessages", String(newUseDummyMessages));
-        setUseDummyMessages(newUseDummyMessages);
-    }
-
-    const savePlayDummyAudio = (newPlayDummyAudio: boolean) => {
-        localStorage.setItem("playDummyAudio", String(newPlayDummyAudio));
-        setPlayDummyAudio(newPlayDummyAudio);
+        setSettings(previousSettings => {
+            return {...previousSettings, [key]: value};
+        })
     }
 
     // Ensure child settings are only true if dev mode is enabled
-    const actualUseDummyMessages: boolean = isDevMode && useDummyMessages;
-    const actualPlayDummyAudio: boolean = isDevMode && playDummyAudio;
+    const actualSettings: DevSettings = {
+        isDevMode: settings.isDevMode,
+        useDummyMessages: settings.isDevMode && settings.useDummyMessages,
+        playDummyAudio: settings.isDevMode && settings.playDummyAudio
+    }
 
     return (
         <DevSettingsContext.Provider value={{
-            isDevMode,
-            saveIsDevMode,
-            useDummyMessages: actualUseDummyMessages,
-            saveUseDummyMessages,
-            playDummyAudio: actualPlayDummyAudio,
-            savePlayDummyAudio
+            settings: actualSettings,
+            updateSetting
         }}>
             {children}
         </DevSettingsContext.Provider>

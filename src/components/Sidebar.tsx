@@ -8,7 +8,7 @@ import DevModeDetails from "./settings/developer/DevModeDetails.tsx";
 import DevModeWarning from "./settings/developer/DevModeWarning.tsx";
 
 export default function Sidebar() {
-    const {isDevMode} = useDevSettings();
+    const {settings} = useDevSettings();
 
     return (
         <Flex direction="column" pl="4" justify="between" align="end" style={{
@@ -19,10 +19,10 @@ export default function Sidebar() {
                 <BartenderCard />
             </Box>
             <DrinkDetails />
-            {isDevMode && <DevModeDetails />}
+            {settings.isDevMode && <DevModeDetails />}
             <Flex direction="row-reverse" justify="between" align="end" width="100%" gap="2">
                 <Settings />
-                {isDevMode && <DevModeWarning />}
+                {settings.isDevMode && <DevModeWarning />}
             </Flex>
         </Flex>
     );
