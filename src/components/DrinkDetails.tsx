@@ -1,4 +1,4 @@
-﻿import {Card, Heading} from "@radix-ui/themes";
+﻿import {Card, DataList, Heading} from "@radix-ui/themes";
 import {useConversation} from "../providers/ConversationProvider.tsx";
 import type {Drink, Ingredient} from "../types/drinks.ts";
 
@@ -18,11 +18,14 @@ export default function DrinkDetails() {
         }}>
             <Heading as="h3" size="4" mb="2">{currentDrink.name}</Heading>
             <Heading as="h4" size="3">Ingredients</Heading>
-            <ul>
+            <DataList.Root size="1" my="2">
                 {currentDrink.ingredients.map((thisIngredient: Ingredient, index: number) => (
-                    <li key={index}>{thisIngredient.amount} {thisIngredient.ingredient}</li>
+                    <DataList.Item key={index}>
+                        <DataList.Label>{thisIngredient.ingredient}</DataList.Label>
+                        <DataList.Value>{thisIngredient.amount}</DataList.Value>
+                    </DataList.Item>
                 ))}
-            </ul>
+            </DataList.Root>
             <Heading as="h4" size="3">Instructions</Heading>
             <ol>
                 {currentDrink.instructions.map((thisStep: string, index: number) => (
