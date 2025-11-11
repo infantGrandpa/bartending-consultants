@@ -1,4 +1,4 @@
-import {Table} from "@radix-ui/themes";
+import {Table, Text} from "@radix-ui/themes";
 import {useApiKeys} from "../../providers/ApiKeyProvider.tsx";
 import {useDevSettings} from "../../providers/DevSettingsProvider.tsx";
 
@@ -31,11 +31,19 @@ export default function DevModeDetails() {
                 </Table.Row>
                 <Table.Row>
                     <Table.RowHeaderCell>OpenAI API Key</Table.RowHeaderCell>
-                    <Table.Cell>{openaiKey}</Table.Cell>
+                    <Table.Cell>
+                        <Text wrap="nowrap" truncate={true}>
+                            {openaiKey}
+                        </Text>
+                    </Table.Cell>
                 </Table.Row>
                 <Table.Row>
                     <Table.RowHeaderCell>ElevenLabs API Key</Table.RowHeaderCell>
-                    <Table.Cell>{elevenLabsKey}</Table.Cell>
+                    <Table.Cell>
+                        <Text wrap="nowrap" truncate={true}>
+                            {elevenLabsKey}
+                        </Text>
+                    </Table.Cell>
                 </Table.Row>
             </Table.Body>
         </Table.Root>
