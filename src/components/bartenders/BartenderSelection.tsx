@@ -11,6 +11,10 @@ export default function BartenderSelection() {
         const convertedKey: keyof typeof bartenders = key as keyof typeof bartenders;
         const bartender: Bartender =bartenders[convertedKey];
 
+        if (selectedBartender === bartender) {
+            return;
+        }
+
         if (!selectedBartender) {       //TODO: or if message history is empty!
             setSelectedBartender(bartender);
             return;
