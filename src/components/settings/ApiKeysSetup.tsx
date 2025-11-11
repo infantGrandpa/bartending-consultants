@@ -40,37 +40,22 @@ export default function ApiKeysSetup() {
         clearApiKeys();
     };
 
-    if (areKeysSaved) {
-        return (
-            <AlertDialog.Root>
-                <AlertDialog.Trigger>
-                    <Button color="red" variant="outline">
-                        Clear API Keys
-                    </Button>
-                </AlertDialog.Trigger>
-                <AlertDialog.Content>
-                    <AlertDialog.Title>Clear Saved API Keys</AlertDialog.Title>
-                    <AlertDialog.Description>
-                        You cannot undo this action. If you want to connect with these awesome bartenders again, you'll
-                        need to reenter your API keys.
-                    </AlertDialog.Description>
+    const canSaveKeys = () => {
+        if (!tempOpenaiKey || !tempElevenLabsKey) {
+            return false;
+        }
 
-                    <Flex gap="3" mt="4" justify="end">
-                        <AlertDialog.Cancel>
-                            <Button variant="soft" color="gray">
-                                Cancel
-                            </Button>
-                        </AlertDialog.Cancel>
-                        <AlertDialog.Action>
-                            <Button color="red" onClick={handleClear}>
-                                Clear Keys
-                            </Button>
-                        </AlertDialog.Action>
-                    </Flex>
-                </AlertDialog.Content>
-            </AlertDialog.Root>
-        )
+        if (tempOpenaiKey !== openaiKey) {
+            return true;
+        }
+
+        if (tempElevenLabsKey !== elevenLabsKey) {
+            return true;
+        }
+
+        return false;
     }
+
 
     return (
         <Flex direction="column">
@@ -123,6 +108,7 @@ export default function ApiKeysSetup() {
                     </AlertDialog.Content>
                 </AlertDialog.Root>
 
+                <Button onClick={handleSave} disabled={!canSaveKeys()}>
                     Save API Keys
                     <i className="fa-solid fa-floppy-disk"></i>
                 </Button>
