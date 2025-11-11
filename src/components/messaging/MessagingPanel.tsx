@@ -2,7 +2,7 @@
 import MessageInput from "./MessageInput.tsx";
 import {Em, Flex, Text} from "@radix-ui/themes";
 import {useBartender} from "../../providers/BartenderProvider.tsx";
-import {useEffect, useState} from "react";
+import {useEffect} from "react";
 import {getSystemPrompt} from "../../types/bartenders.ts";
 import {addResponseToConversation, createConversation} from "../../api/openai.ts";
 import {stripMarkdownFromString} from "../../utils/utils.ts";
@@ -10,22 +10,19 @@ import {useApiKeys} from "../../providers/ApiKeyProvider.tsx";
 import type {ResponseSchema} from "../../types/responseSchema.ts";
 import {speakMessage} from "../../api/elevenLabs.ts";
 import {useDevSettings} from "../../providers/DevSettingsProvider.tsx";
-import type {Message} from "../../types/conversations.ts";
 import type {Drink} from "../../types/drinks.ts";
+import {useConversation} from "../../providers/ConversationProvider.tsx";
 
 
 export default function MessagingPanel() {
     const {selectedBartender} = useBartender();
-    const [conversationId, setConversationId] = useState<string>("");
-    const [messageLog, setMessageLog] = useState<Message[]>([]);
-
+    const {conversation, setConversationId, addMessage, clearConversation} = useConversation();
     const {openaiKey, elevenLabsKey} = useApiKeys();
     const {settings} = useDevSettings()
 
     useEffect(() => {
         console.log(`Bartender Changed to: ${selectedBartender?.profile.displayName}`)
-        setMessageLog([]);
-        setConversationId("")
+        clearConversation();
     }, [selectedBartender]);
 
     const initializeConversation = async (message: string): Promise<string> => {
@@ -45,13 +42,6 @@ export default function MessagingPanel() {
         setConversationId(newConversationId);
 
         return newConversationId;
-    }
-
-    const addMessageToLog = (message: Message) => {
-        setMessageLog((previousMessages: Message[]) => [
-            ...previousMessages,
-            message
-        ]);
     }
 
     const sendMessage = async (message: string, conversation: string) => {
@@ -105,26 +95,26 @@ export default function MessagingPanel() {
             throw new Error("Please select a bartender.")
         }
 
-        let activeConversationId = conversationId;
+        let activeConversationId = conversation.conversationId;
         if (!activeConversationId) {
             activeConversationId = await initializeConversation(messageContent);
         }
 
-        addMessageToLog({sender: "You", content: messageContent, senderIsUser: true});
+        addMessage({sender: "You", content: messageContent, senderIsUser: true})
 
         const {reply, drink} = await sendMessage(messageContent, activeConversationId);
 
         await speakReply(reply);
 
-        addMessageToLog({sender: selectedBartender.profile.displayName, content: reply, senderIsUser: false});
+        addMessage({sender: selectedBartender.profile.displayName, content: reply, senderIsUser: false, drink: drink})
 
         const drinkString: string = formatDrinkAsPlainText(drink);
-        addMessageToLog({sender: selectedBartender.profile.displayName, content: drinkString, senderIsUser: false})
+        addMessage({sender: selectedBartender.profile.displayName, content: drinkString, senderIsUser: false})
     }
 
     return (
         <Flex direction="column" gridColumn="span 2" justify="end">
-            <MessageLog messages={messageLog}/>
+            <MessageLog messages={conversation.messages}/>
             <Flex direction="column">
                 <MessageInput onSendMessage={handleSendMessage}/>
                 <Text as="p" size={"1"} align="right" style={{
@@ -132,7 +122,7 @@ export default function MessagingPanel() {
                     color: "gray",
                     fontSize: "0.7rem"
                 }}>
-                    <Em>ID: {conversationId}</Em>
+                    <Em>ID: {conversation.conversationId}</Em>
                 </Text>
             </Flex>
         </Flex>
