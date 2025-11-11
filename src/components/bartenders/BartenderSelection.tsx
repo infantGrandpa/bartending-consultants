@@ -2,10 +2,12 @@
 import {AlertDialog, Button, Flex, Text} from "@radix-ui/themes";
 import {useBartender} from "../../providers/BartenderProvider.tsx";
 import {useState} from "react";
+import {useConversation} from "../../providers/ConversationProvider.tsx";
 
 export default function BartenderSelection() {
     const {selectedBartender, setSelectedBartender} = useBartender();
     const [pendingBartender, setPendingBartender] = useState<Bartender | null>(null)
+    const {conversation} = useConversation()
 
     const handleSelect = (key: string | keyof typeof bartenders) => {
         const convertedKey: keyof typeof bartenders = key as keyof typeof bartenders;
@@ -15,7 +17,7 @@ export default function BartenderSelection() {
             return;
         }
 
-        if (!selectedBartender) {       //TODO: or if message history is empty!
+        if (!selectedBartender || conversation.messages.length === 0) {
             setSelectedBartender(bartender);
             return;
         }

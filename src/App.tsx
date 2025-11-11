@@ -6,6 +6,7 @@ import {Grid, Theme} from "@radix-ui/themes";
 import {BartenderProvider} from "./providers/BartenderProvider.tsx";
 import {Background} from "./components/Background.tsx";
 import {DevSettingsProvider} from "./providers/DevSettingsProvider.tsx";
+import {ConversationProvider} from "./providers/ConversationProvider.tsx";
 
 export default function App() {
     return (
@@ -14,11 +15,13 @@ export default function App() {
             <DevSettingsProvider>
                 <ApiKeyProvider>
                     <BartenderProvider>
-                        <Background/>
-                        <Grid columns="3" gap="4" p="6" height="100vh">
-                            <MessagingPanel/>
-                            <Sidebar/>
-                        </Grid>
+                        <ConversationProvider>
+                            <Background/>
+                            <Grid columns="3" gap="4" p="6" height="100vh">
+                                <MessagingPanel/>
+                                <Sidebar/>
+                            </Grid>
+                        </ConversationProvider>
                     </BartenderProvider>
                 </ApiKeyProvider>
             </DevSettingsProvider>
