@@ -1,23 +1,10 @@
-﻿export type ResponseSchema = {
+﻿import type {Drink} from "./drinks.ts";
+
+export type ResponseSchema = {
     //If you change this, make sure to update ExampleResponseSchema!!!
     message: string;
     drink: Drink;
 };
-
-export type Drink = {
-    name: string;
-    ingredients: [
-        {
-            ingredient: string;
-            amount: string;
-        }
-    ]
-    instructions: [
-        {
-            step: string;
-        }
-    ];
-}
 
 // TODO: Figure out a way to automate generating this example.
 export const ExampleResponseSchema = {
@@ -31,10 +18,6 @@ export const ExampleResponseSchema = {
                 amount: "string"
             }
         ],
-        instructions: [
-            {
-                step: "string"
-            }
-        ]
+        instructions: ["string"]
     }
 };
