@@ -7,15 +7,16 @@ interface Props {
     labelText: string;
     placeholder: string;
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    value: string;
 }
 
-export default function ApiKeyInput({id, labelText, placeholder, onChange}:Props) {
+export default function ApiKeyInput({id, labelText, placeholder, onChange, value}:Props) {
     return (
-        <Box mt="3">
+        <Box mt="4">
             <Label.Root htmlFor={id}>
-                <Text as="div" size="3" mb="1">{labelText}</Text>
+                <Text as="div" size="2" mb="1">{labelText}</Text>
             </Label.Root>
-            <TextField.Root type="password" placeholder={placeholder} id={id} onChange={onChange}/>
+            <TextField.Root type="password" placeholder={placeholder} id={id} onChange={onChange} value={value}/>
         </Box>
     );
 }
