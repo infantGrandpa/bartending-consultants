@@ -44,8 +44,8 @@ export default function Settings() {
                         Developer
                     </TabNav.Link>
                 </TabNav.Root>
-                {activeTab === 'api-keys' && <ApiKeysSetup />}
-                {activeTab === 'developer' && <DevControls />}
+                {activeTab === 'api-keys' && <ApiKeysSetup/>}
+                {activeTab === 'developer' && <DevControls/>}
             </Dialog.Content>
         </Dialog.Root>
     )
