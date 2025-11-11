@@ -112,7 +112,7 @@ export default function MessagingPanel() {
 
     return (
         <Flex direction="column" gridColumn="span 2" justify="end">
-            <MessageLog messages={conversation.messages}/>
+            <MessageLog />
             <Flex direction="column">
                 <MessageInput onSendMessage={handleSendMessage}/>
                 <Text as="p" size={"1"} align="right" style={{
