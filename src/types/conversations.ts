@@ -7,7 +7,7 @@ export interface Message {
     drink?: Drink;
 }
 
-export interface ConversationHistory {
+export interface Conversation {
     conversationId: string;
     messages: Message[];
 }
