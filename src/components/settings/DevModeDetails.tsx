@@ -9,45 +9,46 @@ export default function DevModeDetails() {
 
     return (
         <Flex direction="column" gap="3">
-        <Table.Root variant="surface" layout="fixed" size="1">
-            <Table.Header>
-                <Table.Row>
-                    <Table.ColumnHeaderCell>Variable</Table.ColumnHeaderCell>
-                    <Table.ColumnHeaderCell>Value</Table.ColumnHeaderCell>
-                </Table.Row>
-            </Table.Header>
+            <Table.Root variant="surface" layout="fixed" size="1">
+                <Table.Header>
+                    <Table.Row>
+                        <Table.ColumnHeaderCell>Variable</Table.ColumnHeaderCell>
+                        <Table.ColumnHeaderCell>Value</Table.ColumnHeaderCell>
+                    </Table.Row>
+                </Table.Header>
 
-            <Table.Body>
-                <Table.Row>
-                    <Table.RowHeaderCell>Dev Mode</Table.RowHeaderCell>
-                    <Table.Cell>{String(isDevMode)}</Table.Cell>
-                </Table.Row>
-                <Table.Row>
-                    <Table.RowHeaderCell>Use Dummy Messages</Table.RowHeaderCell>
-                    <Table.Cell>{String(useDummyMessages)}</Table.Cell>
-                </Table.Row>
-                <Table.Row>
-                    <Table.RowHeaderCell>Play Dummy Audio</Table.RowHeaderCell>
-                    <Table.Cell>{String(playDummyAudio)}</Table.Cell>
-                </Table.Row>
-                <Table.Row>
-                    <Table.RowHeaderCell>OpenAI API Key</Table.RowHeaderCell>
-                    <Table.Cell>
-                        <Text wrap="nowrap" truncate={true}>
-                            {openaiKey}
-                        </Text>
-                    </Table.Cell>
-                </Table.Row>
-                <Table.Row>
-                    <Table.RowHeaderCell>ElevenLabs API Key</Table.RowHeaderCell>
-                    <Table.Cell>
-                        <Text wrap="nowrap" truncate={true}>
-                            {elevenLabsKey}
-                        </Text>
-                    </Table.Cell>
-                </Table.Row>
-            </Table.Body>
-        </Table.Root>
+                <Table.Body>
+                    <Table.Row>
+                        <Table.RowHeaderCell>Dev Mode</Table.RowHeaderCell>
+                        <Table.Cell>{String(isDevMode)}</Table.Cell>
+                    </Table.Row>
+                    <Table.Row>
+                        <Table.RowHeaderCell>Use Dummy Messages</Table.RowHeaderCell>
+                        <Table.Cell>{String(useDummyMessages)}</Table.Cell>
+                    </Table.Row>
+                    <Table.Row>
+                        <Table.RowHeaderCell>Play Dummy Audio</Table.RowHeaderCell>
+                        <Table.Cell>{String(playDummyAudio)}</Table.Cell>
+                    </Table.Row>
+                    <Table.Row>
+                        <Table.RowHeaderCell>OpenAI API Key</Table.RowHeaderCell>
+                        <Table.Cell>
+                            <Text wrap="nowrap" truncate={true}>
+                                {openaiKey}
+                            </Text>
+                        </Table.Cell>
+                    </Table.Row>
+                    <Table.Row>
+                        <Table.RowHeaderCell>ElevenLabs API Key</Table.RowHeaderCell>
+                        <Table.Cell>
+                            <Text wrap="nowrap" truncate={true}>
+                                {elevenLabsKey}
+                            </Text>
+                        </Table.Cell>
+                    </Table.Row>
+                </Table.Body>
+            </Table.Root>
+
             <Callout.Root size="2" color="yellow" variant="soft" role="alert">
                 <Callout.Icon>
                     <i className="fa-solid fa-triangle-exclamation"></i>
