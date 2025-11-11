@@ -70,15 +70,15 @@ function generateMockResponse(message:string) {
             "drink": {
                 "name": "Negroni",
                 "ingredients": [
-                    { "ingredient": "Gin", "amount": "1 oz" },
-                    { "ingredient": "Campari", "amount": "1 oz" },
-                    { "ingredient": "Sweet Vermouth", "amount": "1 oz" }
+                    {"ingredient": "Gin", "amount": "1 oz"},
+                    {"ingredient": "Campari", "amount": "1 oz"},
+                    {"ingredient": "Sweet Vermouth", "amount": "1 oz"}
                 ],
                 "instructions": [
-                    { "step": "Add gin, Campari, and sweet vermouth to a mixing glass filled with ice." },
-                    { "step": "Stir for about 30 seconds until well chilled." },
-                    { "step": "Strain into a rocks glass over a large ice cube." },
-                    { "step": "Garnish with an orange peel, expressed over the drink." }
+                    "Add gin, Campari, and sweet vermouth to a mixing glass filled with ice.",
+                    "Stir for about 30 seconds until well chilled.",
+                    "Strain into a rocks glass over a large ice cube.",
+                    "Garnish with an orange peel, expressed over the drink."
                 ]
             }
         },
@@ -87,17 +87,17 @@ function generateMockResponse(message:string) {
             "drink": {
                 "name": "Mojito",
                 "ingredients": [
-                    { "ingredient": "White Rum", "amount": "2 oz" },
-                    { "ingredient": "Fresh Lime Juice", "amount": "1 oz" },
-                    { "ingredient": "Sugar", "amount": "2 tsp" },
-                    { "ingredient": "Fresh Mint Leaves", "amount": "6-8 leaves" },
-                    { "ingredient": "Club Soda", "amount": "Top up" }
+                    {"ingredient": "White Rum", "amount": "2 oz"},
+                    {"ingredient": "Fresh Lime Juice", "amount": "1 oz"},
+                    {"ingredient": "Sugar", "amount": "2 tsp"},
+                    {"ingredient": "Fresh Mint Leaves", "amount": "6-8 leaves"},
+                    {"ingredient": "Club Soda", "amount": "Top up"}
                 ],
                 "instructions": [
-                    { "step": "Muddle mint leaves and sugar with lime juice in a glass." },
-                    { "step": "Add rum and fill the glass with ice." },
-                    { "step": "Top with club soda and gently stir to mix." },
-                    { "step": "Garnish with a sprig of mint and a lime wheel." }
+                    "Muddle mint leaves and sugar with lime juice in a glass.",
+                    "Add rum and fill the glass with ice.",
+                    "Top with club soda and gently stir to mix.",
+                    "Garnish with a sprig of mint and a lime wheel."
                 ]
             }
         },
@@ -106,16 +106,16 @@ function generateMockResponse(message:string) {
             "drink": {
                 "name": "Espresso Martini",
                 "ingredients": [
-                    { "ingredient": "Vodka", "amount": "2 oz" },
-                    { "ingredient": "Coffee Liqueur", "amount": "1/2 oz" },
-                    { "ingredient": "Freshly Brewed Espresso", "amount": "1 oz" },
-                    { "ingredient": "Simple Syrup", "amount": "1/4 oz" }
+                    {"ingredient": "Vodka", "amount": "2 oz"},
+                    {"ingredient": "Coffee Liqueur", "amount": "1/2 oz"},
+                    {"ingredient": "Freshly Brewed Espresso", "amount": "1 oz"},
+                    {"ingredient": "Simple Syrup", "amount": "1/4 oz"}
                 ],
                 "instructions": [
-                    { "step": "Add vodka, coffee liqueur, espresso, and simple syrup to a shaker filled with ice." },
-                    { "step": "Shake hard for 15–20 seconds to create a frothy texture." },
-                    { "step": "Strain into a chilled coupe or martini glass." },
-                    { "step": "Garnish with three coffee beans on top." }
+                    "Add vodka, coffee liqueur, espresso, and simple syrup to a shaker filled with ice.",
+                    "Shake hard for 15–20 seconds to create a frothy texture.",
+                    "Strain into a chilled coupe or martini glass.",
+                    "Garnish with three coffee beans on top."
                 ]
             }
         },
@@ -124,19 +124,19 @@ function generateMockResponse(message:string) {
             "drink": {
                 "name": "Mezcal Paloma",
                 "ingredients": [
-                    { "ingredient": "Mezcal", "amount": "2 oz" },
-                    { "ingredient": "Fresh Grapefruit Juice", "amount": "2 oz" },
-                    { "ingredient": "Lime Juice", "amount": "1/2 oz" },
-                    { "ingredient": "Agave Syrup", "amount": "1/2 oz" },
-                    { "ingredient": "Club Soda", "amount": "Top up" },
-                    { "ingredient": "Salt", "amount": "Pinch (for rim)" }
+                    {"ingredient": "Mezcal", "amount": "2 oz"},
+                    {"ingredient": "Fresh Grapefruit Juice", "amount": "2 oz"},
+                    {"ingredient": "Lime Juice", "amount": "1/2 oz"},
+                    {"ingredient": "Agave Syrup", "amount": "1/2 oz"},
+                    {"ingredient": "Club Soda", "amount": "Top up"},
+                    {"ingredient": "Salt", "amount": "Pinch (for rim)"}
                 ],
                 "instructions": [
-                    { "step": "Rim a highball glass with salt." },
-                    { "step": "Add mezcal, grapefruit juice, lime juice, and agave syrup to a shaker with ice." },
-                    { "step": "Shake briefly and strain into the prepared glass over fresh ice." },
-                    { "step": "Top with club soda and stir gently." },
-                    { "step": "Garnish with a grapefruit wedge." }
+                    "Rim a highball glass with salt.",
+                    "Add mezcal, grapefruit juice, lime juice, and agave syrup to a shaker with ice.",
+                    "Shake briefly and strain into the prepared glass over fresh ice.",
+                    "Top with club soda and stir gently.",
+                    "Garnish with a grapefruit wedge."
                 ]
             }
         },
@@ -145,18 +145,18 @@ function generateMockResponse(message:string) {
             "drink": {
                 "name": "Hot Buttered Rum",
                 "ingredients": [
-                    { "ingredient": "Dark Rum", "amount": "2 oz" },
-                    { "ingredient": "Unsalted Butter", "amount": "1 tbsp" },
-                    { "ingredient": "Brown Sugar", "amount": "1 tsp" },
-                    { "ingredient": "Ground Cinnamon", "amount": "Pinch" },
-                    { "ingredient": "Ground Nutmeg", "amount": "Pinch" },
-                    { "ingredient": "Hot Water", "amount": "4 oz" }
+                    {"ingredient": "Dark Rum", "amount": "2 oz"},
+                    {"ingredient": "Unsalted Butter", "amount": "1 tbsp"},
+                    {"ingredient": "Brown Sugar", "amount": "1 tsp"},
+                    {"ingredient": "Ground Cinnamon", "amount": "Pinch"},
+                    {"ingredient": "Ground Nutmeg", "amount": "Pinch"},
+                    {"ingredient": "Hot Water", "amount": "4 oz"}
                 ],
                 "instructions": [
-                    { "step": "Combine butter, brown sugar, cinnamon, and nutmeg in a mug." },
-                    { "step": "Pour in rum and top with hot water." },
-                    { "step": "Stir until butter is melted and ingredients are combined." },
-                    { "step": "Garnish with a cinnamon stick or grated nutmeg." }
+                    "Combine butter, brown sugar, cinnamon, and nutmeg in a mug.",
+                    "Pour in rum and top with hot water.",
+                    "Stir until butter is melted and ingredients are combined.",
+                    "Garnish with a cinnamon stick or grated nutmeg."
                 ]
             }
         },
@@ -179,18 +179,10 @@ function generateMockResponse(message:string) {
                     }
                 ],
                 "instructions": [
-                    {
-                        "step": "Add all ingredients to a mixing glass with ice."
-                    },
-                    {
-                        "step": "Stir well until very cold, about 30 seconds—longer than Brett’s attention span."
-                    },
-                    {
-                        "step": "Strain into a chilled coupe or martini glass."
-                    },
-                    {
-                        "step": "Garnish with a brandied cherry, none of that neon rubbish."
-                    }
+                    "Add all ingredients to a mixing glass with ice.",
+                    "Stir well until very cold, about 30 seconds—longer than Brett’s attention span.",
+                    "Strain into a chilled coupe or martini glass.",
+                    "Garnish with a brandied cherry, none of that neon rubbish."
                 ]
             }
         }

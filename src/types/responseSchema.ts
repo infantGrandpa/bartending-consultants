@@ -18,10 +18,6 @@ export const ExampleResponseSchema = {
                 amount: "string"
             }
         ],
-        instructions: [
-            {
-                step: "string"
-            }
-        ]
+        instructions: ["string"]
     }
 };
