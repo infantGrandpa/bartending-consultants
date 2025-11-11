@@ -21,7 +21,6 @@ export default function MessagingPanel() {
     const {settings} = useDevSettings()
 
     useEffect(() => {
-        console.log(`Bartender Changed to: ${selectedBartender?.profile.displayName}`)
         clearConversation();
     }, [selectedBartender]);
 
@@ -30,7 +29,6 @@ export default function MessagingPanel() {
             throw new Error("No bartender selected.");
         }
 
-        console.log("Conversation ID not set. Creating a new conversation...");
         const systemPrompt = getSystemPrompt(selectedBartender);
         const newConversationId = await createConversation(
             systemPrompt,
