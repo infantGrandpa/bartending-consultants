@@ -11,7 +11,7 @@ export default function Settings() {
     return (
         <Dialog.Root>
             <Dialog.Trigger>
-                <IconButton variant="soft">
+                <IconButton variant="soft" onClick={() => setActiveTab('api-keys')}>
                     <i className="fa-solid fa-gear"></i>
                 </IconButton>
             </Dialog.Trigger>
