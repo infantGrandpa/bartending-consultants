@@ -64,6 +64,7 @@ export default function ApiKeysSetup() {
             }}>
                 Enter your API keys. They'll be stored locally in your browser.
             </Text>
+
             <ApiKeyInput
                 id={"openaiApiKeyInput"}
                 labelText={"OpenAI API Key"}
@@ -78,6 +79,7 @@ export default function ApiKeysSetup() {
                 onChange={(e: any) => setTempElevenLabsKey(e.target.value)}
                 value={tempElevenLabsKey}
             />
+
             <Flex mt="4" justify="between">
                 <AlertDialog.Root>
                     <AlertDialog.Trigger>
@@ -90,10 +92,11 @@ export default function ApiKeysSetup() {
                         <AlertDialog.Title>Clear Saved API Keys</AlertDialog.Title>
                         <AlertDialog.Description>
                             <Text as="p" mb={"4"}>
-                                Are you sure? If you want to connect with these awesome bartenders again, you'll need to reenter your API keys.
+                                Are you sure? If you want to connect with these awesome bartenders again, you'll need to
+                                reenter your API keys.
                             </Text>
                             <Text as="p">
-                            You cannot undo this action.
+                                You cannot undo this action.
                             </Text>
                         </AlertDialog.Description>
 
