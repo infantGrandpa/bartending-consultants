@@ -37,6 +37,10 @@ export default function ApiKeysSetup() {
             throw new Error("ElevenLabs API Key is empty.")
         }
 
+        if (!tempAzureKeys.speechKey || !tempAzureKeys.endpoint || !tempAzureKeys.region) {
+            throw new Error("At least 1 azure key value is empty.")
+        }
+
         saveApiKeys(tempOpenaiKey, tempElevenLabsKey, tempAzureKeys);
     };
 
@@ -48,7 +52,7 @@ export default function ApiKeysSetup() {
     };
 
     const canSaveKeys = () => {
-        if (!tempOpenaiKey || !tempElevenLabsKey) {
+        if (!tempOpenaiKey || !tempElevenLabsKey || !tempAzureKeys.speechKey || !tempAzureKeys.endpoint || !tempAzureKeys.region) {
             return false;
         }
 
