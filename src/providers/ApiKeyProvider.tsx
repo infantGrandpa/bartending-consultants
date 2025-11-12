@@ -3,17 +3,26 @@
 interface ApiKeyContextType {
     openaiKey: string;
     elevenLabsKey: string;
-    saveApiKeys: (openaiKey: string, elevenLabsKey: string) => void;
+    azureKeys: AzureSttKeys;
+    saveApiKeys: (openaiKey: string, elevenLabsKey: string, azureKeys: AzureSttKeys) => void;
     clearApiKeys: () => void;
     areKeysSaved: () => boolean;
 }
+
+export interface AzureSttKeys {
+    speechKey: string;
+    region: string;
+    endpoint: string;
+}
+
+export const defaultAzureKeys: AzureSttKeys = {speechKey: "", region: "", endpoint: ""}
 
 const ApiKeyContext = createContext<ApiKeyContextType | undefined>(undefined);
 
 export const ApiKeyProvider = ({children}: { children: ReactNode }) => {
     const [openaiKey, setOpenaiKey] = useState<string>("");
     const [elevenLabsKey, setElevenLabsKey] = useState<string>("");
-
+    const [azureKeys, setAzureKeys] = useState<AzureSttKeys>(defaultAzureKeys);
 
     useEffect(() => {
         const storedOpenAI = localStorage.getItem("openaiApiKey") || "";
@@ -23,7 +32,7 @@ export const ApiKeyProvider = ({children}: { children: ReactNode }) => {
         setElevenLabsKey(storedEleven);
     }, []);
 
-    const saveApiKeys = (newOpenAiKey: string, newElevenLabsKey: string) => {
+    const saveApiKeys = (newOpenAiKey: string, newElevenLabsKey: string, newAzureKeys: AzureSttKeys) => {
         if (newOpenAiKey) {
             localStorage.setItem("openaiApiKey", openaiKey);
             setOpenaiKey(newOpenAiKey);
@@ -33,6 +42,11 @@ export const ApiKeyProvider = ({children}: { children: ReactNode }) => {
             localStorage.setItem("elevenLabsApiKey", newElevenLabsKey);
             setElevenLabsKey(newElevenLabsKey);
         }
+
+        if (newAzureKeys.speechKey && newAzureKeys.endpoint && newAzureKeys.region) {
+            //TODO: Save to local storage
+            setAzureKeys(newAzureKeys);
+        }
     }
 
     const clearApiKeys = () => {
@@ -41,10 +55,11 @@ export const ApiKeyProvider = ({children}: { children: ReactNode }) => {
 
         setOpenaiKey("");
         setElevenLabsKey("");
+        setAzureKeys(defaultAzureKeys);
     }
 
     const areKeysSaved = () => {
-        return Boolean(openaiKey && elevenLabsKey)
+        return Boolean(openaiKey && elevenLabsKey && azureKeys.speechKey && azureKeys.region && azureKeys.endpoint);
     }
 
     useEffect(() => {
@@ -54,7 +69,7 @@ export const ApiKeyProvider = ({children}: { children: ReactNode }) => {
 
     return (
         <ApiKeyContext.Provider
-            value={{openaiKey, elevenLabsKey, saveApiKeys, clearApiKeys, areKeysSaved}}>
+            value={{openaiKey, elevenLabsKey, azureKeys, saveApiKeys, clearApiKeys, areKeysSaved}}>
             {children}
         </ApiKeyContext.Provider>
     );
