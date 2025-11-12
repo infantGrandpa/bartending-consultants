@@ -6,7 +6,7 @@ import DevModeDataRow from "./DevModeDataRow.tsx";
 
 export default function DevModeDetails() {
     const {settings} = useDevSettings();
-    const {openaiKey, elevenLabsKey} = useApiKeys();
+    const {openaiKey, elevenLabsKey, azureKeys} = useApiKeys();
 
     if (!settings.showVariableTable) {
         return;
@@ -27,6 +27,9 @@ export default function DevModeDetails() {
                     <DevModeDataRow labelText={"Play Dummy Audio"} value={String(settings.playDummyAudio)} />
                     <DevModeDataRow labelText={"Open AI API Key"} value={openaiKey} />
                     <DevModeDataRow labelText={"ElevenLabs API Key"} value={elevenLabsKey} />
+                    <DevModeDataRow labelText={"Azure Speech Key"} value={azureKeys.speechKey} />
+                    <DevModeDataRow labelText={"Azure Region"} value={azureKeys.region} />
+                    <DevModeDataRow labelText={"Azure Endpoint"} value={azureKeys.endpoint} />
                 </Table.Body>
             </Table.Root>
         </Flex>
