@@ -11,13 +11,14 @@
   },
   "dependencies": {
     "@radix-ui/themes": "^3.2.1",
+    "microsoft-cognitiveservices-speech-sdk": "^1.46.0",
     "radix-ui": "^1.4.3",
     "react": "^19.1.1",
     "react-dom": "^19.1.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.36.0",
-    "@types/node": "^24.6.0",
+    "@types/node": "^24.10.1",
     "@types/react": "^19.1.16",
     "@types/react-dom": "^19.1.9",
     "@vitejs/plugin-react": "^5.0.4",
