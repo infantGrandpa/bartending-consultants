@@ -3,8 +3,6 @@
 interface ApiKeyContextType {
     openaiKey: string;
     elevenLabsKey: string;
-    setOpenaiKey: (key: string) => void;
-    setElevenLabsKey: (key: string) => void;
     saveApiKeys: (openaiKey: string, elevenLabsKey: string) => void;
     clearApiKeys: () => void;
     areKeysSaved: boolean;
@@ -58,7 +56,7 @@ export const ApiKeyProvider = ({children}: { children: ReactNode }) => {
 
     return (
         <ApiKeyContext.Provider
-            value={{openaiKey, elevenLabsKey, setOpenaiKey, setElevenLabsKey, saveApiKeys, clearApiKeys, areKeysSaved}}>
+            value={{openaiKey, elevenLabsKey, saveApiKeys, clearApiKeys, areKeysSaved}}>
             {children}
         </ApiKeyContext.Provider>
     );
