@@ -11,7 +11,7 @@ interface ApiKeyContextType {
 
 export interface AzureSttKeys {
     speechKey: string;
-    region: string;
+    region: string;     //TODO: Remove region; we don't actually need it
     endpoint: string;
 }
 
