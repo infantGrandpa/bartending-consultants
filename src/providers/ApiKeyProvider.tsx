@@ -15,7 +15,11 @@ export interface AzureSttKeys {
     endpoint: string;
 }
 
-export const defaultAzureKeys: AzureSttKeys = {speechKey: "", region: "", endpoint: ""}
+export const defaultAzureKeys: AzureSttKeys = {
+    speechKey: "",
+    region: "eastus",
+    endpoint: "https://eastus.api.cognitive.microsoft.com/"
+}
 
 const ApiKeyContext = createContext<ApiKeyContextType | undefined>(undefined);
 
@@ -29,9 +33,9 @@ export const ApiKeyProvider = ({children}: { children: ReactNode }) => {
         const storedEleven = localStorage.getItem("elevenLabsApiKey") || "";
 
         const storedAzureKeys = {
-            speechKey: localStorage.getItem("azureSpeechKey") || "",
-            region: localStorage.getItem("azureRegion") || "",
-            endpoint: localStorage.getItem("azureEndpoint") || ""
+            speechKey: localStorage.getItem("azureSpeechKey") || defaultAzureKeys.speechKey,
+            region: localStorage.getItem("azureRegion") || defaultAzureKeys.region,
+            endpoint: localStorage.getItem("azureEndpoint") || defaultAzureKeys.endpoint
         }
 
         setOpenaiKey(storedOpenAI);
