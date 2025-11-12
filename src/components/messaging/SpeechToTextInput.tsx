@@ -18,6 +18,10 @@ export default function SpeechToTextInput() {
 
         console.log(`Selected File: ${fileInfo}`);
 
+        if (audioFile.type !== 'audio/wav') {
+            throw new Error("File must be a .wav Audio file.")
+        }
+
         const speechConfig: SpeechConfig = SpeechConfig.fromEndpoint(endpoint, speechKey);
         speechConfig.speechRecognitionLanguage = 'en-US';
 
