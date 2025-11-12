@@ -28,8 +28,15 @@ export const ApiKeyProvider = ({children}: { children: ReactNode }) => {
         const storedOpenAI = localStorage.getItem("openaiApiKey") || "";
         const storedEleven = localStorage.getItem("elevenLabsApiKey") || "";
 
+        const storedAzureKeys = {
+            speechKey: localStorage.getItem("azureSpeechKey") || "",
+            region: localStorage.getItem("azureRegion") || "",
+            endpoint: localStorage.getItem("azureEndpoint") || ""
+        }
+
         setOpenaiKey(storedOpenAI);
         setElevenLabsKey(storedEleven);
+        setAzureKeys(storedAzureKeys);
     }, []);
 
     const saveApiKeys = (newOpenAiKey: string, newElevenLabsKey: string, newAzureKeys: AzureSttKeys) => {
@@ -44,7 +51,9 @@ export const ApiKeyProvider = ({children}: { children: ReactNode }) => {
         }
 
         if (newAzureKeys.speechKey && newAzureKeys.endpoint && newAzureKeys.region) {
-            //TODO: Save to local storage
+            localStorage.setItem("azureSpeechKey", newAzureKeys.speechKey);
+            localStorage.setItem("azureRegion", newAzureKeys.region);
+            localStorage.setItem("azureEndpoint", newAzureKeys.endpoint);
             setAzureKeys(newAzureKeys);
         }
     }

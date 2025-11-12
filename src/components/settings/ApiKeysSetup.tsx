@@ -15,6 +15,8 @@ export default function ApiKeysSetup() {
         const storedOpenAI = openaiKey;
         const storedEleven = elevenLabsKey;
 
+        const storedAzureKeys = azureKeys;
+
         if (storedOpenAI) {
             setTempOpenaiKey(storedOpenAI);
         }
@@ -22,6 +24,8 @@ export default function ApiKeysSetup() {
         if (storedEleven) {
             setTempElevenLabsKey(storedEleven);
         }
+
+        setTempAzureKeys(storedAzureKeys);
     }, []);
 
     const handleSave = () => {
