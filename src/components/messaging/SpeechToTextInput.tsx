@@ -1,10 +1,10 @@
 ﻿import {ResultReason, SpeechConfig, AudioConfig, SpeechRecognizer, SpeechRecognitionResult} from "microsoft-cognitiveservices-speech-sdk";
 import type { ChangeEvent } from "react";
+import {useApiKeys} from "../../providers/ApiKeyProvider.tsx";
 
 
 export default function SpeechToTextInput() {
-    const speechKey: string = "speech-key"
-    const endpoint: URL = new URL("http://endpoint-url.com");
+    const {azureKeys} = useApiKeys();
 
     async function fileChange(event: ChangeEvent<HTMLInputElement>) {
         const audioFile: File | null = event.target.files?.[0] ?? null;
@@ -22,7 +22,7 @@ export default function SpeechToTextInput() {
             throw new Error("File must be a .wav Audio file.")
         }
 
-        const speechConfig: SpeechConfig = SpeechConfig.fromEndpoint(endpoint, speechKey);
+        const speechConfig: SpeechConfig = SpeechConfig.fromEndpoint(new URL(azureKeys.endpoint), azureKeys.speechKey);
         speechConfig.speechRecognitionLanguage = 'en-US';
 
         const audioConfig: AudioConfig = AudioConfig.fromWavFileInput(audioFile);

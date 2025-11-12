@@ -3,9 +3,22 @@
 interface ApiKeyContextType {
     openaiKey: string;
     elevenLabsKey: string;
-    saveApiKeys: (openaiKey: string, elevenLabsKey: string) => void;
+    azureKeys: AzureSttKeys;
+    saveApiKeys: (openaiKey: string, elevenLabsKey: string, azureKeys: AzureSttKeys) => void;
     clearApiKeys: () => void;
     areKeysSaved: () => boolean;
+}
+
+export interface AzureSttKeys {
+    speechKey: string;
+    region: string;
+    endpoint: string;
+}
+
+export const defaultAzureKeys: AzureSttKeys = {
+    speechKey: "",
+    region: "eastus",
+    endpoint: "https://eastus.api.cognitive.microsoft.com/"
 }
 
 const ApiKeyContext = createContext<ApiKeyContextType | undefined>(undefined);
@@ -13,17 +26,24 @@ const ApiKeyContext = createContext<ApiKeyContextType | undefined>(undefined);
 export const ApiKeyProvider = ({children}: { children: ReactNode }) => {
     const [openaiKey, setOpenaiKey] = useState<string>("");
     const [elevenLabsKey, setElevenLabsKey] = useState<string>("");
-
+    const [azureKeys, setAzureKeys] = useState<AzureSttKeys>(defaultAzureKeys);
 
     useEffect(() => {
         const storedOpenAI = localStorage.getItem("openaiApiKey") || "";
         const storedEleven = localStorage.getItem("elevenLabsApiKey") || "";
 
+        const storedAzureKeys = {
+            speechKey: localStorage.getItem("azureSpeechKey") || defaultAzureKeys.speechKey,
+            region: localStorage.getItem("azureRegion") || defaultAzureKeys.region,
+            endpoint: localStorage.getItem("azureEndpoint") || defaultAzureKeys.endpoint
+        }
+
         setOpenaiKey(storedOpenAI);
         setElevenLabsKey(storedEleven);
+        setAzureKeys(storedAzureKeys);
     }, []);
 
-    const saveApiKeys = (newOpenAiKey: string, newElevenLabsKey: string) => {
+    const saveApiKeys = (newOpenAiKey: string, newElevenLabsKey: string, newAzureKeys: AzureSttKeys) => {
         if (newOpenAiKey) {
             localStorage.setItem("openaiApiKey", openaiKey);
             setOpenaiKey(newOpenAiKey);
@@ -33,18 +53,30 @@ export const ApiKeyProvider = ({children}: { children: ReactNode }) => {
             localStorage.setItem("elevenLabsApiKey", newElevenLabsKey);
             setElevenLabsKey(newElevenLabsKey);
         }
+
+        if (newAzureKeys.speechKey && newAzureKeys.endpoint && newAzureKeys.region) {
+            localStorage.setItem("azureSpeechKey", newAzureKeys.speechKey);
+            localStorage.setItem("azureRegion", newAzureKeys.region);
+            localStorage.setItem("azureEndpoint", newAzureKeys.endpoint);
+            setAzureKeys(newAzureKeys);
+        }
     }
 
     const clearApiKeys = () => {
         localStorage.removeItem("openaiApiKey");
         localStorage.removeItem("elevenLabsApiKey");
 
+        localStorage.removeItem("azureSpeechKey");
+        localStorage.removeItem("azureRegion");
+        localStorage.removeItem("azureEndpoint");
+
         setOpenaiKey("");
         setElevenLabsKey("");
+        setAzureKeys(defaultAzureKeys);
     }
 
     const areKeysSaved = () => {
-        return Boolean(openaiKey && elevenLabsKey)
+        return Boolean(openaiKey && elevenLabsKey && azureKeys.speechKey && azureKeys.region && azureKeys.endpoint);
     }
 
     useEffect(() => {
@@ -54,7 +86,7 @@ export const ApiKeyProvider = ({children}: { children: ReactNode }) => {
 
     return (
         <ApiKeyContext.Provider
-            value={{openaiKey, elevenLabsKey, saveApiKeys, clearApiKeys, areKeysSaved}}>
+            value={{openaiKey, elevenLabsKey, azureKeys, saveApiKeys, clearApiKeys, areKeysSaved}}>
             {children}
         </ApiKeyContext.Provider>
     );
