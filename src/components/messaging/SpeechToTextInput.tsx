@@ -6,6 +6,31 @@ import {useApiKeys} from "../../providers/ApiKeyProvider.tsx";
 export default function SpeechToTextInput() {
     const {azureKeys} = useApiKeys();
 
+    const getSpeechConfig = () => {
+        const speechConfig: SpeechConfig = SpeechConfig.fromEndpoint(new URL(azureKeys.endpoint), azureKeys.speechKey);
+        speechConfig.speechRecognitionLanguage = 'en-US';
+        return speechConfig;
+    }
+
+    async function recognizeSpeechOnce(audioConfig: AudioConfig) {
+        const speechConfig = getSpeechConfig();
+        const recognizer = new SpeechRecognizer(speechConfig, audioConfig);
+
+        return new Promise<string>((resolve, reject) => {
+            recognizer.recognizeOnceAsync((result: SpeechRecognitionResult) => {
+                    if (result.reason === ResultReason.RecognizedSpeech) {
+                        resolve(result.text);
+                    } else {
+                        resolve('ERROR: Speech was cancelled or could not be recognized.')
+                    }
+                }, (error) => {
+                    reject(error);
+                }
+            )
+        });
+    }
+
+
     async function fileChange(event: ChangeEvent<HTMLInputElement>) {
         const audioFile: File | null = event.target.files?.[0] ?? null;
         if (!audioFile) {
@@ -22,22 +47,9 @@ export default function SpeechToTextInput() {
             throw new Error("File must be a .wav Audio file.")
         }
 
-        const speechConfig: SpeechConfig = SpeechConfig.fromEndpoint(new URL(azureKeys.endpoint), azureKeys.speechKey);
-        speechConfig.speechRecognitionLanguage = 'en-US';
-
         const audioConfig: AudioConfig = AudioConfig.fromWavFileInput(audioFile);
-        const recognizer = new SpeechRecognizer(speechConfig, audioConfig);
-
-        recognizer.recognizeOnceAsync((result: SpeechRecognitionResult) => {
-            let text;
-            if (result.reason === ResultReason.RecognizedSpeech) {
-                text = `RECOGNIZED: Text=${result.text}`
-            } else {
-                text = 'ERROR: Speech was cancelled or could not be recognized. Ensure you selected a WAV file.';
-            }
-
-            console.log(fileInfo + text);
-        });
+        const text: string = await recognizeSpeechOnce(audioConfig)
+        console.log(`${fileInfo}: ${text}`);
     }
 
 
