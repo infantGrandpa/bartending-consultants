@@ -83,7 +83,7 @@ export default function ApiKeysSetup() {
             <Flex mt="4" justify="between">
                 <AlertDialog.Root>
                     <AlertDialog.Trigger>
-                        <Button color="red" variant="outline" disabled={!areKeysSaved}>
+                        <Button color="red" variant="outline" disabled={!areKeysSaved()}>
                             Clear API Keys
                         </Button>
                     </AlertDialog.Trigger>
