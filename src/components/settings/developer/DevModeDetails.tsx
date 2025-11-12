@@ -23,7 +23,6 @@ export default function DevModeDetails() {
                 </Table.Header>
 
                 <Table.Body>
-                    <DevModeDataRow labelText={"Dev Mode Enabled"} value={String(settings.isDevMode)} />
                     <DevModeDataRow labelText={"Use Dummy Messages"} value={String(settings.useDummyMessages)} />
                     <DevModeDataRow labelText={"Play Dummy Audio"} value={String(settings.playDummyAudio)} />
                     <DevModeDataRow labelText={"Open AI API Key"} value={openaiKey} />
