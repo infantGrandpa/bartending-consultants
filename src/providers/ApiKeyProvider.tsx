@@ -62,6 +62,10 @@ export const ApiKeyProvider = ({children}: { children: ReactNode }) => {
         localStorage.removeItem("openaiApiKey");
         localStorage.removeItem("elevenLabsApiKey");
 
+        localStorage.removeItem("azureSpeechKey");
+        localStorage.removeItem("azureRegion");
+        localStorage.removeItem("azureEndpoint");
+
         setOpenaiKey("");
         setElevenLabsKey("");
         setAzureKeys(defaultAzureKeys);
