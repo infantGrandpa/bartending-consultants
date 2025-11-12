@@ -1,6 +1,7 @@
 ﻿import {Flex, IconButton, TextArea} from "@radix-ui/themes";
 import {useState} from "react";
 import {useBartender} from "../../providers/BartenderProvider.tsx";
+import SpeechToTextInput from "./SpeechToTextInput.tsx";
 
 interface Props {
     onSendMessage: (message: string) => Promise<void>;
@@ -54,9 +55,7 @@ export default function MessageInput({onSendMessage}: Props) {
                 >
                     <i className="fa-solid fa-paper-plane"></i>
                 </IconButton>
-                <IconButton variant="outline">
-                    <i className="fa-solid fa-microphone"></i>
-                </IconButton>
+                <SpeechToTextInput />
             </Flex>
         </Flex>
     );
