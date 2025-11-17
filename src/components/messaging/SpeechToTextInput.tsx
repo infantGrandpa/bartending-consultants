@@ -1,6 +1,7 @@
 ﻿import {ResultReason, SpeechConfig, AudioConfig, SpeechRecognizer, SpeechRecognitionResult} from "microsoft-cognitiveservices-speech-sdk";
 import type { ChangeEvent } from "react";
 import {useApiKeys} from "../../providers/ApiKeyProvider.tsx";
+import {Button, Flex} from "@radix-ui/themes";
 
 
 export default function SpeechToTextInput() {
@@ -54,15 +55,17 @@ export default function SpeechToTextInput() {
 
 
     return (
-        <div className="mt-2">
-            <label htmlFor="audio-file"><i className="fa-solid fa-file-audio"></i></label>
+        <Flex gap="3">
+            <label htmlFor="audio-file"><i className="fa-regular fa-file-audio"></i></label>
             <input
                 type="file"
                 id="audio-file"
                 onChange={(e: ChangeEvent<HTMLInputElement>) => fileChange(e)}
                 style={{display: "none"}}
             />
-            Convert speech to text from an audio file.
-        </div>
+            <Button variant="outline" onClick={() => sttFromMic()}>
+                <i className="fa-solid fa-microphone"></i>
+            </Button>
+        </Flex>
     )
 }
