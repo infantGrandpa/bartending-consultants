@@ -32,6 +32,16 @@ export default function SpeechToTextInput() {
         });
     }
 
+    async function sttFromMic() {
+        const audioConfig: AudioConfig = AudioConfig.fromDefaultMicrophoneInput();
+
+        console.log("Speak into your microphone");
+
+        const text: string = await recognizeSpeechOnce(audioConfig)
+        console.log(`From Microphone: ${text}`);
+
+    }
+
 
     async function fileChange(event: ChangeEvent<HTMLInputElement>) {
         const audioFile: File | null = event.target.files?.[0] ?? null;
