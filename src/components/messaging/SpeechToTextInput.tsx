@@ -15,6 +15,7 @@ import {Flex, IconButton} from "@radix-ui/themes";
 export default function SpeechToTextInput() {
     const {azureKeys} = useApiKeys();
     const [isRecognizing, setIsRecognizing] = useState<boolean>(false);
+    const [isStoppingRecognition, setIsStoppingRecognition] = useState<boolean>(false);
     const speechRecognizerRef: RefObject<SpeechRecognizer | null> = useRef<SpeechRecognizer | null>(null);
     const recognizedTextRef: RefObject<string> = useRef<string>("")
 
@@ -67,11 +68,13 @@ export default function SpeechToTextInput() {
         setIsRecognizing(true);
     }
 
-    function stopContinuousSttFromMic() {
-        //TODO: Delay halting to avoid losing the last few words.
+    async function stopContinuousSttFromMic() {
+        setIsStoppingRecognition(true);
+        await new Promise(resolve => setTimeout(resolve, 2000));
 
         if (!speechRecognizerRef.current) {
             console.log("Speech Recognizer Ref is null.");
+            setIsStoppingRecognition(false);
             return;
         }
 
@@ -81,13 +84,16 @@ export default function SpeechToTextInput() {
         console.log("Continuous recognition stopped.");
         console.log(`Full Recognized Text \n${recognizedTextRef.current.trim()}`)
         recognizedTextRef.current ="";
+        setIsStoppingRecognition(false);
     }
 
     return (
         <Flex gap="3">
             <IconButton
                 variant="outline"
-                onClick={() => isRecognizing ? stopContinuousSttFromMic() : startContinuousSttFromMic()}>
+                onClick={() => isRecognizing ? stopContinuousSttFromMic() : startContinuousSttFromMic()}
+                loading={isStoppingRecognition}
+            >
                 <i className={isRecognizing ? "fa-solid fa-microphone-slash" : "fa-solid fa-microphone"}></i>
             </IconButton>
         </Flex>
