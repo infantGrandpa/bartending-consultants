@@ -19,6 +19,7 @@ export default function SpeechToTextInput() {
     const getSpeechConfig = () => {
         const speechConfig: SpeechConfig = SpeechConfig.fromEndpoint(new URL(azureKeys.endpoint), azureKeys.speechKey);
         speechConfig.speechRecognitionLanguage = 'en-US';
+        //TODO: Remove censoring
         return speechConfig;
     }
 
@@ -56,25 +57,28 @@ export default function SpeechToTextInput() {
         }
 
         speechRecognizer.sessionStopped = () => {
-            console.log("Session stopped.");
             speechRecognizer.stopContinuousRecognitionAsync();
             setIsRecognizing(false);
         }
 
         speechRecognizer.startContinuousRecognitionAsync();
         setIsRecognizing(true);
-        console.log("Continuous recognition started. Speak into your microphone.");
     }
 
     function stopContinuousSttFromMic() {
-        if (speechRecognizerRef.current) {
-            speechRecognizerRef.current.stopContinuousRecognitionAsync();
-            speechRecognizerRef.current = null;
-            setIsRecognizing(false);
-            console.log("Continuous recognition stopped.");
-            console.log(`Full Recognized Text \n${recognizedTextRef.current}`)
-            recognizedTextRef.current ="";
+        //TODO: Delay halting to avoid losing the last few words.
+
+        if (!speechRecognizerRef.current) {
+            console.log("Speech Recognizer Ref is null.");
+            return;
         }
+
+        speechRecognizerRef.current.stopContinuousRecognitionAsync();
+        speechRecognizerRef.current = null;
+        setIsRecognizing(false);
+        console.log("Continuous recognition stopped.");
+        console.log(`Full Recognized Text \n${recognizedTextRef.current}`)
+        recognizedTextRef.current ="";
     }
 
     return (
