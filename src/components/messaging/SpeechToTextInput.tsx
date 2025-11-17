@@ -1,5 +1,11 @@
-﻿import {ResultReason, SpeechConfig, AudioConfig, SpeechRecognizer, SpeechRecognitionResult} from "microsoft-cognitiveservices-speech-sdk";
-import type { ChangeEvent } from "react";
+﻿import {
+    AudioConfig, CancellationReason,
+    ResultReason,
+    SpeechConfig,
+    SpeechRecognitionResult,
+    SpeechRecognizer
+} from "microsoft-cognitiveservices-speech-sdk";
+import {type ChangeEvent, type RefObject, useRef, useState} from "react";
 import {useApiKeys} from "../../providers/ApiKeyProvider.tsx";
 import {Button, Flex} from "@radix-ui/themes";
 
@@ -7,6 +13,8 @@ import {Button, Flex} from "@radix-ui/themes";
 
 export default function SpeechToTextInput() {
     const {azureKeys} = useApiKeys();
+    const [isRecognizing, setIsRecognizing] = useState<boolean>(false);
+    const speechRecognizerRef: RefObject<SpeechRecognizer | null> = useRef<SpeechRecognizer | null>(null);
 
     const getSpeechConfig = () => {
         const speechConfig: SpeechConfig = SpeechConfig.fromEndpoint(new URL(azureKeys.endpoint), azureKeys.speechKey);
@@ -32,14 +40,60 @@ export default function SpeechToTextInput() {
         });
     }
 
-    async function sttFromMic() {
+    async function startContinuousSttFromMic() {
         const audioConfig: AudioConfig = AudioConfig.fromDefaultMicrophoneInput();
+        const speechConfig: SpeechConfig = getSpeechConfig();
+        const speechRecognizer: SpeechRecognizer = new SpeechRecognizer(speechConfig, audioConfig);
 
-        console.log("Speak into your microphone");
+        speechRecognizerRef.current = speechRecognizer;
 
-        const text: string = await recognizeSpeechOnce(audioConfig)
-        console.log(`From Microphone: ${text}`);
+        speechRecognizer.recognizing = (_sender, event) => {
+            console.log(`RECOGNIZING: Text=${event.result.text}`);
+        }
 
+        speechRecognizer.recognized = (_sender, event) => {
+            if (event.result.reason === ResultReason.NoMatch) {
+                console.log("Speech could not be recognized.");
+                return;
+            }
+
+            if (event.result.reason === ResultReason.RecognizedSpeech) {
+                console.log(`RECOGNIZED: Text=${event.result.text}`);
+                return;
+            }
+        }
+
+        speechRecognizer.canceled = (_sender, event) => {
+            console.log(`CANCELLED: Reason=${event.reason}`);
+
+            if (event.reason === CancellationReason.Error) {
+                console.log(`CANCELED: ErrorCode=${event.errorCode}`);
+                console.log(`CANCELED: ErrorDetails=${event.errorDetails}`);
+                console.log("CANCELED: Did you set the speech resource key and endpoint values?");
+            }
+
+            speechRecognizer.stopContinuousRecognitionAsync();
+            setIsRecognizing(false);
+        }
+
+        speechRecognizer.sessionStopped = () => {
+            console.log("Session stopped.");
+            speechRecognizer.stopContinuousRecognitionAsync();
+            setIsRecognizing(false);
+        }
+
+        speechRecognizer.startContinuousRecognitionAsync();
+        setIsRecognizing(true);
+        console.log("Continuous recognition started. Speak into your microphone.");
+    }
+
+    function stopContinuousSttFromMic() {
+        if (speechRecognizerRef.current) {
+            speechRecognizerRef.current.stopContinuousRecognitionAsync();
+            speechRecognizerRef.current = null;
+            setIsRecognizing(false);
+            console.log("Continuous recognition stopped.");
+        }
     }
 
 
@@ -74,8 +128,10 @@ export default function SpeechToTextInput() {
                 onChange={(e: ChangeEvent<HTMLInputElement>) => fileChange(e)}
                 style={{display: "none"}}
             />
-            <Button variant="outline" onClick={() => sttFromMic()}>
-                <i className="fa-solid fa-microphone"></i>
+            <Button
+                variant="outline"
+                onClick={() => isRecognizing ? stopContinuousSttFromMic() : startContinuousSttFromMic()}>
+                <i className={isRecognizing ? "fa-solid fa-microphone-slash" : "fa-solid fa-microphone"}></i>
             </Button>
         </Flex>
     )
