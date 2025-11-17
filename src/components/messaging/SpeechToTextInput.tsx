@@ -12,7 +12,11 @@ import {Flex, IconButton} from "@radix-ui/themes";
 
 // A lot of this code is modified from: https://github.com/Azure-Samples/AzureSpeechReactSample/tree/main
 
-export default function SpeechToTextInput() {
+interface Props {
+    onRecognizedText: (recognizedText: string) => void;
+}
+
+export default function SpeechToTextInput({onRecognizedText}: Props) {
     const {azureKeys} = useApiKeys();
     const [isRecognizing, setIsRecognizing] = useState<boolean>(false);
     const [isStoppingRecognition, setIsStoppingRecognition] = useState<boolean>(false);
@@ -81,9 +85,10 @@ export default function SpeechToTextInput() {
         speechRecognizerRef.current.stopContinuousRecognitionAsync();
         speechRecognizerRef.current = null;
         setIsRecognizing(false);
-        console.log("Continuous recognition stopped.");
-        console.log(`Full Recognized Text \n${recognizedTextRef.current.trim()}`)
-        recognizedTextRef.current ="";
+        const trimmedText = recognizedTextRef.current.trim()
+        console.log(`Full Recognized Text \n${trimmedText}`)
+        onRecognizedText(trimmedText);
+        recognizedTextRef.current = "";
         setIsStoppingRecognition(false);
     }
 

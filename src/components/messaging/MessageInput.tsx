@@ -55,7 +55,7 @@ export default function MessageInput({onSendMessage}: Props) {
                 >
                     <i className="fa-solid fa-paper-plane"></i>
                 </IconButton>
-                <SpeechToTextInput />
+                <SpeechToTextInput onRecognizedText={(recognizedText) => setMessage(recognizedText)}/>
             </Flex>
         </Flex>
     );
