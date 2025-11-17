@@ -15,6 +15,7 @@ export default function SpeechToTextInput() {
     const {azureKeys} = useApiKeys();
     const [isRecognizing, setIsRecognizing] = useState<boolean>(false);
     const speechRecognizerRef: RefObject<SpeechRecognizer | null> = useRef<SpeechRecognizer | null>(null);
+    const recognizedTextRef: RefObject<string> = useRef<string>("")
 
     const getSpeechConfig = () => {
         const speechConfig: SpeechConfig = SpeechConfig.fromEndpoint(new URL(azureKeys.endpoint), azureKeys.speechKey);
@@ -47,10 +48,6 @@ export default function SpeechToTextInput() {
 
         speechRecognizerRef.current = speechRecognizer;
 
-        speechRecognizer.recognizing = (_sender, event) => {
-            console.log(`RECOGNIZING: Text=${event.result.text}`);
-        }
-
         speechRecognizer.recognized = (_sender, event) => {
             if (event.result.reason === ResultReason.NoMatch) {
                 console.log("Speech could not be recognized.");
@@ -58,7 +55,7 @@ export default function SpeechToTextInput() {
             }
 
             if (event.result.reason === ResultReason.RecognizedSpeech) {
-                console.log(`RECOGNIZED: Text=${event.result.text}`);
+                recognizedTextRef.current += event.result.text + " "
                 return;
             }
         }
@@ -93,6 +90,8 @@ export default function SpeechToTextInput() {
             speechRecognizerRef.current = null;
             setIsRecognizing(false);
             console.log("Continuous recognition stopped.");
+            console.log(`Full Recognized Text \n${recognizedTextRef.current}`)
+            recognizedTextRef.current ="";
         }
     }
 
