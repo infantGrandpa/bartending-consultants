@@ -1,5 +1,7 @@
 ﻿import {
-    AudioConfig, CancellationReason,
+    AudioConfig,
+    CancellationReason,
+    ProfanityOption,
     ResultReason,
     SpeechConfig,
     SpeechRecognizer
@@ -19,7 +21,7 @@ export default function SpeechToTextInput() {
     const getSpeechConfig = () => {
         const speechConfig: SpeechConfig = SpeechConfig.fromEndpoint(new URL(azureKeys.endpoint), azureKeys.speechKey);
         speechConfig.speechRecognitionLanguage = 'en-US';
-        //TODO: Remove censoring
+        speechConfig.setProfanity(ProfanityOption.Raw);
         return speechConfig;
     }
 
