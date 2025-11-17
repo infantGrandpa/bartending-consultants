@@ -3,6 +3,7 @@ import type { ChangeEvent } from "react";
 import {useApiKeys} from "../../providers/ApiKeyProvider.tsx";
 import {Button, Flex} from "@radix-ui/themes";
 
+// A lot of this code is modified from: https://github.com/Azure-Samples/AzureSpeechReactSample/tree/main
 
 export default function SpeechToTextInput() {
     const {azureKeys} = useApiKeys();
