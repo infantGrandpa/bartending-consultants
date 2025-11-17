@@ -79,7 +79,7 @@ export default function SpeechToTextInput() {
         speechRecognizerRef.current = null;
         setIsRecognizing(false);
         console.log("Continuous recognition stopped.");
-        console.log(`Full Recognized Text \n${recognizedTextRef.current}`)
+        console.log(`Full Recognized Text \n${recognizedTextRef.current.trim()}`)
         recognizedTextRef.current ="";
     }
 
