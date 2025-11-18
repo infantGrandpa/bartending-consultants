@@ -35,13 +35,6 @@ export default function SpeechToTextInput({onRecognizedText}: Props) {
 
 
     async function startContinuousSttFromMic() {
-        if (settings.useDummyStt) {
-            setIsRecognizing(true);
-            await new Promise(resolve => setTimeout(resolve, 300));
-            recognizedTextRef.current = "This is a dummy Speech to Text response.";
-            return;
-        }
-
         const audioConfig: AudioConfig = AudioConfig.fromDefaultMicrophoneInput();
         const speechConfig: SpeechConfig = getSpeechConfig();
         const speechRecognizer: SpeechRecognizer = new SpeechRecognizer(speechConfig, audioConfig);
@@ -78,8 +71,15 @@ export default function SpeechToTextInput({onRecognizedText}: Props) {
             setIsRecognizing(false);
         }
 
-        speechRecognizer.startContinuousRecognitionAsync();
         setIsRecognizing(true);
+
+        if (settings.useDummyStt) {
+            await new Promise(resolve => setTimeout(resolve, 300));
+            recognizedTextRef.current = "This is a dummy Speech to Text response.";
+            return;
+        }
+
+        speechRecognizer.startContinuousRecognitionAsync();
     }
 
     function returnRecognizedText() {
@@ -93,21 +93,17 @@ export default function SpeechToTextInput({onRecognizedText}: Props) {
         setIsStoppingRecognition(true);
         await new Promise(resolve => setTimeout(resolve, 2000));
 
-        if (!speechRecognizerRef.current) {
-            setIsStoppingRecognition(false);
-            if (settings.useDummyStt) {
-                returnRecognizedText();
-                setIsRecognizing(false);
-                return;
-            }
+        stopAndClearSpeechRecognizer();
+        returnRecognizedText();
 
-            console.log("Speech Recognizer Ref is null.");
-            return;
-        }
+        setIsStoppingRecognition(false);
+    }
 
-        speechRecognizerRef.current.stopContinuousRecognitionAsync();
+    function stopAndClearSpeechRecognizer() {
+        speechRecognizerRef.current?.stopContinuousRecognitionAsync();
         speechRecognizerRef.current = null;
         setIsRecognizing(false);
+    }
 
         returnRecognizedText();
 
