@@ -105,22 +105,22 @@ export default function SpeechToTextInput({onRecognizedText}: Props) {
         setIsRecognizing(false);
     }
 
-        returnRecognizedText();
-
+    function handleCancelSttFromMic() {
+        setIsStoppingRecognition(true);
+        stopAndClearSpeechRecognizer();
+        recognizedTextRef.current = "";
         setIsStoppingRecognition(false);
     }
 
     // We use an AlertDialog instead of a regular one because the AlertDialog is modal.
     // We can't make a Dialog modal (unless we use a primitive which is too much work).
     return (
-        <AlertDialog.Root
-            open={isRecognizing}
-            onOpenChange={() => isRecognizing ? stopContinuousSttFromMic() : startContinuousSttFromMic()}
-        >
+        <AlertDialog.Root open={isRecognizing}>
             <AlertDialog.Trigger>
                 <IconButton
                     variant="outline"
                     loading={isStoppingRecognition}
+                    onClick={startContinuousSttFromMic}
                 >
                     <i className="fa-solid fa-microphone"></i>
                 </IconButton>
@@ -132,17 +132,21 @@ export default function SpeechToTextInput({onRecognizedText}: Props) {
                 <Flex direction="column" m="4" justify="center" align="center" minHeight="200px">
                     <i className={`fa-solid fa-microphone ${isStoppingRecognition ? "" : "fa-fade"} fa-2xl`}></i>
                     <Text as="p" mt="5" align="center">
-                        {isStoppingRecognition ? "Transcribing..." : "Listening..."}
+                        {isStoppingRecognition ? "Transcribing..." :
+                            settings.useDummyStt ? "Pretending to Listen..." : "Listening..."}
                     </Text>
                 </Flex>
                 <Flex direction="row" justify="end" gap="3">
                     <AlertDialog.Cancel>
-                        <Button color="gray" variant="soft">
+                        <Button color="gray" variant="soft" onClick={handleCancelSttFromMic}>
                             Cancel
                         </Button>
                     </AlertDialog.Cancel>
                     <AlertDialog.Action>
-                        <Button loading={isStoppingRecognition}>
+                        <Button
+                            loading={isStoppingRecognition}
+                            onClick={stopContinuousSttFromMic}
+                        >
                             Done Speaking
                         </Button>
                     </AlertDialog.Action>
