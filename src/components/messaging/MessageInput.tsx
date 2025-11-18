@@ -23,7 +23,6 @@ export default function MessageInput({onSendMessage}: Props) {
         setMessage("");
     }
 
-    //TODO: Allow speech to text dictation
     //TODO: Change the Input to be sticky
     //TODO: Add some feedback to explain they need to choose a bartender?
 
