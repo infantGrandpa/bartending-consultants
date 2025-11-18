@@ -25,6 +25,7 @@ export default function DevModeDetails() {
                 <Table.Body>
                     <DevModeDataRow labelText={"Use Dummy Messages"} value={String(settings.useDummyMessages)} />
                     <DevModeDataRow labelText={"Play Dummy Audio"} value={String(settings.playDummyAudio)} />
+                    <DevModeDataRow labelText={"Use Dummy Speech to Text"} value={String(settings.useDummyStt)} />
                     <DevModeDataRow labelText={"Open AI API Key"} value={openaiKey} />
                     <DevModeDataRow labelText={"ElevenLabs API Key"} value={elevenLabsKey} />
                     <DevModeDataRow labelText={"Azure Speech Key"} value={azureKeys.speechKey} />

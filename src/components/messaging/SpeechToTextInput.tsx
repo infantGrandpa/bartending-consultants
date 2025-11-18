@@ -9,6 +9,7 @@
 import {type RefObject, useRef, useState} from "react";
 import {useApiKeys} from "../../providers/ApiKeyProvider.tsx";
 import {Flex, IconButton} from "@radix-ui/themes";
+import {useDevSettings} from "../../providers/DevSettingsProvider.tsx";
 
 // A lot of this code is modified from: https://github.com/Azure-Samples/AzureSpeechReactSample/tree/main
 
@@ -18,6 +19,8 @@ interface Props {
 
 export default function SpeechToTextInput({onRecognizedText}: Props) {
     const {azureKeys} = useApiKeys();
+    const {settings} = useDevSettings();
+
     const [isRecognizing, setIsRecognizing] = useState<boolean>(false);
     const [isStoppingRecognition, setIsStoppingRecognition] = useState<boolean>(false);
     const speechRecognizerRef: RefObject<SpeechRecognizer | null> = useRef<SpeechRecognizer | null>(null);
@@ -32,6 +35,13 @@ export default function SpeechToTextInput({onRecognizedText}: Props) {
 
 
     async function startContinuousSttFromMic() {
+        if (settings.useDummyStt) {
+            setIsRecognizing(true);
+            await new Promise(resolve => setTimeout(resolve, 300));
+            recognizedTextRef.current = "This is a dummy Speech to Text response.";
+            return;
+        }
+
         const audioConfig: AudioConfig = AudioConfig.fromDefaultMicrophoneInput();
         const speechConfig: SpeechConfig = getSpeechConfig();
         const speechRecognizer: SpeechRecognizer = new SpeechRecognizer(speechConfig, audioConfig);
@@ -72,23 +82,35 @@ export default function SpeechToTextInput({onRecognizedText}: Props) {
         setIsRecognizing(true);
     }
 
+    function returnRecognizedText() {
+        const trimmedText = recognizedTextRef.current.trim()
+        console.log(`Full Recognized Text \n${trimmedText}`)
+        onRecognizedText(trimmedText);
+        recognizedTextRef.current = "";
+    }
+
     async function stopContinuousSttFromMic() {
         setIsStoppingRecognition(true);
         await new Promise(resolve => setTimeout(resolve, 2000));
 
         if (!speechRecognizerRef.current) {
-            console.log("Speech Recognizer Ref is null.");
             setIsStoppingRecognition(false);
+            if (settings.useDummyStt) {
+                returnRecognizedText();
+                setIsRecognizing(false);
+                return;
+            }
+
+            console.log("Speech Recognizer Ref is null.");
             return;
         }
 
         speechRecognizerRef.current.stopContinuousRecognitionAsync();
         speechRecognizerRef.current = null;
         setIsRecognizing(false);
-        const trimmedText = recognizedTextRef.current.trim()
-        console.log(`Full Recognized Text \n${trimmedText}`)
-        onRecognizedText(trimmedText);
-        recognizedTextRef.current = "";
+
+        returnRecognizedText();
+
         setIsStoppingRecognition(false);
     }
 
