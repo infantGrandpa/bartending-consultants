@@ -75,7 +75,15 @@ export default function SpeechToTextInput({onRecognizedText}: Props) {
 
         if (settings.useDummyStt) {
             await new Promise(resolve => setTimeout(resolve, 300));
-            recognizedTextRef.current = "This is a dummy Speech to Text response.";
+            const dummyResponses = [
+                "This is a dummy Speech to Text response.",
+                "Here's another sample transcription.",
+                "Testing the speech recognition system.",
+                "This text was generated for testing purposes.",
+                "Dummy audio transcription complete."
+            ];
+            const timestampBasedIndex = Date.now() % dummyResponses.length;
+            recognizedTextRef.current = dummyResponses[timestampBasedIndex];
             return;
         }
 
