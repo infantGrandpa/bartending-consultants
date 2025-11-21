@@ -99,7 +99,27 @@ export default function SpeechToTextInput({onRecognizedText}: Props) {
 
     async function stopContinuousSttFromMic() {
         setIsStoppingRecognition(true);
-        await new Promise(resolve => setTimeout(resolve, 2000));
+        if (settings.useDummyStt) {
+            await new Promise(resolve => setTimeout(resolve, 200));
+            returnRecognizedText();
+            setIsStoppingRecognition(false);
+            return;
+        }
+
+        const currentRecognizer: SpeechRecognizer | null = speechRecognizerRef.current;
+
+        if (!currentRecognizer) {
+            setIsStoppingRecognition(false);
+            return;
+        }
+
+        await new Promise<void>((resolve) => {
+            currentRecognizer.sessionStopped = () => {
+                resolve();
+            };
+
+            currentRecognizer.stopContinuousRecognitionAsync();
+        });
 
         stopAndClearSpeechRecognizer();
         returnRecognizedText();
