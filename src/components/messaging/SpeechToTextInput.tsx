@@ -8,8 +8,9 @@
 } from "microsoft-cognitiveservices-speech-sdk";
 import {type RefObject, useRef, useState} from "react";
 import {useApiKeys} from "../../providers/ApiKeyProvider.tsx";
-import {AlertDialog, Button, Flex, IconButton, Text} from "@radix-ui/themes";
+import {AlertDialog, Button, Flex, IconButton} from "@radix-ui/themes";
 import {useDevSettings} from "../../providers/DevSettingsProvider.tsx";
+import RecordingIndicator from "./RecordingIndicator.tsx";
 
 // A lot of this code is modified from: https://github.com/Azure-Samples/AzureSpeechReactSample/tree/main
 
@@ -157,13 +158,7 @@ export default function SpeechToTextInput({onRecognizedText}: Props) {
             <AlertDialog.Content>
                 <AlertDialog.Title>Speech to Text</AlertDialog.Title>
                 <AlertDialog.Description>What are you in the mood for?</AlertDialog.Description>
-                <Flex direction="column" m="4" justify="center" align="center" minHeight="200px">
-                    <i className={`fa-solid fa-microphone ${isStoppingRecognition ? "" : "fa-fade"} fa-2xl`}></i>
-                    <Text as="p" mt="5" align="center">
-                        {isStoppingRecognition ? "Transcribing..." :
-                            settings.useDummyStt ? "Pretending to Listen..." : "Listening..."}
-                    </Text>
-                </Flex>
+                <RecordingIndicator />
                 <Flex direction="row" justify="end" gap="3">
                     <AlertDialog.Cancel>
                         <Button color="gray" variant="soft" onClick={handleCancelSttFromMic}>
