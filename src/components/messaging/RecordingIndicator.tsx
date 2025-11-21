@@ -29,11 +29,13 @@ export default function RecordingIndicator() {
             console.log(`Microphone Outputs: ${microphone.numberOfOutputs}`);
 
             const frequencyData = new Uint8Array(analyser.frequencyBinCount);
+            const maxByteValue: number = 255;
 
             const updateLevel = () => {
                 analyser.getByteFrequencyData(frequencyData);
                 const averageAudioLevel = frequencyData.reduce((sum, value) => sum + value, 0) / frequencyData.length;
-                setAudioLevel(averageAudioLevel);
+                const normalizedLevels: number = Math.min(100, Math.round((averageAudioLevel / maxByteValue) * 100));
+                setAudioLevel(normalizedLevels);
             }
 
             window.setInterval(updateLevel, 100);
