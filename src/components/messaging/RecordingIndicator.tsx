@@ -18,6 +18,7 @@ export default function RecordingIndicator() {
             })
 
             audioContextRef.current = new AudioContext();
+            console.log(`Sample Rate: ${audioContextRef.current?.sampleRate}`);
 
         } catch (error) {
             console.error("Error accessing microphone for audio level monitoring:", error);
