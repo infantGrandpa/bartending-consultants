@@ -7,13 +7,6 @@ export default function RecordingIndicator() {
 
     useEffect(() => {
         startAudioLevelMonitoring();
-
-        return () => {
-            streamRef.current?.getAudioTracks().forEach((track, index) => {
-                console.log(`Stopping Track ${index}: ${track.label}`)
-                track.stop()
-            });
-        }
     }, []);
 
     async function startAudioLevelMonitoring() {
