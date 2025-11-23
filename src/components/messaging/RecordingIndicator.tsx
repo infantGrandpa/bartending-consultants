@@ -4,6 +4,7 @@ import {type RefObject, useEffect, useRef} from "react";
 
 export default function RecordingIndicator() {
     const streamRef: RefObject<MediaStream | null> = useRef(null);
+    const audioContextRef: RefObject<AudioContext | null> = useRef(null);
 
     useEffect(() => {
         startAudioLevelMonitoring();
@@ -15,6 +16,8 @@ export default function RecordingIndicator() {
             streamRef.current?.getAudioTracks().forEach((track, index) => {
                 console.log(`Track ${index}: ${track.label}`);
             })
+
+            audioContextRef.current = new AudioContext();
 
         } catch (error) {
             console.error("Error accessing microphone for audio level monitoring:", error);
