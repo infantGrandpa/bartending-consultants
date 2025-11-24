@@ -5,7 +5,6 @@ import {type RefObject, useEffect, useRef} from "react";
 export default function RecordingIndicator() {
     const streamRef: RefObject<MediaStream | null> = useRef(null);
     const audioContextRef: RefObject<AudioContext | null> = useRef(null);
-    const microphoneRef: RefObject<MediaStreamAudioSourceNode | null> = useRef(null);
 
     useEffect(() => {
         startAudioLevelMonitoring();
@@ -34,8 +33,8 @@ export default function RecordingIndicator() {
             const analyser: AnalyserNode = audioContextRef.current.createAnalyser();
             console.log(`Fft Size: ${analyser.fftSize}`);
 
-            microphoneRef.current = audioContextRef.current.createMediaStreamSource(streamRef.current);
-            console.log(microphoneRef.current.numberOfOutputs);
+            const microphone = audioContextRef.current.createMediaStreamSource(streamRef.current);
+            console.log(microphone.numberOfOutputs);
 
 
         } catch (error) {
