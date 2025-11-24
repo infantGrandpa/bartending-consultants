@@ -10,13 +10,9 @@ export default function RecordingIndicator() {
         startAudioLevelMonitoring();
 
         return () => {
-            streamRef.current?.getTracks().forEach(
-                (track, index) => {
-                    console.log(`Stopping Track ${index} (${track.label})`);
-                    track.stop()
-                    track.enabled = false;
-                });
-
+            if (streamRef.current) {
+                stopTracksOnStream(streamRef.current);
+            }
         };
     }, []);
 
@@ -40,6 +36,15 @@ export default function RecordingIndicator() {
         } catch (error) {
             console.error("Error accessing microphone for audio level monitoring:", error);
         }
+    }
+
+    function stopTracksOnStream(mediaStream: MediaStream) {
+        mediaStream.getTracks().forEach(
+            (track, index) => {
+                console.log(`Stopping Track ${index} (${track.label})`);
+                track.stop()
+                track.enabled = false;      //TODO: Check if we need to manually disable
+            });
     }
 
     return (
