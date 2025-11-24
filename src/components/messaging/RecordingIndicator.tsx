@@ -9,7 +9,7 @@ export default function RecordingIndicator() {
     useEffect(() => {
         const abortController = new AbortController();
 
-        async function startAudioLevelMonitoring() {
+        async function initAudioMonitoring() {
             try {
                 const newStream: MediaStream = await navigator.mediaDevices.getUserMedia({audio: true});
 
@@ -22,12 +22,7 @@ export default function RecordingIndicator() {
                 }
 
                 streamRef.current = newStream;
-                streamRef.current?.getAudioTracks().forEach((track, index) => {
-                    console.log(`Track ${index}: ${track.label}`);
-                })
-
                 audioContextRef.current = new AudioContext();
-                console.log(`Sample Rate: ${audioContextRef.current?.sampleRate}`);
 
                 const analyser: AnalyserNode = audioContextRef.current.createAnalyser();
                 console.log(`Fft Size: ${analyser.fftSize}`);
@@ -39,7 +34,7 @@ export default function RecordingIndicator() {
             }
         }
 
-        startAudioLevelMonitoring();
+        initAudioMonitoring();
 
         return () => {
             abortController.abort();
@@ -53,10 +48,8 @@ export default function RecordingIndicator() {
 
     function stopTracksOnStream(mediaStream: MediaStream) {
         mediaStream.getTracks().forEach(
-            (track, index) => {
-                console.log(`Stopping Track ${index} (${track.label})`);
+            (track: MediaStreamTrack) => {
                 track.stop()
-                track.enabled = false;      //TODO: Check if we need to manually disable
             });
     }
 
