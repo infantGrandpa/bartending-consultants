@@ -6,7 +6,6 @@ export default function RecordingIndicator() {
     const [audioLevel, setAudioLevel] = useState<number>(0);
 
     const streamRef: RefObject<MediaStream | null> = useRef(null);
-    const audioContextRef: RefObject<AudioContext | null> = useRef(null);
 
     useEffect(() => {
         const abortController = new AbortController();
@@ -24,12 +23,12 @@ export default function RecordingIndicator() {
                 }
 
                 streamRef.current = newStream;
-                audioContextRef.current = new AudioContext();
+                const audioContext = new AudioContext();
 
-                const analyser: AnalyserNode = audioContextRef.current.createAnalyser();
+                const analyser: AnalyserNode = audioContext.createAnalyser();
                 analyser.fftSize = 2048;
 
-                const microphone = audioContextRef.current.createMediaStreamSource(streamRef.current);
+                const microphone: MediaStreamAudioSourceNode = audioContext.createMediaStreamSource(streamRef.current);
                 microphone.connect(analyser);
 
                 const bufferLength = analyser.frequencyBinCount;
