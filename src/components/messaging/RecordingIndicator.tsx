@@ -1,8 +1,10 @@
 ﻿import {Flex, Text} from "@radix-ui/themes";
-import {type RefObject, useEffect, useRef} from "react";
+import {type RefObject, useEffect, useRef, useState} from "react";
 
 
 export default function RecordingIndicator() {
+    const [audioLevel, setAudioLevel] = useState<number>(0);
+
     const streamRef: RefObject<MediaStream | null> = useRef(null);
     const audioContextRef: RefObject<AudioContext | null> = useRef(null);
 
@@ -25,10 +27,24 @@ export default function RecordingIndicator() {
                 audioContextRef.current = new AudioContext();
 
                 const analyser: AnalyserNode = audioContextRef.current.createAnalyser();
-                console.log(`Fft Size: ${analyser.fftSize}`);
+                analyser.fftSize = 2048;
 
                 const microphone = audioContextRef.current.createMediaStreamSource(streamRef.current);
-                console.log(microphone.numberOfOutputs);
+                microphone.connect(analyser);
+
+                const bufferLength = analyser.frequencyBinCount;
+                const frequencyDataArray = new Uint8Array(bufferLength);
+
+                const updateAudioLevels = () => {
+                    analyser.getByteFrequencyData(frequencyDataArray);
+                    const averageAudioLevel: number = frequencyDataArray.reduce((sum, value) => sum + value, 0) / frequencyDataArray.length;
+                    setAudioLevel(averageAudioLevel);
+                }
+
+                window.setInterval(updateAudioLevels, 100);
+
+                console.log(frequencyDataArray.length)
+
             } catch (error) {
                 console.error("Error accessing microphone for audio level monitoring:", error);
             }
@@ -57,6 +73,7 @@ export default function RecordingIndicator() {
         <Flex direction="column" m="4" justify="center" align="center" minHeight="200px">
             <i className={`fa-solid fa-microphone fa-fade fa-2xl`}></i>
             <Text as="p" mt="5" align="center">Listening...</Text>
+            <Text as="p" mt="5" align="center">{audioLevel}</Text>
         </Flex>
     );
 }
