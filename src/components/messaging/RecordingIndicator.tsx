@@ -1,9 +1,10 @@
-﻿import {Box, Flex} from "@radix-ui/themes";
+﻿import {Box, Callout, Flex} from "@radix-ui/themes";
 import {type RefObject, useEffect, useRef, useState} from "react";
 
 
 export default function RecordingIndicator() {
     const [audioLevel, setAudioLevel] = useState<number>(0);
+    const [error, setError] = useState<string | null>(null);
 
     const streamRef: RefObject<MediaStream | null> = useRef(null);
     const intervalId: RefObject<number> = useRef(0);
@@ -75,8 +76,16 @@ export default function RecordingIndicator() {
                 intervalId.current = window.setInterval(updateAudioLevels, 100);
 
             } catch (error) {
-                //TODO: Give use feedback if no microphone is connected.
-                console.error("Error accessing microphone for audio level monitoring:", error);
+                if (error instanceof DOMException) {
+                    if (error.name === 'NotAllowedError' || error.name === 'PermissionDeniedError') {
+                        setError("Microphone permission denied. Without permissions, we cannot use the microphone.");
+                    } else if (error.name === 'NotFoundError' || error.name === 'DeviceNotFoundError') {
+                        setError("No microphone found. Please connect a microphone.");
+                    } else {
+                        setError(`Unexpected error accessing microphone! Details: ${error.message}`);
+                        console.error("Unexpected error accessing microphone.", error);
+                    }
+                }
             }
         }
 
@@ -113,15 +122,26 @@ export default function RecordingIndicator() {
     }
 
     return (
-        <Flex direction="column" m="4" justify="center" align="center" minHeight="200px">
-            <Box position="absolute" width={getCircleSize()} height={getCircleSize()} style={{
-                borderRadius: "100%",
-                backgroundColor: "var(--ba-main-color)",
-                opacity: "0.5",
-                transition: "width 50ms ease-out, height 50ms ease-out",
-                zIndex: -1
-            }}/>
-            <i className={`fa-solid fa-microphone fa-2xl`}></i>
+        <Flex direction="column" m="4" justify="center" align="center" gap="5" minHeight="200px">
+            {error ?
+                <Callout.Root size="3" variant="soft" color="red">
+                    <Flex direction="column" justify="center" align="center" gap="5">
+                        <Callout.Icon> <i className="fa-solid fa-circle-exclamation fa-2xl"></i> </Callout.Icon>
+                        <Callout.Text align="center">{error}</Callout.Text>
+                    </Flex>
+                </Callout.Root>
+                :
+                <>
+                    <Box position="absolute" width={getCircleSize()} height={getCircleSize()} style={{
+                        borderRadius: "100%",
+                        backgroundColor: "var(--ba-main-color)",
+                        opacity: "0.5",
+                        transition: "width 50ms ease-out, height 50ms ease-out",
+                        zIndex: -1
+                    }}/>
+                    <i className={`fa-solid fa-microphone fa-2xl`}></i>
+                </>
+            }
         </Flex>
     );
 }
