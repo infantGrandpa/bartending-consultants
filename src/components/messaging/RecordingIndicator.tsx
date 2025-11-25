@@ -63,9 +63,11 @@ export default function RecordingIndicator() {
                     // Normalize into a percentage
                     const rms: number = Math.sqrt(sumOfSquares / dataArray.length);
 
-                    const practicalMaxRms: number = 0.3;
-                    const scaledRms: number = Math.sqrt(rms);       //Use non-linear scaling so quiet sounds appear more prominent
-                    const normalizedLevels: number = Math.min(scaledRms / Math.sqrt(practicalMaxRms), 1.0);
+                    // Use logarithmic scaling so quiet sounds appear louder (since that's how we hear them)
+                    const minimumRms: number = 0.001;
+                    const clampedRms: number = Math.max(rms, minimumRms);
+                    const decibelValue: number = 20 * Math.log10(clampedRms);
+                    const normalizedLevels: number = Math.max(0, Math.min(1, (decibelValue + 60) / 50));
 
                     setAudioLevel(normalizedLevels);
                 }
