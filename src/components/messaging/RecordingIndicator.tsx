@@ -102,9 +102,18 @@ export default function RecordingIndicator() {
             });
     }
 
+    function getCircleSize() {
+        const maxSizePx = 128;
+        const minSizePx = 16;
+
+        const audioBasedSizePx = Math.max(audioLevel * maxSizePx, minSizePx);
+
+        return `${audioBasedSizePx}px`
+    }
+
     return (
         <Flex direction="column" m="4" justify="center" align="center" minHeight="200px">
-            <Box position="absolute" width={`${audioLevel * 128}px`} height={`${audioLevel * 128}px`} style={{
+            <Box position="absolute" width={getCircleSize()} height={getCircleSize()} style={{
                 borderRadius: "100%",
                 backgroundColor: "var(--ba-main-color)",
                 opacity: "0.5"
