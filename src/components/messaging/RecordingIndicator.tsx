@@ -6,6 +6,7 @@ export default function RecordingIndicator() {
     const [audioLevel, setAudioLevel] = useState<number>(0);
 
     const streamRef: RefObject<MediaStream | null> = useRef(null);
+    const intervalId: RefObject<number> = useRef(0);
 
     useEffect(() => {
         const abortController = new AbortController();
@@ -66,7 +67,7 @@ export default function RecordingIndicator() {
                     setAudioLevel(normalizedLevels);
                 }
 
-                window.setInterval(updateAudioLevels, 100);
+                intervalId.current = window.setInterval(updateAudioLevels, 100);
 
                 console.log(dataArray.length)
 
@@ -79,6 +80,11 @@ export default function RecordingIndicator() {
 
         return () => {
             abortController.abort();
+
+            if (intervalId.current) {
+                window.clearInterval(intervalId.current);
+                intervalId.current = 0;
+            }
 
             if (streamRef.current) {
                 stopTracksOnStream(streamRef.current);
