@@ -15,6 +15,7 @@ export default function RecordingIndicator() {
         async function initAudioMonitoring() {
             try {
                 const newStream: MediaStream = await navigator.mediaDevices.getUserMedia({audio: true});
+                setError(null);
 
                 // We need to handle the double mounting of this component when is Strict Mode.
                 // Strict Mode's second mounting overwrites streamRef, meaning we never stop all the tracks on it.
@@ -89,10 +90,20 @@ export default function RecordingIndicator() {
             }
         }
 
+        const handleDeviceChange = () => {
+            if (error) {
+                initAudioMonitoring();
+            }
+        }
+
+        navigator.mediaDevices.addEventListener('devicechange', handleDeviceChange);
+
         initAudioMonitoring();
 
         return () => {
             abortController.abort();
+
+            navigator.mediaDevices.removeEventListener('devicechange', handleDeviceChange);
 
             if (intervalId.current) {
                 window.clearInterval(intervalId.current);
@@ -103,7 +114,7 @@ export default function RecordingIndicator() {
                 stopTracksOnStream(streamRef.current);
             }
         };
-    }, []);
+    }, [error]);
 
 
     function stopTracksOnStream(mediaStream: MediaStream) {
