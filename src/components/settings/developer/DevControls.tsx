@@ -31,6 +31,12 @@ export default function DevControls() {
                 label={"Show Variable Table"}
                 disabled={!settings.isDevMode}
             />
+            <LabelledSwitch
+                checked={settings.useDummyStt}
+                onCheckedChange={() => updateSetting('useDummyStt', !settings.useDummyStt)}
+                label={"Use Dummy Speech to Text"}
+                disabled={!settings.isDevMode}
+            />
         </Flex>
     )
 }

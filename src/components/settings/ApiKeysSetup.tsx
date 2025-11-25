@@ -1,17 +1,21 @@
 ﻿import {useState, useEffect} from "react";
 import {AlertDialog, Button, Flex, Text} from "@radix-ui/themes";
 import ApiKeyInput from "./ApiKeyInput.tsx";
-import {useApiKeys} from "../../providers/ApiKeyProvider.tsx";
+import {type AzureSttKeys, defaultAzureKeys, useApiKeys} from "../../providers/ApiKeyProvider.tsx";
 
 export default function ApiKeysSetup() {
-    const {openaiKey, elevenLabsKey, saveApiKeys, clearApiKeys, areKeysSaved} = useApiKeys();
+    const {openaiKey, elevenLabsKey, azureKeys, saveApiKeys, clearApiKeys, areKeysSaved} = useApiKeys();
     // Without separate state hooks, then typing in the field would save the keys.
     const [tempOpenaiKey, setTempOpenaiKey] = useState("");
     const [tempElevenLabsKey, setTempElevenLabsKey] = useState("");
+    const [tempAzureKeys, setTempAzureKeys] = useState<AzureSttKeys>(defaultAzureKeys)
+
 
     useEffect(() => {
         const storedOpenAI = openaiKey;
         const storedEleven = elevenLabsKey;
+
+        const storedAzureKeys = azureKeys;
 
         if (storedOpenAI) {
             setTempOpenaiKey(storedOpenAI);
@@ -20,6 +24,8 @@ export default function ApiKeysSetup() {
         if (storedEleven) {
             setTempElevenLabsKey(storedEleven);
         }
+
+        setTempAzureKeys(storedAzureKeys);
     }, []);
 
     const handleSave = () => {
@@ -31,17 +37,22 @@ export default function ApiKeysSetup() {
             throw new Error("ElevenLabs API Key is empty.")
         }
 
-        saveApiKeys(tempOpenaiKey, tempElevenLabsKey);
+        if (!tempAzureKeys.speechKey || !tempAzureKeys.endpoint || !tempAzureKeys.region) {
+            throw new Error("At least 1 azure key value is empty.")
+        }
+
+        saveApiKeys(tempOpenaiKey, tempElevenLabsKey, tempAzureKeys);
     };
 
     const handleClear = () => {
         setTempOpenaiKey("");
         setTempElevenLabsKey("");
+        setTempAzureKeys(defaultAzureKeys);
         clearApiKeys();
     };
 
     const canSaveKeys = () => {
-        if (!tempOpenaiKey || !tempElevenLabsKey) {
+        if (!tempOpenaiKey || !tempElevenLabsKey || !tempAzureKeys.speechKey || !tempAzureKeys.endpoint || !tempAzureKeys.region) {
             return false;
         }
 
@@ -50,6 +61,10 @@ export default function ApiKeysSetup() {
         }
 
         if (tempElevenLabsKey !== elevenLabsKey) {
+            return true;
+        }
+
+        if (tempAzureKeys !== azureKeys) {
             return true;
         }
 
@@ -79,11 +94,45 @@ export default function ApiKeysSetup() {
                 onChange={(e: any) => setTempElevenLabsKey(e.target.value)}
                 value={tempElevenLabsKey}
             />
+            <ApiKeyInput
+                id={"azureSpeechKeyInput"}
+                labelText={"Azure Speech to Text API Key"}
+                placeholder={"..."}
+                onChange={(e: any) => setTempAzureKeys(
+                    {...tempAzureKeys, speechKey: e.target.value}
+                    )}
+                value={tempAzureKeys.speechKey}
+            />
+            <ApiKeyInput
+                id={"azureRegion"}
+                labelText={"Azure Region"}
+                placeholder={"eastus"}
+                onChange={(e: any) => {
+                    setTempAzureKeys(
+                        {...tempAzureKeys, region: e.target.value}
+                    )
+                }}
+                value={tempAzureKeys.region}
+                isSensitive={false}
+            />
+            <ApiKeyInput
+                id={"azureEndpoint"}
+                labelText={"Azure Endpoint"}
+                placeholder={""}
+                onChange={(e: any) => {
+                    setTempAzureKeys(
+                        {...tempAzureKeys, endpoint: e.target.value}
+                    )
+                }}
+                value={tempAzureKeys.endpoint}
+                isSensitive={false}
+            />
+
 
             <Flex mt="4" justify="between">
                 <AlertDialog.Root>
                     <AlertDialog.Trigger>
-                        <Button color="red" variant="outline" disabled={!areKeysSaved}>
+                        <Button color="red" variant="outline" disabled={!areKeysSaved()}>
                             Clear API Keys
                         </Button>
                     </AlertDialog.Trigger>

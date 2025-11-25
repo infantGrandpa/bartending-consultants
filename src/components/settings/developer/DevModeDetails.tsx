@@ -1,11 +1,12 @@
-import {Flex, Table, Text} from "@radix-ui/themes";
+import {Flex, Table} from "@radix-ui/themes";
 import {useApiKeys} from "../../../providers/ApiKeyProvider.tsx";
 import {useDevSettings} from "../../../providers/DevSettingsProvider.tsx";
+import DevModeDataRow from "./DevModeDataRow.tsx";
 
 
 export default function DevModeDetails() {
     const {settings} = useDevSettings();
-    const {openaiKey, elevenLabsKey} = useApiKeys();
+    const {openaiKey, elevenLabsKey, azureKeys} = useApiKeys();
 
     if (!settings.showVariableTable) {
         return;
@@ -22,34 +23,14 @@ export default function DevModeDetails() {
                 </Table.Header>
 
                 <Table.Body>
-                    <Table.Row>
-                        <Table.RowHeaderCell>Dev Mode</Table.RowHeaderCell>
-                        <Table.Cell>{String(settings.isDevMode)}</Table.Cell>
-                    </Table.Row>
-                    <Table.Row>
-                        <Table.RowHeaderCell>Use Dummy Messages</Table.RowHeaderCell>
-                        <Table.Cell>{String(settings.useDummyMessages)}</Table.Cell>
-                    </Table.Row>
-                    <Table.Row>
-                        <Table.RowHeaderCell>Play Dummy Audio</Table.RowHeaderCell>
-                        <Table.Cell>{String(settings.playDummyAudio)}</Table.Cell>
-                    </Table.Row>
-                    <Table.Row>
-                        <Table.RowHeaderCell>OpenAI API Key</Table.RowHeaderCell>
-                        <Table.Cell>
-                            <Text wrap="nowrap" truncate={true}>
-                                {openaiKey}
-                            </Text>
-                        </Table.Cell>
-                    </Table.Row>
-                    <Table.Row>
-                        <Table.RowHeaderCell>ElevenLabs API Key</Table.RowHeaderCell>
-                        <Table.Cell>
-                            <Text wrap="nowrap" truncate={true}>
-                                {elevenLabsKey}
-                            </Text>
-                        </Table.Cell>
-                    </Table.Row>
+                    <DevModeDataRow labelText={"Use Dummy Messages"} value={String(settings.useDummyMessages)} />
+                    <DevModeDataRow labelText={"Play Dummy Audio"} value={String(settings.playDummyAudio)} />
+                    <DevModeDataRow labelText={"Use Dummy Speech to Text"} value={String(settings.useDummyStt)} />
+                    <DevModeDataRow labelText={"Open AI API Key"} value={openaiKey} />
+                    <DevModeDataRow labelText={"ElevenLabs API Key"} value={elevenLabsKey} />
+                    <DevModeDataRow labelText={"Azure Speech Key"} value={azureKeys.speechKey} />
+                    <DevModeDataRow labelText={"Azure Region"} value={azureKeys.region} />
+                    <DevModeDataRow labelText={"Azure Endpoint"} value={azureKeys.endpoint} />
                 </Table.Body>
             </Table.Root>
         </Flex>

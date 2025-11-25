@@ -1,0 +1,11 @@
+﻿{
+  "compilerOptions": {
+    "module": "NodeNext",
+    "target": "ES2022",
+    "moduleResolution": "NodeNext",
+    "skipLibCheck": true,
+    "strict": true,
+    "outDir": "./dist"
+  },
+  "include": ["src/api/azure.ts"]
+}
