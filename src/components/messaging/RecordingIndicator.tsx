@@ -39,9 +39,7 @@ export default function RecordingIndicator() {
                     //TODO: This function is slow AF. Optimize!
                     analyser.getByteTimeDomainData(dataArray);      // This gets the current waveform
 
-                    /*
-                    Calculate Root Mean Square (RMS) of the waveform
-                    We use RMS because it gives a very accurate measurement of perceived loudness.
+                    /* Calculate the average sound deviation to determine volume.
 
                     Values are centered around 128, where 128 represents the 0 on a waveform.
                     Both negative (below 128) and positive (above 128)  values represent "loudness."
@@ -50,24 +48,26 @@ export default function RecordingIndicator() {
                     For example, 64 and 192 are part of the same loud sound wave.
                     Averaging them out would get us 128, which would inaccurately imply silence.
 
-                    So we normalize the values to be centered around 0 instead of 128.
-                    Then we square them so positives and negatives don't cancel out.
-                    Then we get the mean of those squared values, then get the square root of the mean.
+                    First, we normalize the values to be centered around 0 instead of 128.
+                    We then get the absolute values and average those together to get the deviation.
+                    The higher the deviation, the higher the volume.
 
-                    Alternatively, we could normalize and then get the absolute values, but that is less accurate.
+                    The most accurate way of handling this would be by calculating the Root Mean Square (RMS).
+                    This is super inefficient though, so I've swapped that out with the simpler absolute value method.
                      */
-                    const sumOfSquares: number = dataArray.reduce((sum, value) => {
-                        const centeredValue: number = (value - 128) / 128; // Center around 0, range -1 to 1
-                        return sum + (centeredValue * centeredValue);
-                    }, 0);
+                    let sumOfAbsoluteDeviations: number = 0;
+                    for (let i = 0; i < dataArray.length; i++) {
+                        sumOfAbsoluteDeviations += Math.abs(dataArray[i] - 128);
+                    }
 
-                    // Normalize into a percentage
-                    const rms: number = Math.sqrt(sumOfSquares / dataArray.length);
+                    // Normalize to 0-1 so we can use it as a percentage
+                    const avgDeviation: number = sumOfAbsoluteDeviations / dataArray.length;
+                    const avgDeviationPerc: number = avgDeviation / 128;
 
                     // Use logarithmic scaling so quiet sounds appear louder (since that's how we hear them)
-                    const minimumRms: number = 0.001;
-                    const clampedRms: number = Math.max(rms, minimumRms);
-                    const decibelValue: number = 20 * Math.log10(clampedRms);
+                    const minimumDeviationPerc: number = 0.001;
+                    const clampedDeviationPerc: number = Math.max(avgDeviationPerc, minimumDeviationPerc);
+                    const decibelValue: number = 20 * Math.log10(clampedDeviationPerc);
                     const normalizedLevels: number = Math.max(0, Math.min(1, (decibelValue + 60) / 50));
 
                     setAudioLevel(normalizedLevels);
