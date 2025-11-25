@@ -119,7 +119,8 @@ export default function RecordingIndicator() {
             <Box position="absolute" width={getCircleSize()} height={getCircleSize()} style={{
                 borderRadius: "100%",
                 backgroundColor: "var(--ba-main-color)",
-                opacity: "0.5"
+                opacity: "0.5",
+                transition: "width 100ms ease-out, height 100ms ease-out"
             }} />
             <i className={`fa-solid fa-microphone fa-fade fa-2xl`}></i>
             <Text as="p" mt="5" align="center">Listening...</Text>
