@@ -109,7 +109,7 @@ export default function RecordingIndicator() {
         const maxSizePx = 128;
         const minSizePx = 16;
 
-        const audioBasedSizePx = Math.max(audioLevel * maxSizePx, minSizePx);
+        const audioBasedSizePx = (audioLevel * (maxSizePx - minSizePx)) + minSizePx;
 
         return `${audioBasedSizePx}px`
     }
