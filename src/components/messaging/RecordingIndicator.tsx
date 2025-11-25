@@ -1,4 +1,4 @@
-﻿import {Box, Flex, Text} from "@radix-ui/themes";
+﻿import {Box, Flex} from "@radix-ui/themes";
 import {type RefObject, useEffect, useRef, useState} from "react";
 
 
@@ -36,6 +36,7 @@ export default function RecordingIndicator() {
                 const dataArray = new Uint8Array(bufferLength);
 
                 const updateAudioLevels = () => {
+                    //TODO: This function is slow AF. Optimize!
                     analyser.getByteTimeDomainData(dataArray);      // This gets the current waveform
 
                     /*
@@ -110,7 +111,6 @@ export default function RecordingIndicator() {
         const minSizePx = 64;
 
         const audioBasedSizePx = (audioLevel * (maxSizePx - minSizePx)) + minSizePx;
-
         return `${audioBasedSizePx}px`
     }
 
@@ -122,7 +122,7 @@ export default function RecordingIndicator() {
                 opacity: "0.5",
                 transition: "width 100ms ease-out, height 100ms ease-out",
                 zIndex: -1
-            }} />
+            }}/>
             <i className={`fa-solid fa-microphone fa-2xl`}></i>
         </Flex>
     );
