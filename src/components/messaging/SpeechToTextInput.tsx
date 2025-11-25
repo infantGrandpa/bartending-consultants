@@ -24,6 +24,7 @@ export default function SpeechToTextInput({onRecognizedText}: Props) {
 
     const [isRecognizing, setIsRecognizing] = useState<boolean>(false);
     const [isStoppingRecognition, setIsStoppingRecognition] = useState<boolean>(false);
+    const [hasRecordingError, setHasRecordingError] = useState<boolean>(false);
     const speechRecognizerRef: RefObject<SpeechRecognizer | null> = useRef<SpeechRecognizer | null>(null);
     const recognizedTextRef: RefObject<string> = useRef<string>("")
 
@@ -158,7 +159,9 @@ export default function SpeechToTextInput({onRecognizedText}: Props) {
             <AlertDialog.Content>
                 <AlertDialog.Title>Speech to Text</AlertDialog.Title>
                 <AlertDialog.Description>What are you in the mood for?</AlertDialog.Description>
-                <RecordingIndicator />
+                <RecordingIndicator
+                    onErrorChange={setHasRecordingError}
+                />
                 <Flex direction="row" justify="end" gap="3">
                     <AlertDialog.Cancel>
                         <Button color="gray" variant="soft" onClick={handleCancelSttFromMic}>
@@ -169,6 +172,7 @@ export default function SpeechToTextInput({onRecognizedText}: Props) {
                         <Button
                             loading={isStoppingRecognition}
                             onClick={stopContinuousSttFromMic}
+                            disabled={hasRecordingError}
                         >
                             Done Speaking
                         </Button>

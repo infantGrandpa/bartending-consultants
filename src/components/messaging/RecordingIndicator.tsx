@@ -1,13 +1,26 @@
 ﻿import {Box, Callout, Flex} from "@radix-ui/themes";
 import {type RefObject, useEffect, useRef, useState} from "react";
 
+interface Props {
+    // I forgot that the error checking should probably be in the parent component, not here.
+    // I started work on it, but because it uses Azure to handle the microphone, it would require a lot of work.
+    // This works well enough for now, so we'll just pass the error value back to the parent.
+    // Feel free to put SpeechToTextInput.tsx in charge of this instead of this component.
+    onErrorChange?: (hasError: boolean) => void;
+}
 
-export default function RecordingIndicator() {
+export default function RecordingIndicator({onErrorChange}: Props) {
     const [audioLevel, setAudioLevel] = useState<number>(0);
     const [error, setError] = useState<string | null>(null);
 
     const streamRef: RefObject<MediaStream | null> = useRef(null);
     const intervalId: RefObject<number> = useRef(0);
+
+    useEffect(() => {
+        if (onErrorChange) {
+            onErrorChange(error !== null);
+        }
+    }, [error, setError]);
 
     useEffect(() => {
         const abortController: AbortController = new AbortController();
