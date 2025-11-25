@@ -106,8 +106,8 @@ export default function RecordingIndicator() {
     }
 
     function getCircleSize() {
-        const maxSizePx = 128;
-        const minSizePx = 16;
+        const maxSizePx = 256;
+        const minSizePx = 64;
 
         const audioBasedSizePx = (audioLevel * (maxSizePx - minSizePx)) + minSizePx;
 
@@ -120,11 +120,10 @@ export default function RecordingIndicator() {
                 borderRadius: "100%",
                 backgroundColor: "var(--ba-main-color)",
                 opacity: "0.5",
-                transition: "width 100ms ease-out, height 100ms ease-out"
+                transition: "width 100ms ease-out, height 100ms ease-out",
+                zIndex: -1
             }} />
-            <i className={`fa-solid fa-microphone fa-fade fa-2xl`}></i>
-            <Text as="p" mt="5" align="center">Listening...</Text>
-            <Text as="p" mt="5" align="center">{audioLevel}</Text>
+            <i className={`fa-solid fa-microphone fa-2xl`}></i>
         </Flex>
     );
 }
