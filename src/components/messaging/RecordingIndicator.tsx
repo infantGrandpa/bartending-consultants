@@ -1,4 +1,4 @@
-﻿import {Flex, Text} from "@radix-ui/themes";
+﻿import {Box, Flex, Text} from "@radix-ui/themes";
 import {type RefObject, useEffect, useRef, useState} from "react";
 
 
@@ -62,7 +62,9 @@ export default function RecordingIndicator() {
 
                     // Normalize into a percentage
                     const rms: number = Math.sqrt(sumOfSquares / dataArray.length);
-                    const normalizedLevels: number = rms * 100;
+
+                    const practicalMaxRms: number = 0.3
+                    const normalizedLevels: number = Math.min(rms / practicalMaxRms, 1.0);
 
                     setAudioLevel(normalizedLevels);
                 }
@@ -102,6 +104,11 @@ export default function RecordingIndicator() {
 
     return (
         <Flex direction="column" m="4" justify="center" align="center" minHeight="200px">
+            <Box position="absolute" width={`${audioLevel * 128}px`} height={`${audioLevel * 128}px`} style={{
+                borderRadius: "100%",
+                backgroundColor: "var(--ba-main-color)",
+                opacity: "0.5"
+            }} />
             <i className={`fa-solid fa-microphone fa-fade fa-2xl`}></i>
             <Text as="p" mt="5" align="center">Listening...</Text>
             <Text as="p" mt="5" align="center">{audioLevel}</Text>
