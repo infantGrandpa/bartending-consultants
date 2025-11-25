@@ -120,7 +120,7 @@ export default function RecordingIndicator() {
                 borderRadius: "100%",
                 backgroundColor: "var(--ba-main-color)",
                 opacity: "0.5",
-                transition: "width 100ms ease-out, height 100ms ease-out",
+                transition: "width 50ms ease-out, height 50ms ease-out",
                 zIndex: -1
             }}/>
             <i className={`fa-solid fa-microphone fa-2xl`}></i>
