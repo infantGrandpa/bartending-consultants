@@ -9,7 +9,7 @@ export default function RecordingIndicator() {
     const intervalId: RefObject<number> = useRef(0);
 
     useEffect(() => {
-        const abortController = new AbortController();
+        const abortController: AbortController = new AbortController();
 
         async function initAudioMonitoring() {
             try {
@@ -24,7 +24,7 @@ export default function RecordingIndicator() {
                 }
 
                 streamRef.current = newStream;
-                const audioContext = new AudioContext();
+                const audioContext: AudioContext = new AudioContext();
 
                 const analyser: AnalyserNode = audioContext.createAnalyser();
                 analyser.fftSize = 2048;
@@ -32,11 +32,10 @@ export default function RecordingIndicator() {
                 const microphone: MediaStreamAudioSourceNode = audioContext.createMediaStreamSource(streamRef.current);
                 microphone.connect(analyser);
 
-                const bufferLength = analyser.frequencyBinCount;
-                const dataArray = new Uint8Array(bufferLength);
+                const bufferLength: number = analyser.frequencyBinCount;
+                const dataArray: Uint8Array<ArrayBuffer> = new Uint8Array(bufferLength);
 
                 const updateAudioLevels = () => {
-                    //TODO: This function is slow AF. Optimize!
                     analyser.getByteTimeDomainData(dataArray);      // This gets the current waveform
 
                     /* Calculate the average sound deviation to determine volume.
@@ -56,7 +55,7 @@ export default function RecordingIndicator() {
                     This is super inefficient though, so I've swapped that out with the simpler absolute value method.
                      */
                     let sumOfAbsoluteDeviations: number = 0;
-                    for (let i = 0; i < dataArray.length; i++) {
+                    for (let i: number = 0; i < dataArray.length; i++) {
                         sumOfAbsoluteDeviations += Math.abs(dataArray[i] - 128);
                     }
 
@@ -75,9 +74,8 @@ export default function RecordingIndicator() {
 
                 intervalId.current = window.setInterval(updateAudioLevels, 100);
 
-                console.log(dataArray.length)
-
             } catch (error) {
+                //TODO: Give use feedback if no microphone is connected.
                 console.error("Error accessing microphone for audio level monitoring:", error);
             }
         }
@@ -106,11 +104,11 @@ export default function RecordingIndicator() {
             });
     }
 
-    function getCircleSize() {
-        const maxSizePx = 256;
-        const minSizePx = 64;
+    function getCircleSize(): string {
+        const maxSizePx: number = 256;
+        const minSizePx: number = 64;
 
-        const audioBasedSizePx = (audioLevel * (maxSizePx - minSizePx)) + minSizePx;
+        const audioBasedSizePx: number = (audioLevel * (maxSizePx - minSizePx)) + minSizePx;
         return `${audioBasedSizePx}px`
     }
 
