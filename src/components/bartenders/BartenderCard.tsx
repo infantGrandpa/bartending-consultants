@@ -27,7 +27,7 @@ export default function BartenderCard({bartender}: Props) {
                 </Inset>
                 <Box minWidth="65%">
                     <Heading as="h3" size="4">{bartender.profile.displayName}</Heading>
-                    <BartenderDataList/>
+                    <BartenderDataList profile={bartender.profile}/>
                     <Text as="p" size="2" mt={"3"}>{bartender.profile.aboutMe}</Text>
                 </Box>
             </Flex>

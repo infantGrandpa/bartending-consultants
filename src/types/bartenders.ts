@@ -15,7 +15,7 @@ interface Personality {
     dialogueStyle?: string;
 }
 
-interface BartenderProfile {
+export interface BartenderProfile {
     displayName: string;
     firstName: string;
     age: string;
