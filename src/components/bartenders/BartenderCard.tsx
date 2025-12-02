@@ -1,12 +1,14 @@
 ﻿import {Box, Card, Flex, Heading, Inset, Text} from "@radix-ui/themes";
-import {useBartender} from "../../providers/BartenderProvider.tsx";
 import BartenderDataList from "./BartenderDataList.tsx";
+import type {Bartender} from "../../types/bartenders.ts";
 
-export default function BartenderCard() {
-    const {selectedBartender} = useBartender();
+interface Props {
+    bartender: Bartender;
+}
 
+export default function BartenderCard({bartender}: Props) {
     const placeholderImageUrl: string = "https://placehold.co/574x861/030712/white?text=Choose+a+Bartender&font=roboto"
-    const imageUrl: string = selectedBartender?.profile.imagePath ?? placeholderImageUrl;
+    const imageUrl: string = bartender.profile.imagePath ?? placeholderImageUrl;
 
     return (
         <Card>
@@ -16,7 +18,7 @@ export default function BartenderCard() {
                 }}>
                     <img
                         src={imageUrl}
-                        alt={`${selectedBartender?.profile.displayName} Bartender`}
+                        alt={`${bartender.profile.displayName} Bartender`}
                         style={{
                             objectFit: "cover",
                             height: "100%"
@@ -24,9 +26,9 @@ export default function BartenderCard() {
                     />
                 </Inset>
                 <Box minWidth="65%">
-                    <Heading as="h3" size="4">{selectedBartender?.profile.displayName}</Heading>
+                    <Heading as="h3" size="4">{bartender.profile.displayName}</Heading>
                     <BartenderDataList/>
-                    <Text as="p" size="2" mt={"3"}>{selectedBartender?.profile.aboutMe}</Text>
+                    <Text as="p" size="2" mt={"3"}>{bartender.profile.aboutMe}</Text>
                 </Box>
             </Flex>
         </Card>

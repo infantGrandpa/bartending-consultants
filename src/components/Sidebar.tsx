@@ -6,9 +6,11 @@ import Settings from "./settings/Settings.tsx";
 import {useDevSettings} from "../providers/DevSettingsProvider.tsx";
 import DevModeDetails from "./settings/developer/DevModeDetails.tsx";
 import DevModeWarning from "./settings/developer/DevModeWarning.tsx";
+import {useBartender} from "../providers/BartenderProvider.tsx";
 
 export default function Sidebar() {
     const {settings} = useDevSettings();
+    const {selectedBartender} = useBartender();
 
     return (
         <Flex direction="column" pl="4" justify="between" align="end" style={{
@@ -16,7 +18,7 @@ export default function Sidebar() {
         }}>
             <Box>
                 <BartenderSelection />
-                <BartenderCard />
+                {selectedBartender && <BartenderCard bartender={selectedBartender} />}
             </Box>
             <DrinkDetails />
             {settings.isDevMode && <DevModeDetails />}
