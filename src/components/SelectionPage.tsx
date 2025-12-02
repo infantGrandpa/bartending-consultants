@@ -1,5 +1,14 @@
-﻿export default function SelectionPage() {
+﻿import {Flex} from "@radix-ui/themes";
+import {bartenders} from "../types/bartenders.ts";
+import BartenderCard from "./bartenders/BartenderCard.tsx";
+
+export default function SelectionPage() {
     return (
-        <div>Selection Page</div>
+        <Flex>
+            {Object.values(bartenders).map((thisBartender) => (
+                <BartenderCard bartender={thisBartender}></BartenderCard>
+            ))}
+
+        </Flex>
     )
 }
