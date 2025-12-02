@@ -6,7 +6,7 @@ export default function SelectionPage() {
     return (
         <Flex>
             {Object.values(bartenders).map((thisBartender) => (
-                <BartenderCard bartender={thisBartender}></BartenderCard>
+                <BartenderCard key={thisBartender.key} bartender={thisBartender}></BartenderCard>
             ))}
 
         </Flex>
