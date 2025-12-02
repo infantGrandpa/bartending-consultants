@@ -43,7 +43,7 @@ export default function BartenderSelection() {
                     <AlertDialog.Title>Erase Message History</AlertDialog.Title>
                     <AlertDialog.Description>
                         <Text>
-                            Changing bartenders tenders will erase your message history and drink information.
+                            Changing bartenders will erase your message history and drink information.
                         </Text>
                     </AlertDialog.Description>
                     <Text as="p" mt={"4"}>
