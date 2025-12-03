@@ -1,13 +1,15 @@
 ﻿import MessagingPanel from "./messaging/MessagingPanel.tsx";
 import Sidebar from "./Sidebar.tsx";
-import {Grid} from "@radix-ui/themes";
+import {Box, Grid} from "@radix-ui/themes";
 
 
 export default function ChatPage() {
     return (
-        <Grid columns="3" gap="4" height="100vh">
+        <Grid columns={{initial: "1", md: "3"}} gap="4">
             <MessagingPanel/>
-            <Sidebar/>
+            <Box display={{initial: "none", md: "block"}}>
+                <Sidebar/>
+            </Box>
         </Grid>
     )
 }
