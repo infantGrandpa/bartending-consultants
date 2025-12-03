@@ -2,7 +2,6 @@ import {ApiKeyProvider} from "./providers/ApiKeyProvider.tsx";
 import "@radix-ui/themes/styles.css";
 import {Container, Theme} from "@radix-ui/themes";
 import {BartenderProvider} from "./providers/BartenderProvider.tsx";
-import {Background} from "./components/Background.tsx";
 import {DevSettingsProvider} from "./providers/DevSettingsProvider.tsx";
 import {ConversationProvider} from "./providers/ConversationProvider.tsx";
 import {BrowserRouter, Route, Routes} from "react-router";
@@ -18,7 +17,6 @@ export default function App() {
                     <ApiKeyProvider>
                         <BartenderProvider>
                             <ConversationProvider>
-                                <Background/>
                                 <Container p={{initial: "3", md: "6"}}>
                                     <Routes>
                                         <Route path="/" element={<SelectionPage/>}/>
