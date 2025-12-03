@@ -1,9 +1,4 @@
-﻿:root {
-    --ba-main-color: #6e56cf;
-    --ba-grey-color: #6f6d78;
-}
-
-.radix-themes {
+﻿.radix-themes {
     /* TODO: Fix the need for IMPORTANT all the time
     We need to use important because this should fix an issue with inaccurate loading of css
     It seems like occasionally, Radix is loaded after our styles.
