@@ -10,7 +10,7 @@ import ChatPage from "./components/ChatPage.tsx";
 
 export default function App() {
     return (
-        <Theme accentColor="violet" appearance="dark" grayColor="mauve" radius="large" scaling="110%"
+        <Theme accentColor="gold" appearance="dark" grayColor="mauve" radius="medium" scaling="110%"
                panelBackground="translucent">
             <BrowserRouter>
                 <DevSettingsProvider>
