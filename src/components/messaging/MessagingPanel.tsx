@@ -104,6 +104,17 @@ export default function MessagingPanel() {
                     </IconButton>
                 </Flex>
             </Card>
+            <Flex position="fixed" justify="between" align="end" p="3" bottom="0" left="0" width="100%">
+                <IconButton variant="soft">
+                    <i className="fa-solid fa-gear"></i>
+                </IconButton>
+                <IconButton radius="full" variant="solid" style={{width: "64px", height: "64px"}}>
+                    <i className="fa-solid fa-microphone"></i>
+                </IconButton>
+                <IconButton>
+                    <i className="fa-regular fa-keyboard"></i>
+                </IconButton>
+            </Flex>
         </>
     );
 }
