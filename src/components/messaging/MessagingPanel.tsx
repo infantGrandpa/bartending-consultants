@@ -1,7 +1,4 @@
-﻿import MessageLog from "./MessageLog.tsx";
-import MessageInput from "./MessageInput.tsx";
-import {Em, Flex, Text} from "@radix-ui/themes";
-import {useBartender} from "../../providers/BartenderProvider.tsx";
+﻿import {useBartender} from "../../providers/BartenderProvider.tsx";
 import {useEffect} from "react";
 import {getSystemPrompt} from "../../types/bartenders.ts";
 import {addResponseToConversation, createConversation} from "../../api/openai.ts";
@@ -92,18 +89,6 @@ export default function MessagingPanel() {
     }
 
     return (
-        <Flex direction="column" gridColumn="span 2" justify="end">
-            <MessageLog />
-            <Flex direction="column">
-                <MessageInput onSendMessage={handleSendMessage}/>
-                <Text as="p" size={"1"} align="right" style={{
-                    paddingTop: "0.25rem",
-                    color: "gray",
-                    fontSize: "0.7rem"
-                }}>
-                    <Em>ID: {conversation.conversationId}</Em>
-                </Text>
-            </Flex>
-        </Flex>
+        <></>
     );
 }
