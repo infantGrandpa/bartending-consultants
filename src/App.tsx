@@ -19,7 +19,7 @@ export default function App() {
                         <BartenderProvider>
                             <ConversationProvider>
                                 <Background/>
-                                <Container p="6">
+                                <Container p={{initial: "3", md: "6"}}>
                                     <Routes>
                                         <Route path="/" element={<SelectionPage/>}/>
                                         <Route path="/chat" element={<ChatPage/>}/>
