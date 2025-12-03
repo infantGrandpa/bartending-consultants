@@ -3,6 +3,22 @@
     --ba-grey-color: #6f6d78;
 }
 
+.radix-themes {
+    /* TODO: Fix the need for IMPORTANT all the time
+    We need to use important because this should fix an issue with inaccurate loading of css
+    It seems like occasionally, Radix is loaded after our styles.
+    https://www.radix-ui.com/themes/docs/overview/styling#nextjs-import-order
+    Yes, I know this is Nextjs, which we don't use. I have no other ideas for why this is happening.
+    */
+    --default-font-family: "Mulish", sans-serif !important;
+    --heading-font-family: "Aboreto", sans-serif !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 400 !important;
+    line-height: 0 !important;
+}
+
 img {
     max-width: 100%;
     display: block;
