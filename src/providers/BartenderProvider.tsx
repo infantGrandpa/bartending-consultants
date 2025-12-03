@@ -4,7 +4,7 @@ import {createContext, type ReactNode, useContext, useState} from "react";
 
 interface BartenderContextType {
     selectedBartender: Bartender | null;
-    setSelectedBartender: (personality: Bartender) => void;
+    setSelectedBartender: (personality: Bartender | null) => void;
 }
 
 const PersonalityContext = createContext<BartenderContextType | undefined>(undefined);
