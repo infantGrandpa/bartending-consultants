@@ -1,4 +1,5 @@
-﻿import {useBartender} from "../../providers/BartenderProvider.tsx";
+﻿import {Card, Flex, Heading, IconButton} from "@radix-ui/themes";
+import {useBartender} from "../../providers/BartenderProvider.tsx";
 import {useEffect} from "react";
 import {getSystemPrompt} from "../../types/bartenders.ts";
 import {addResponseToConversation, createConversation} from "../../api/openai.ts";
@@ -89,6 +90,20 @@ export default function MessagingPanel() {
     }
 
     return (
-        <></>
+        <>
+            <Card style={{padding: "8px"}}>
+                <Flex direction="row" justify="between" align="center">
+                    <IconButton variant="ghost" style={{paddingLeft: "8px"}}>
+                        <i className="fa-solid fa-chevron-left"></i>
+                    </IconButton>
+                    <Heading as="h1" size="5" style={{ lineHeight: "0" }}>
+                        {selectedBartender ? selectedBartender.profile.displayName : "Nickname"}
+                    </Heading>
+                    <IconButton variant="ghost">
+                        <i className="fa-solid fa-martini-glass"></i>
+                    </IconButton>
+                </Flex>
+            </Card>
+        </>
     );
 }
