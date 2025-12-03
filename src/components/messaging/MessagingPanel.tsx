@@ -97,11 +97,14 @@ export default function MessagingPanel() {
                 <IconButton variant="soft">
                     <i className="fa-solid fa-gear"></i>
                 </IconButton>
-                <IconButton radius="full" variant="solid" style={{width: "64px", height: "64px"}}>
-                    <i className="fa-solid fa-microphone"></i>
+                <IconButton radius="full" variant="solid"
+                    style={{
+                        color: "var(--gray-3)", width: "64px", height: "64px"
+                    }}>
+                    <i className="fa-solid fa-microphone fa-xl"></i>
                 </IconButton>
                 <IconButton>
-                    <i className="fa-regular fa-keyboard"></i>
+                    <i className="fa-regular fa-keyboard" style={{color: "var(--gray-3)"}}></i>
                 </IconButton>
             </Flex>
         </>
