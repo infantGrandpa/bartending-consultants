@@ -5,7 +5,7 @@ import {Grid} from "@radix-ui/themes";
 
 export default function ChatPage() {
     return (
-        <Grid columns="3" gap="4" p="6" height="100vh">
+        <Grid columns="3" gap="4" height="100vh">
             <MessagingPanel/>
             <Sidebar/>
         </Grid>
