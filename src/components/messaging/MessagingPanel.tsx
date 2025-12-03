@@ -10,6 +10,7 @@ import {speakMessage} from "../../api/elevenLabs.ts";
 import {useDevSettings} from "../../providers/DevSettingsProvider.tsx";
 import type {Drink} from "../../types/drinks.ts";
 import {useConversation} from "../../providers/ConversationProvider.tsx";
+import MessageHeader from "./MessageHeader.tsx";
 
 
 export default function MessagingPanel() {
@@ -91,19 +92,7 @@ export default function MessagingPanel() {
 
     return (
         <>
-            <Card style={{padding: "8px"}}>
-                <Flex direction="row" justify="between" align="center">
-                    <IconButton variant="ghost" style={{paddingLeft: "8px"}}>
-                        <i className="fa-solid fa-chevron-left"></i>
-                    </IconButton>
-                    <Heading as="h1" size="5" style={{ lineHeight: "0" }}>
-                        {selectedBartender ? selectedBartender.profile.displayName : "Nickname"}
-                    </Heading>
-                    <IconButton variant="ghost">
-                        <i className="fa-solid fa-martini-glass"></i>
-                    </IconButton>
-                </Flex>
-            </Card>
+            <MessageHeader headerText={selectedBartender ? selectedBartender.profile.displayName : "Nickname"} />
             <Flex position="fixed" justify="between" align="end" p="3" bottom="0" left="0" width="100%">
                 <IconButton variant="soft">
                     <i className="fa-solid fa-gear"></i>
