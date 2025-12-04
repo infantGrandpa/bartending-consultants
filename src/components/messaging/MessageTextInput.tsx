@@ -1,5 +1,5 @@
 ﻿import {Flex, IconButton, TextArea} from "@radix-ui/themes";
-import {type RefObject, useRef, useState} from "react";
+import {type RefObject, useEffect, useRef, useState} from "react";
 import {useBartender} from "../../providers/BartenderProvider.tsx";
 
 interface Props {
@@ -12,6 +12,16 @@ export default function MessageTextInput({onSendMessage}: Props) {
 
     const textAreaRef: RefObject<HTMLTextAreaElement | null> = useRef<HTMLTextAreaElement>(null);
 
+    useEffect(() => {
+        if (!textAreaRef.current) {
+            return;
+        }
+
+        const textArea = textAreaRef.current;
+        textArea.style.height = 'auto';
+        textArea.style.height = textArea.scrollHeight + 'px';
+    }, [message]);
+
     const handleSendButtonClick = async () => {
         const trimmedMessage = message.trim();
 
@@ -22,17 +32,6 @@ export default function MessageTextInput({onSendMessage}: Props) {
         await onSendMessage(trimmedMessage);
 
         setMessage("");
-    }
-
-    const handleInputBoxChange = (inputValue: string) => {
-        setMessage(inputValue);
-
-        if (textAreaRef.current) {
-            const textArea = textAreaRef.current;
-            textArea.style.height = 'auto';
-            textArea.style.height = textArea.scrollHeight + 'px';
-        }
-
     }
 
     //TODO: Don't clear message if you switch to microphone
@@ -47,7 +46,7 @@ export default function MessageTextInput({onSendMessage}: Props) {
                     value={message}
                     rows={1}
                     autoFocus={true}
-                    onChange={(e) => handleInputBoxChange(e.target.value)}
+                    onChange={(e) => setMessage(e.target.value)}
                     onKeyDown={(e) => {
                         if (e.key === 'Enter' && !e.shiftKey) {
                             e.preventDefault();
