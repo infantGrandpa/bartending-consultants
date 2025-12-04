@@ -24,7 +24,9 @@ export default function MessagingControls() {
 
             <Flex direction="row" justify="between" align="end" width="100%">
                 <Settings/>
-                {useMicrophone && <MessageAudioInput/>}
+                {useMicrophone &&
+                    <MessageAudioInput onAudioTranscribed={async (msg) => handleSendMessage(msg)}/>
+                }
 
                 <IconButton onMouseDown={handleToggleInputMode}>
                     <i className={useMicrophone ? 'fa-regular fa-keyboard' : 'fa-solid fa-microphone'}
