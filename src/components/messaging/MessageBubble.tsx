@@ -1,4 +1,4 @@
-﻿import {Avatar, Card, Flex, Text} from "@radix-ui/themes";
+﻿import {Avatar, Button, Card, Flex, Text} from "@radix-ui/themes";
 import type {Message} from "../../types/conversations.ts";
 import type {Bartender} from "../../types/bartenders.ts";
 
@@ -28,9 +28,18 @@ export default function MessageBubble({message}: Props) {
                     radius="full"
                 /> : null
             }
-            <Card>
-                <Text as="div" size="2" color="gray" align={onLeftSide ? "left" : "right"}>{message.content}</Text>
-            </Card>
+            <Flex direction="column" gap="2" align="end">
+                <Card>
+                    <Text as="div" size="2" color="gray" align={onLeftSide ? "left" : "right"}>{message.content}</Text>
+                </Card>
+                {message.drink ?
+                    <Button size={"1"} variant="soft" style={{width: "fit-content"}}
+                            onClick={() => console.log(message.drink?.instructions)}>
+                        {message.drink.name}
+                        <i className="fa-solid fa-chevron-right fa-xs"></i>
+                    </Button> : null
+                }
+            </Flex>
         </Flex>
     );
 }
