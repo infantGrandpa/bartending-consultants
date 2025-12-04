@@ -23,5 +23,5 @@ img {
     border: solid 1px var(--base-card-classic-border-color);
     box-shadow: inset 0 0 0 var(--text-field-border-width) var(--gray-a7);
     color: var(--gray-12);
-    border-radius: var(--radius-2)
+    border-radius: var(--radius-6);
 }

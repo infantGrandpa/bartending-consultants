@@ -25,34 +25,38 @@ export default function MessageInput({onSendMessage}: Props) {
     //TODO: Don't clear message if you switch to microphone
 
     return (
-        <Flex className="input-box">
-            <TextArea
-                placeholder="Type your message here..."
-                variant="soft"
-                resize="vertical"
-                value={message}
-                onChange={(e) => setMessage(e.target.value)}
-                onKeyDown={(e) => {
-                    if (e.key === 'Enter' && !e.shiftKey) {
-                        e.preventDefault();
-                        handleSendButtonClick();
-                    }
-                }}
-                style={{
-                    backgroundColor: "initial",
-                    flexGrow: "1",
-                    minHeight: "96.8px"
-                }}
-            />
-            <Flex direction="column" m="2" gap="2" justify="end">
-                <IconButton
-                    variant="solid"
-                    onClick={handleSendButtonClick}
-                    disabled={(!selectedBartender) || (message.trim().length === 0)}
-                >
-                    <i className="fa-solid fa-paper-plane"></i>
-                </IconButton>
+            <Flex className="input-box">
+                <TextArea
+                    ref={textAreaRef}
+                    placeholder="Type your message here..."
+                    variant="soft"
+                    resize="none"
+                    value={message}
+                    rows={1}
+                    autoFocus={true}
+                    onKeyDown={(e) => {
+                        if (e.key === 'Enter' && !e.shiftKey) {
+                            e.preventDefault();
+                            handleSendButtonClick();
+                        }
+                    }}
+                    style={{
+                        backgroundColor: "initial",
+                        flexGrow: "1",
+                        minHeight: "33px",
+                        maxHeight: "123px",
+                        borderRadius: "var(--radius-6)"
+                    }}
+                />
+                <Flex direction="column" m="2" gap="2" justify="start">
+                    <IconButton
+                        variant="ghost"
+                        onClick={handleSendButtonClick}
+                        disabled={(!selectedBartender) || (message.trim().length === 0)}
+                    >
+                        <i className="fa-solid fa-paper-plane"></i>
+                    </IconButton>
+                </Flex>
             </Flex>
-        </Flex>
     );
 }
