@@ -3,11 +3,10 @@ import {useState} from "react";
 import {useBartender} from "../../providers/BartenderProvider.tsx";
 
 interface Props {
-    onSendMessage: (message: string) => Promise<void>;
-    onMicrophoneClick: () => void;
+    onSendMessage: (message: string) => Promise<void>
 }
 
-export default function MessageInput({onSendMessage, onMicrophoneClick}: Props) {
+export default function MessageInput({onSendMessage}: Props) {
     const [message, setMessage] = useState<string>("");
     const {selectedBartender} = useBartender();
 
@@ -52,9 +51,6 @@ export default function MessageInput({onSendMessage, onMicrophoneClick}: Props) 
                     disabled={(!selectedBartender) || (message.trim().length === 0)}
                 >
                     <i className="fa-solid fa-paper-plane"></i>
-                </IconButton>
-                <IconButton variant="outline" onClick={onMicrophoneClick}>
-                    <i className="fa-solid fa-microphone"></i>
                 </IconButton>
             </Flex>
         </Flex>
