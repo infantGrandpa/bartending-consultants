@@ -147,12 +147,16 @@ export default function SpeechToTextInput({onRecognizedText}: Props) {
     return (
         <AlertDialog.Root open={isRecognizing}>
             <AlertDialog.Trigger>
-                <IconButton
-                    variant="outline"
-                    loading={isStoppingRecognition}
-                    onClick={startContinuousSttFromMic}
+                <IconButton radius="full" variant="solid"
+                            style={{
+                                color: "var(--gray-3)",
+                                width: "64px",
+                                height: "64px"
+                            }}
+                            loading={isStoppingRecognition}
+                            onClick={startContinuousSttFromMic}
                 >
-                    <i className="fa-solid fa-microphone"></i>
+                    <i className="fa-solid fa-microphone fa-xl"></i>
                 </IconButton>
             </AlertDialog.Trigger>
 

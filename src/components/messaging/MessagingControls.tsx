@@ -2,7 +2,7 @@
 import {useState} from "react";
 import MessageTextInput from "./MessageTextInput.tsx";
 import Settings from "../settings/Settings.tsx";
-import MessageAudioInput from "./MessageAudioInput.tsx";
+import SpeechToTextInput from "./SpeechToTextInput.tsx";
 
 
 export default function MessagingControls() {
@@ -25,7 +25,7 @@ export default function MessagingControls() {
             <Flex direction="row" justify="between" align="end" width="100%">
                 <Settings/>
                 {useMicrophone &&
-                    <MessageAudioInput onAudioTranscribed={async (msg) => handleSendMessage(msg)}/>
+                    <SpeechToTextInput onRecognizedText={async (msg) => handleSendMessage(msg)} />
                 }
 
                 <IconButton onMouseDown={handleToggleInputMode}>
