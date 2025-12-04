@@ -20,7 +20,7 @@ export default function MessagingControls({onSendMessage}:Props) {
     }
 
     return (
-        <Flex position="fixed" gap="2" p="3" bottom="0" left="0" width="100%" direction="column">
+        <Flex position="fixed" gap="2" p="3" bottom="0" left="0" width="100%" direction="column" style={{zIndex: "1"}}>
             {!useMicrophone &&
                 <MessageTextInput onSendMessage={async (msg) => handleSendMessage(msg)}/>
             }
