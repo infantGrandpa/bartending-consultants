@@ -1,13 +1,13 @@
 ﻿import {Flex, IconButton, TextArea} from "@radix-ui/themes";
 import {useState} from "react";
 import {useBartender} from "../../providers/BartenderProvider.tsx";
-import SpeechToTextInput from "./SpeechToTextInput.tsx";
 
 interface Props {
     onSendMessage: (message: string) => Promise<void>;
+    onMicrophoneClick: () => void;
 }
 
-export default function MessageInput({onSendMessage}: Props) {
+export default function MessageInput({onSendMessage, onMicrophoneClick}: Props) {
     const [message, setMessage] = useState<string>("");
     const {selectedBartender} = useBartender();
 
@@ -23,8 +23,7 @@ export default function MessageInput({onSendMessage}: Props) {
         setMessage("");
     }
 
-    //TODO: Change the Input to be sticky
-    //TODO: Add some feedback to explain they need to choose a bartender?
+    //TODO: Don't clear message if you switch to microphone
 
     return (
         <Flex className="input-box">
@@ -54,7 +53,9 @@ export default function MessageInput({onSendMessage}: Props) {
                 >
                     <i className="fa-solid fa-paper-plane"></i>
                 </IconButton>
-                <SpeechToTextInput onRecognizedText={(recognizedText) => setMessage(recognizedText)}/>
+                <IconButton variant="outline" onClick={onMicrophoneClick}>
+                    <i className="fa-solid fa-microphone"></i>
+                </IconButton>
             </Flex>
         </Flex>
     );

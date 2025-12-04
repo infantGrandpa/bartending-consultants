@@ -1,4 +1,6 @@
 ﻿import {Flex, IconButton} from "@radix-ui/themes";
+import {useState} from "react";
+import MessageInput from "./MessageInput.tsx";
 
 
 export default function MessagingControls() {
@@ -8,9 +10,14 @@ export default function MessagingControls() {
         setUseMicrophone(false);
     }
 
+    const handleSwitchToMicrophone = () => {
+        setUseMicrophone(true);
+    }
+
     if (!useMicrophone) {
         return <MessageInput
             onSendMessage={async () => console.log("Message Sent")}
+            onMicrophoneClick={() => handleSwitchToMicrophone()}
         />
     }
 
