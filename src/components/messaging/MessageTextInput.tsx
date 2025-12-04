@@ -61,7 +61,7 @@ export default function MessageTextInput({onSendMessage}: Props) {
                         borderRadius: "var(--radius-6)"
                     }}
                 />
-                <Flex direction="column" m="2" gap="2" justify="start">
+                <Flex direction="column" m="2" gap="2" justify="center">
                     <IconButton
                         variant="ghost"
                         onClick={handleSendButtonClick}
