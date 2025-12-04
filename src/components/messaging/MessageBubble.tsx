@@ -1,4 +1,4 @@
-﻿import {Card, Flex, Text} from "@radix-ui/themes";
+﻿import {Avatar, Card, Flex, Text} from "@radix-ui/themes";
 import type {Message} from "../../types/conversations.ts";
 import type {Bartender} from "../../types/bartenders.ts";
 
@@ -17,10 +17,17 @@ export default function MessageBubble({message}: Props) {
             direction="row"
             gap="2"
             minWidth={"40%"}
-            maxWidth={{initial: "80%", md: "60%"}}
+            maxWidth={{initial: "95%", md: "60%"}}
             style={{alignSelf: onLeftSide ? "start" : "end"}}
             justify={"end"}
         >
+            {bartender ?
+                <Avatar
+                    src={bartender.profile.imagePath}
+                    fallback={bartender.profile.firstName.charAt(0)}
+                    radius="full"
+                /> : null
+            }
             <Card>
                 <Text as="div" size="2" color="gray" align={onLeftSide ? "left" : "right"}>{message.content}</Text>
             </Card>
