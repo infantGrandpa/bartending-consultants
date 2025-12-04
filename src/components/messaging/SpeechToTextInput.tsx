@@ -144,6 +144,8 @@ export default function SpeechToTextInput({onRecognizedText}: Props) {
 
     // We use an AlertDialog instead of a regular one because the AlertDialog is modal.
     // We can't make a Dialog modal (unless we use a primitive which is too much work).
+    //TODO: Remove the use of the Alert Dialog entirely.
+    // If audio transcription is meant to be our preferred form of interaction, then it shouldn't feel separate from the main experience.
     return (
         <AlertDialog.Root open={isRecognizing}>
             <AlertDialog.Trigger>
