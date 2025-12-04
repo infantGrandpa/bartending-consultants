@@ -11,12 +11,7 @@ export default function MessageLog({conversation}:Props) {
         <ScrollArea scrollbars="vertical" mt="9" style={{height: "700px"}}>
             <Flex direction="column" gap="3">
                 {conversation.messages.map((thisMessage: Message, index) => (
-                    <MessageBubble
-                        message={thisMessage.content}
-                        sender={thisMessage.sender}
-                        onLeftSide={!thisMessage.senderIsUser}
-                        key={index}
-                    />
+                    <MessageBubble message={thisMessage} key={index}/>
                 ))}
             </Flex>
         </ScrollArea>
