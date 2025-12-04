@@ -1,6 +1,7 @@
 ﻿import {Flex, IconButton} from "@radix-ui/themes";
 import {useState} from "react";
 import MessageInput from "./MessageInput.tsx";
+import Settings from "../settings/Settings.tsx";
 
 
 export default function MessagingControls() {
@@ -17,9 +18,7 @@ export default function MessagingControls() {
             />}
 
             <Flex direction="row" justify="between" align="end" width="100%">
-                <IconButton variant="soft">
-                    <i className="fa-solid fa-gear"></i>
-                </IconButton>
+                <Settings />
                 {useMicrophone &&
                     <IconButton radius="full" variant="solid"
                                 style={{
