@@ -16,7 +16,7 @@ export default function SelectionPage() {
     }
 
     return (
-        <Grid columns="3" gap="3" width="auto">
+        <Grid columns={{initial: "1", md: "3"}} gap="3" width="auto">
             {bartenderArray.map((thisBartender, index) => (
                 <Flex key={index} direction="column" gap="3">
                     <BartenderCard key={index} bartender={thisBartender}/>
