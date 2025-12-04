@@ -12,12 +12,14 @@ export default function MessagingControls() {
         setUseMicrophone(!useMicrophone);
     }
 
+    const handleSendMessage = (message: string) => {
+        console.log(`Pretending to send the following message: ${message}`);
+    }
+
     return (
         <Flex position="fixed" gap="2" p="3" bottom="0" left="0" width="100%" direction="column">
             {!useMicrophone &&
-                <MessageTextInput
-                    onSendMessage={async () => console.log("Message Sent")}
-                />
+                <MessageTextInput onSendMessage={async (msg) => handleSendMessage(msg)}/>
             }
 
             <Flex direction="row" justify="between" align="end" width="100%">
