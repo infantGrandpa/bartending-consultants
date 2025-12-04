@@ -1,4 +1,4 @@
-﻿import {Flex, IconButton} from "@radix-ui/themes";
+﻿import {Box, Card, Flex, IconButton} from "@radix-ui/themes";
 import {useState} from "react";
 import MessageTextInput from "./MessageTextInput.tsx";
 import Settings from "../settings/Settings.tsx";
@@ -19,23 +19,33 @@ export default function MessagingControls({onSendMessage}:Props) {
         await onSendMessage(message);
     }
 
+    //TODO: Remove the border radius on the bottom card.
+    // For some reason, using bottom border radius styles on the card doesn't affect it.
+    // I even set up CSS styles with !important on both the card and the card's ::before element.
+    // No idea what's causing this.
     return (
-        <Flex position="fixed" gap="2" p="3" bottom="0" left="0" width="100%" direction="column" style={{zIndex: "1"}}>
-            {!useMicrophone &&
-                <MessageTextInput onSendMessage={async (msg) => handleSendMessage(msg)}/>
-            }
+        <Box position="fixed" bottom="0" left="0" width="100%">
+            <Card>
+                <Flex gap="2" direction="column"
+                      style={{zIndex: "1"}}>
 
-            <Flex direction="row" justify="between" align="end" width="100%">
-                <Settings/>
-                {useMicrophone &&
-                    <SpeechToTextInput onRecognizedText={async (msg) => handleSendMessage(msg)} />
-                }
+                    {!useMicrophone &&
+                        <MessageTextInput onSendMessage={async (msg) => handleSendMessage(msg)}/>
+                    }
 
-                <IconButton onMouseDown={handleToggleInputMode}>
-                    <i className={useMicrophone ? 'fa-regular fa-keyboard' : 'fa-solid fa-microphone'}
-                       style={{color: "var(--gray-3)"}}></i>
-                </IconButton>
-            </Flex>
-        </Flex>
+                    <Flex direction="row" justify="between" align="end" width="100%">
+                        <Settings/>
+                        {useMicrophone &&
+                            <SpeechToTextInput onRecognizedText={async (msg) => handleSendMessage(msg)}/>
+                        }
+
+                        <IconButton onMouseDown={handleToggleInputMode}>
+                            <i className={useMicrophone ? 'fa-regular fa-keyboard' : 'fa-solid fa-microphone'}
+                               style={{color: "var(--gray-3)"}}></i>
+                        </IconButton>
+                    </Flex>
+                </Flex>
+            </Card>
+        </Box>
     )
 }
