@@ -1,5 +1,6 @@
 ﻿import {Card, Text} from "@radix-ui/themes";
 import type {Message} from "../../types/conversations.ts";
+import type {Bartender} from "../../types/bartenders.ts";
 
 
 interface Props {
@@ -7,7 +8,7 @@ interface Props {
 }
 
 export default function MessageBubble({message}: Props) {
-    const bartender = message.sendingBartender;
+    const bartender: Bartender | undefined = message.sendingBartender;
 
     const onLeftSide: boolean = Boolean(bartender);
     const sender: string = bartender ? bartender.profile.displayName : "You"
