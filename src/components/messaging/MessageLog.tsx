@@ -12,7 +12,7 @@ export default function MessageLog({conversation}:Props) {
     // For example, the Messages themselves would be scrollable, but the Input would be sticky at the bottom.
     // Take inspo from ChatGPT and Claude
     return (
-        <ScrollArea scrollbars="vertical" style={{height: "700px"}}>
+        <ScrollArea scrollbars="vertical" mt="9" style={{height: "700px"}}>
             <Flex direction="column" gap="3">
                 {conversation.messages.map((thisMessage: Message, index) => (
                     <MessageBubble
