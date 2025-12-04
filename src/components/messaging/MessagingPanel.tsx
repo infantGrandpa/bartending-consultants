@@ -82,13 +82,13 @@ export default function MessagingPanel() {
             activeConversationId = await initializeConversation(messageContent);
         }
 
-        addMessage({sender: "You", content: messageContent, senderIsUser: true})
+        addMessage({content: messageContent})
 
         const {reply, drink} = await sendMessage(messageContent, activeConversationId);
 
         await speakReply(reply);
 
-        addMessage({sender: selectedBartender.profile.displayName, content: reply, senderIsUser: false, drink: drink})
+        addMessage({content: reply, sendingBartender: selectedBartender, drink: drink})
     }
 
     return (

@@ -1,9 +1,9 @@
 ﻿import type {Drink} from "./drinks.ts";
+import type {Bartender} from "./bartenders.ts";
 
 export interface Message {
-    sender: string;
     content: string;
-    senderIsUser: boolean;
+    sendingBartender?: Bartender;
     drink?: Drink;
 }
 
