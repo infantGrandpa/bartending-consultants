@@ -2,17 +2,19 @@
 import ApiKeysSetup from "./ApiKeysSetup.tsx";
 import {useState} from "react";
 import DevControls from "./developer/DevControls.tsx";
+import {useDevSettings} from "../../providers/DevSettingsProvider.tsx";
 
 type SettingsTab = 'api-keys' | 'developer';
 
 export default function Settings() {
     const [activeTab, setActiveTab] = useState<SettingsTab>('api-keys');
+    const {settings} = useDevSettings();
 
     return (
         <Dialog.Root>
             <Dialog.Trigger>
                 <IconButton variant="soft" onClick={() => setActiveTab('api-keys')}>
-                    <i className="fa-solid fa-gear"></i>
+                    <i className={settings.isDevMode ? "fa-solid fa-code" :  "fa-solid fa-gear"}></i>
                 </IconButton>
             </Dialog.Trigger>
 
