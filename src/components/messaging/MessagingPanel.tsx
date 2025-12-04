@@ -1,5 +1,4 @@
-﻿import {Card, Flex, Heading, IconButton} from "@radix-ui/themes";
-import {useBartender} from "../../providers/BartenderProvider.tsx";
+﻿import {useBartender} from "../../providers/BartenderProvider.tsx";
 import {useEffect} from "react";
 import {getSystemPrompt} from "../../types/bartenders.ts";
 import {addResponseToConversation, createConversation} from "../../api/openai.ts";
@@ -94,7 +93,7 @@ export default function MessagingPanel() {
     return (
         <>
             <MessageHeader headerText={selectedBartender ? selectedBartender.profile.displayName : "Nickname"} />
-            <MessagingControls />
+            <MessagingControls onSendMessage={handleSendMessage}/>
         </>
     );
 }

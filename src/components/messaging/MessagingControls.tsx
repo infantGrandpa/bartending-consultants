@@ -4,16 +4,19 @@ import MessageTextInput from "./MessageTextInput.tsx";
 import Settings from "../settings/Settings.tsx";
 import SpeechToTextInput from "./SpeechToTextInput.tsx";
 
+interface Props {
+    onSendMessage: (message: string) => Promise<void>
+}
 
-export default function MessagingControls() {
+export default function MessagingControls({onSendMessage}:Props) {
     const [useMicrophone, setUseMicrophone] = useState<boolean>(true);
 
     const handleToggleInputMode = () => {
         setUseMicrophone(!useMicrophone);
     }
 
-    const handleSendMessage = (message: string) => {
-        console.log(`Pretending to send the following message: ${message}`);
+    const handleSendMessage = async (message: string) => {
+        await onSendMessage(message);
     }
 
     return (
