@@ -11,6 +11,7 @@ import type {Drink} from "../../types/drinks.ts";
 import {useConversation} from "../../providers/ConversationProvider.tsx";
 import MessageHeader from "./MessageHeader.tsx";
 import MessagingControls from "./MessagingControls.tsx";
+import MessageLog from "./MessageLog.tsx";
 
 
 export default function MessagingPanel() {
@@ -93,6 +94,7 @@ export default function MessagingPanel() {
     return (
         <>
             <MessageHeader headerText={selectedBartender ? selectedBartender.profile.displayName : "Nickname"} />
+            <MessageLog/>
             <MessagingControls onSendMessage={handleSendMessage}/>
         </>
     );
