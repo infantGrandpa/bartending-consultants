@@ -6,7 +6,7 @@ interface Props {
     onSendMessage: (message: string) => Promise<void>
 }
 
-export default function MessageInput({onSendMessage}: Props) {
+export default function MessageTextInput({onSendMessage}: Props) {
     const [message, setMessage] = useState<string>("");
     const {selectedBartender} = useBartender();
 

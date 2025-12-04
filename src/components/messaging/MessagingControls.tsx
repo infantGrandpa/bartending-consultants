@@ -1,6 +1,6 @@
 ﻿import {Flex, IconButton} from "@radix-ui/themes";
 import {useState} from "react";
-import MessageInput from "./MessageInput.tsx";
+import MessageTextInput from "./MessageTextInput.tsx";
 import Settings from "../settings/Settings.tsx";
 
 
@@ -13,7 +13,7 @@ export default function MessagingControls() {
 
     return (
         <Flex position="fixed" gap="2" p="3" bottom="0" left="0" width="100%" direction="column">
-            {!useMicrophone && <MessageInput
+            {!useMicrophone && <MessageTextInput
                 onSendMessage={async () => console.log("Message Sent")}
             />}
 
