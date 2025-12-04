@@ -94,7 +94,7 @@ export default function MessagingPanel() {
     return (
         <>
             <MessageHeader headerText={selectedBartender ? selectedBartender.profile.displayName : "Nickname"} />
-            <MessageLog/>
+            <MessageLog conversation={conversation}/>
             <MessagingControls onSendMessage={handleSendMessage}/>
         </>
     );
