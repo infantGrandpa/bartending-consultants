@@ -16,11 +16,18 @@ export default function MessageSidebar() {
                 zIndex: "2"
             }}>
             <Card style={{height: "100%"}}>
-                <Flex direction="row" width="100%">
+                <Flex direction="row" width="100%" justify="between" align="center">
                     <IconButton variant="ghost" onClick={closeSidebar}>
                         <i className="fa-solid fa-martini-glass"></i>
                     </IconButton>
-
+                    <Flex direction="row" gap="2">
+                        <IconButton size="1" variant="soft">
+                            <i className="fa-solid fa-chevron-left"></i>
+                        </IconButton>
+                        <IconButton size="1" variant="soft">
+                            <i className="fa-solid fa-chevron-right"></i>
+                        </IconButton>
+                    </Flex>
                 </Flex>
             </Card>
 
