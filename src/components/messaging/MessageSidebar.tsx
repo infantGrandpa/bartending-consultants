@@ -1,10 +1,26 @@
 ﻿import {Dialog, Flex, IconButton, VisuallyHidden} from "@radix-ui/themes";
 import DrinkDetails from "../DrinkDetails.tsx";
 import {useMessageSidebar} from "../../providers/MessageSidebarProvider.tsx";
-
+import {useConversation} from "../../providers/ConversationProvider.tsx";
+import type {Drink} from "../../types/drinks.ts";
+import {useEffect} from "react";
 
 export default function MessageSidebar() {
-    const {isSidebarOpen, openSidebar, closeSidebar} = useMessageSidebar();
+    const {isSidebarOpen, openSidebar, closeSidebar, currentDrink, setCurrentDrink} = useMessageSidebar();
+    const {getMostRecentDrink} = useConversation();
+
+    useEffect(() => {
+        if (currentDrink) {
+            return;
+        }
+
+        const mostRecentDrink: Drink | undefined = getMostRecentDrink();
+        if (!mostRecentDrink) {
+            return;
+        }
+
+        setCurrentDrink(mostRecentDrink)
+    }, []);
 
     return (
         <Dialog.Root open={isSidebarOpen}>
