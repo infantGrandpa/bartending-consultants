@@ -1,4 +1,4 @@
-﻿import {DataList, Heading, Text} from "@radix-ui/themes";
+﻿import {Avatar, DataList, Flex, Heading, Text} from "@radix-ui/themes";
 import {useConversation} from "../providers/ConversationProvider.tsx";
 import type {Drink, Ingredient} from "../types/drinks.ts";
 
@@ -14,7 +14,10 @@ export default function DrinkDetails() {
 
     return (
         <>
-            <Heading as="h3" size="5" mb="2">{currentDrink.name}</Heading>
+            <Flex direction="row" gap="2" pb="2">
+                <Heading as="h3" size="5" mb="2">{currentDrink.name}</Heading>
+                <Avatar variant="solid" size="5" fallback={currentDrink.name.charAt(0)} />
+            </Flex>
 
             <Heading as="h4" size="3">Ingredients</Heading>
             <DataList.Root size="1" my="2" style={{gap: "0.5rem"}}>
