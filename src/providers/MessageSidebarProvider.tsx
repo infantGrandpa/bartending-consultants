@@ -17,17 +17,11 @@ const SidebarContext = createContext<SidebarContextType>(
 export function MessageSidebarProvider({children}: { children: ReactNode }) {
     const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);
 
-    const handleOpen = () => {
-        console.log("Opening...");
-        console.log(`isSidebarOpen: ${isSidebarOpen}`)
-        setIsSidebarOpen(true);
-    }
-
     return (
         <SidebarContext.Provider
             value={{
                 isSidebarOpen: isSidebarOpen,
-                openSidebar: () => handleOpen(),
+                openSidebar: () => setIsSidebarOpen(true),
                 closeSidebar: () => setIsSidebarOpen(false)
             }}>
             {children}
