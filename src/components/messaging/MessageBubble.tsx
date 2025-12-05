@@ -9,10 +9,15 @@ interface Props {
 }
 
 export default function MessageBubble({message}: Props) {
-    const {openSidebar} = useMessageSidebar();
+    const {openSidebar, setCurrentDrink} = useMessageSidebar();
     const bartender: Bartender | undefined = message.sendingBartender;
 
     const onLeftSide: boolean = Boolean(bartender);
+
+    const openSidebarOnDrink = () => {
+        setCurrentDrink(message.drink);
+        openSidebar();
+    }
 
     return (
         <Flex
@@ -36,7 +41,7 @@ export default function MessageBubble({message}: Props) {
                 </Card>
                 {message.drink ?
                     <Button size={"1"} variant="soft" style={{width: "fit-content"}}
-                            onClick={() => openSidebar()}>
+                            onClick={() => openSidebarOnDrink()}>
                         {message.drink.name}
                         <i className="fa-solid fa-chevron-right fa-xs"></i>
                     </Button> : null
