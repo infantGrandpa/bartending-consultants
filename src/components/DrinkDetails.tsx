@@ -20,7 +20,7 @@ export default function DrinkDetails() {
             </Flex>
 
             <Heading as="h4" size="3">Ingredients</Heading>
-            <DataList.Root size="1" my="2" style={{gap: "0.5rem"}}>
+            <DataList.Root size="1" my="1" style={{rowGap: "var(--space-2)", width: "100%"}}>
                 {currentDrink.ingredients.map((thisIngredient: Ingredient, index: number) => (
                     <DataList.Item key={index}>
                         <DataList.Label minWidth="12rem">{thisIngredient.ingredient}</DataList.Label>
@@ -30,7 +30,7 @@ export default function DrinkDetails() {
             </DataList.Root>
 
             <Heading as="h4" size="3" mt="5">Instructions</Heading>
-            <ol style={{fontSize: "var(--font-size-2)", paddingLeft: "1rem", marginTop: "0.5rem"}}>
+            <ol style={{fontSize: "var(--font-size-2)", paddingLeft: "var(--space-4)", marginTop: "var(--space-2)"}}>
                 {currentDrink.instructions.map((thisStep: string, index: number) => (
                     <li key={index}><Text size="2">{thisStep}</Text></li>
                 ))}
