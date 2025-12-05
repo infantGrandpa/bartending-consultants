@@ -13,7 +13,6 @@ import MessageHeader from "./MessageHeader.tsx";
 import MessagingControls from "./MessagingControls.tsx";
 import MessageLog from "./MessageLog.tsx";
 import {useMessageSidebar} from "../../providers/MessageSidebarProvider.tsx";
-import {Text} from "@radix-ui/themes";
 import MessageSidebar from "./MessageSidebar.tsx";
 
 
@@ -99,7 +98,6 @@ export default function MessagingPanel() {
         <>
             <MessageHeader headerText={selectedBartender ? selectedBartender.profile.displayName : "Nickname"}/>
             <MessageLog conversation={conversation}/>
-            <Text>Sidebar Value: {String(isSidebarOpen)}</Text>
             {isSidebarOpen && <MessageSidebar/>}
             <MessagingControls onSendMessage={handleSendMessage}/>
         </>
