@@ -22,8 +22,8 @@ export default function DrinkDetails() {
             <Heading as="h4" size="3">Ingredients</Heading>
             <DataList.Root size="1" my="1" style={{rowGap: "var(--space-2)", width: "100%"}}>
                 {currentDrink.ingredients.map((thisIngredient: Ingredient, index: number) => (
-                    <DataList.Item key={index}>
-                        <DataList.Label minWidth="12rem">{thisIngredient.ingredient}</DataList.Label>
+                    <DataList.Item key={index} style={{display: "flex"}}>
+                        <DataList.Label style={{flexGrow: "1"}}>{thisIngredient.ingredient}</DataList.Label>
                         <DataList.Value>{thisIngredient.amount}</DataList.Value>
                     </DataList.Item>
                 ))}
