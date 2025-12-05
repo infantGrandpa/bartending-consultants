@@ -12,6 +12,8 @@ import {useConversation} from "../../providers/ConversationProvider.tsx";
 import MessageHeader from "./MessageHeader.tsx";
 import MessagingControls from "./MessagingControls.tsx";
 import MessageLog from "./MessageLog.tsx";
+import {useMessageSidebar} from "../../providers/MessageSidebarProvider.tsx";
+import {Text} from "@radix-ui/themes";
 
 
 export default function MessagingPanel() {
@@ -19,6 +21,7 @@ export default function MessagingPanel() {
     const {conversation, setConversationId, addMessage, clearConversation} = useConversation();
     const {openaiKey, elevenLabsKey} = useApiKeys();
     const {settings} = useDevSettings()
+    const {isSidebarOpen} = useMessageSidebar();
 
     useEffect(() => {
         clearConversation();
@@ -93,8 +96,9 @@ export default function MessagingPanel() {
 
     return (
         <>
-            <MessageHeader headerText={selectedBartender ? selectedBartender.profile.displayName : "Nickname"} />
+            <MessageHeader headerText={selectedBartender ? selectedBartender.profile.displayName : "Nickname"}/>
             <MessageLog conversation={conversation}/>
+            <Text>Sidebar Value: {String(isSidebarOpen)}</Text>
             <MessagingControls onSendMessage={handleSendMessage}/>
         </>
     );
