@@ -21,7 +21,6 @@ export default function MessageSidebar() {
                     position: "fixed",
                     top: "0",
                     right: "0",
-                    backgroundColor: "var(--color-panel-solid)",
                     padding: "var(--space-4)"
                 }}
                 aria-describedby={undefined}
