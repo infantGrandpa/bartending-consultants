@@ -2,7 +2,6 @@
 import DrinkDetails from "../DrinkDetails.tsx";
 import {useMessageSidebar} from "../../providers/MessageSidebarProvider.tsx";
 import {useConversation} from "../../providers/ConversationProvider.tsx";
-import type {Drink} from "../../types/drinks.ts";
 import {useEffect} from "react";
 
 export default function MessageSidebar() {
@@ -14,12 +13,7 @@ export default function MessageSidebar() {
             return;
         }
 
-        const mostRecentDrink: Drink | undefined = getMostRecentDrink();
-        if (!mostRecentDrink) {
-            return;
-        }
-
-        setCurrentDrink(mostRecentDrink)
+        setCurrentDrink(getMostRecentDrink())
     }, []);
 
     return (

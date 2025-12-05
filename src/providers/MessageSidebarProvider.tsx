@@ -5,15 +5,15 @@ interface SidebarContextType {
     isSidebarOpen: boolean;
     openSidebar: () => void;
     closeSidebar: () => void;
-    currentDrink: Drink | null;
-    setCurrentDrink: (drink: Drink | null) => void
+    currentDrink: Drink | undefined;
+    setCurrentDrink: (drink: Drink | undefined) => void
 }
 
 const SidebarContext = createContext<SidebarContextType | undefined>(undefined)
 
 export function MessageSidebarProvider({children}: { children: ReactNode }) {
     const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);
-    const [currentDrink, setCurrentDrink] = useState<Drink | null>(null)
+    const [currentDrink, setCurrentDrink] = useState<Drink | undefined>(undefined)
 
 
     return (
