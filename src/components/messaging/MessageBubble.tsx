@@ -1,6 +1,7 @@
 ﻿import {Avatar, Button, Card, Flex, Text} from "@radix-ui/themes";
 import type {Message} from "../../types/conversations.ts";
 import type {Bartender} from "../../types/bartenders.ts";
+import {useMessageSidebar} from "../../providers/MessageSidebarProvider.tsx";
 
 
 interface Props {
@@ -8,6 +9,7 @@ interface Props {
 }
 
 export default function MessageBubble({message}: Props) {
+    const {openSidebar} = useMessageSidebar();
     const bartender: Bartender | undefined = message.sendingBartender;
 
     const onLeftSide: boolean = Boolean(bartender);
@@ -34,7 +36,7 @@ export default function MessageBubble({message}: Props) {
                 </Card>
                 {message.drink ?
                     <Button size={"1"} variant="soft" style={{width: "fit-content"}}
-                            onClick={() => console.log(message.drink?.instructions)}>
+                            onClick={() => openSidebar()}>
                         {message.drink.name}
                         <i className="fa-solid fa-chevron-right fa-xs"></i>
                     </Button> : null
