@@ -1,5 +1,6 @@
 ﻿import {Box, Card, Flex, IconButton} from "@radix-ui/themes";
 import {useMessageSidebar} from "../../providers/MessageSidebarProvider.tsx";
+import DrinkDetails from "../DrinkDetails.tsx";
 
 
 export default function MessageSidebar() {
@@ -29,6 +30,7 @@ export default function MessageSidebar() {
                         </IconButton>
                     </Flex>
                 </Flex>
+                <DrinkDetails />
             </Card>
 
         </Box>
