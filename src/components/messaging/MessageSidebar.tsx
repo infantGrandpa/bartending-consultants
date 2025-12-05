@@ -1,26 +1,43 @@
-﻿import {Box, Card, Flex, IconButton} from "@radix-ui/themes";
-import {useMessageSidebar} from "../../providers/MessageSidebarProvider.tsx";
+﻿import {Dialog, Flex, IconButton, VisuallyHidden} from "@radix-ui/themes";
 import DrinkDetails from "../DrinkDetails.tsx";
+import {useMessageSidebar} from "../../providers/MessageSidebarProvider.tsx";
 
 
 export default function MessageSidebar() {
-    const {closeSidebar} = useMessageSidebar();
+    const {isSidebarOpen, openSidebar, closeSidebar} = useMessageSidebar();
 
     return (
-        <Box
-            position="fixed"
-            height="100%"
-            width="80%"
-            top="0"
-            right="0"
-            style={{
-                zIndex: "2"
-            }}>
-            <Card style={{height: "100%"}}>
-                <Flex direction="row" width="100%" justify="between" align="center">
-                    <IconButton variant="ghost" onClick={closeSidebar}>
-                        <i className="fa-solid fa-martini-glass"></i>
-                    </IconButton>
+        <Dialog.Root open={isSidebarOpen}>
+            <Dialog.Trigger>
+                <IconButton variant="ghost" onClick={openSidebar}>
+                    <i className="fa-solid fa-martini-glass"></i>
+                </IconButton>
+            </Dialog.Trigger>
+
+            <Dialog.Content
+                width="90%"
+                height="100%"
+                style={{
+                    position: "fixed",
+                    top: "0",
+                    right: "0",
+                    backgroundColor: "var(--color-panel-solid)"
+                }}
+                aria-describedby={undefined}
+                onPointerDownOutside={closeSidebar}
+            >
+                <VisuallyHidden>
+                    <Dialog.Title>
+                        Drink Details
+                    </Dialog.Title>
+                </VisuallyHidden>
+
+                <Flex direction="row" width="100%" justify="between" align="center" pb="2">
+                    <Dialog.Close>
+                        <IconButton variant="ghost" onClick={closeSidebar}>
+                            <i className="fa-solid fa-martini-glass"></i>
+                        </IconButton>
+                    </Dialog.Close>
                     <Flex direction="row" gap="2">
                         <IconButton size="1" variant="soft">
                             <i className="fa-solid fa-chevron-left"></i>
@@ -30,9 +47,8 @@ export default function MessageSidebar() {
                         </IconButton>
                     </Flex>
                 </Flex>
-                <DrinkDetails />
-            </Card>
-
-        </Box>
+                <DrinkDetails/>
+            </Dialog.Content>
+        </Dialog.Root>
     )
 }

@@ -1,7 +1,7 @@
 ﻿import {Box, Card, Flex, Heading, IconButton} from "@radix-ui/themes";
 import {useNavigate} from "react-router";
 import {useBartender} from "../../providers/BartenderProvider.tsx";
-import {useMessageSidebar} from "../../providers/MessageSidebarProvider.tsx";
+import MessageSidebar from "./MessageSidebar.tsx";
 
 interface Props {
     headerText: string;
@@ -9,7 +9,6 @@ interface Props {
 
 export default function MessageHeader({headerText}: Props) {
     const {setSelectedBartender} = useBartender();
-    const {openSidebar} = useMessageSidebar();
     let navigate = useNavigate();
 
     const handleReturn = () => {
@@ -27,9 +26,7 @@ export default function MessageHeader({headerText}: Props) {
                     <Heading as="h1" size="5" style={{lineHeight: "0"}}>
                         {headerText}
                     </Heading>
-                    <IconButton variant="ghost" onClick={openSidebar}>
-                        <i className="fa-solid fa-martini-glass"></i>
-                    </IconButton>
+                    <MessageSidebar/>
                 </Flex>
             </Card>
         </Box>
