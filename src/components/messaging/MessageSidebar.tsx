@@ -63,7 +63,7 @@ export default function MessageSidebar() {
                         </IconButton>
                     </Flex>
                 </Flex>
-                <DrinkDetails/>
+                {currentDrink && <DrinkDetails drink={currentDrink}/>}
             </Dialog.Content>
         </Dialog.Root>
     )
