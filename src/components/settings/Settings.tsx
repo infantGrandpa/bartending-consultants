@@ -6,14 +6,18 @@ import {useDevSettings} from "../../providers/DevSettingsProvider.tsx";
 
 type SettingsTab = 'api-keys' | 'developer';
 
-export default function Settings() {
+interface Props {
+    ghostVariant?: boolean;
+}
+
+export default function Settings({ghostVariant = false}: Props) {
     const [activeTab, setActiveTab] = useState<SettingsTab>('api-keys');
     const {settings} = useDevSettings();
 
     return (
         <Dialog.Root>
             <Dialog.Trigger>
-                <IconButton variant="soft" onClick={() => setActiveTab('api-keys')}>
+                <IconButton variant={ghostVariant ? "ghost" : "soft"} onClick={() => setActiveTab('api-keys')}>
                     <i className={settings.isDevMode ? "fa-solid fa-code" :  "fa-solid fa-gear"}></i>
                 </IconButton>
             </Dialog.Trigger>
