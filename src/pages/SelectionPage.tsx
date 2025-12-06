@@ -23,7 +23,7 @@ export default function SelectionPage() {
                 leftSlot={<Settings ghostVariant={true}/>}
                 headerText="Bartender"
             />
-            <Grid columns={{initial: "1", md: "3"}} gap="3" width="auto" pt={"9"}>
+            <Grid columns={{initial: "1", md: "3"}} gap="3" width="auto">
                 {bartenderArray.map((thisBartender, index) => (
                     <Flex key={index} direction="column" gap="3">
                         <BartenderCard key={index} bartender={thisBartender}/>

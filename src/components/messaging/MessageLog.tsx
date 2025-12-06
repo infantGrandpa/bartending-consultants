@@ -14,7 +14,7 @@ export default function MessageLog({conversation}: Props) {
         messagesEndRef.current?.scrollIntoView({behavior: "smooth"})
     }, [conversation.messages]);
     return (
-        <Box my="9">
+        <Box mb="9">
             <ScrollArea scrollbars="vertical" style={{height: "100%"}}>
                 <Flex direction="column" gap="3">
                     {conversation.messages.map((thisMessage: Message, index) => (
