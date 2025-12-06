@@ -9,19 +9,22 @@ import {speakMessage} from "../../api/elevenLabs.ts";
 import {useDevSettings} from "../../providers/DevSettingsProvider.tsx";
 import type {Drink} from "../../types/drinks.ts";
 import {useConversation} from "../../providers/ConversationProvider.tsx";
-import MessageHeader from "./MessageHeader.tsx";
 import MessagingControls from "./MessagingControls.tsx";
 import MessageLog from "./MessageLog.tsx";
 import {useMessageSidebar} from "../../providers/MessageSidebarProvider.tsx";
 import MessageSidebar from "./MessageSidebar.tsx";
+import Header from "../blocks/Header.tsx";
+import {Heading, IconButton} from "@radix-ui/themes";
+import {useNavigate} from "react-router";
 
 
 export default function MessagingPanel() {
-    const {selectedBartender} = useBartender();
+    const {selectedBartender, setSelectedBartender} = useBartender();
     const {conversation, setConversationId, addMessage, clearConversation} = useConversation();
     const {openaiKey, elevenLabsKey} = useApiKeys();
     const {settings} = useDevSettings()
     const {isSidebarOpen} = useMessageSidebar();
+    let navigate = useNavigate();
 
     useEffect(() => {
         clearConversation();
@@ -94,9 +97,23 @@ export default function MessagingPanel() {
         addMessage({content: reply, sendingBartender: selectedBartender, drink: drink})
     }
 
+    const handleReturn = () => {
+        setSelectedBartender(null);
+        navigate("/");
+    }
+
     return (
         <>
-            <MessageHeader headerText={selectedBartender ? selectedBartender.profile.displayName : "Nickname"}/>
+            <Header>
+                <IconButton onClick={handleReturn} variant="ghost" style={{paddingLeft: "8px"}}>
+                    <i className="fa-solid fa-chevron-left"></i>
+                </IconButton>
+                <Heading as="h1" size="5" style={{lineHeight: "0"}}>
+                    {selectedBartender ? selectedBartender.profile.displayName : "Nickname"}
+                </Heading>
+                <MessageSidebar/>
+            </Header>
+
             <MessageLog conversation={conversation}/>
             {isSidebarOpen && <MessageSidebar/>}
             <MessagingControls onSendMessage={handleSendMessage}/>
