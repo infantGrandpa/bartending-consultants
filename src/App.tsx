@@ -5,8 +5,8 @@ import {BartenderProvider} from "./providers/BartenderProvider.tsx";
 import {DevSettingsProvider} from "./providers/DevSettingsProvider.tsx";
 import {ConversationProvider} from "./providers/ConversationProvider.tsx";
 import {BrowserRouter, Route, Routes} from "react-router";
-import SelectionPage from "./components/SelectionPage.tsx";
-import ChatPage from "./components/ChatPage.tsx";
+import SelectionPage from "./pages/SelectionPage.tsx";
+import ChatPage from "./pages/ChatPage.tsx";
 
 export default function App() {
     return (

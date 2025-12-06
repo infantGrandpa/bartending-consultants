@@ -1,10 +1,10 @@
 ﻿import {Button, Flex, Grid} from "@radix-ui/themes";
 import {type Bartender, bartenders} from "../types/bartenders.ts";
-import BartenderCard from "./bartenders/BartenderCard.tsx";
+import BartenderCard from "../components/bartenders/BartenderCard.tsx";
 import {useBartender} from "../providers/BartenderProvider.tsx";
 import {useNavigate} from "react-router";
-import Header from "./blocks/Header.tsx";
-import Settings from "./settings/Settings.tsx";
+import Header from "../components/blocks/Header.tsx";
+import Settings from "../components/settings/Settings.tsx";
 
 export default function SelectionPage() {
     const {setSelectedBartender} = useBartender();

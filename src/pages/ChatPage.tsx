@@ -1,5 +1,5 @@
-﻿import MessagingPanel from "./messaging/MessagingPanel.tsx";
-import Sidebar from "./Sidebar.tsx";
+﻿import MessagingPanel from "../components/messaging/MessagingPanel.tsx";
+import Sidebar from "../components/Sidebar.tsx";
 import {Box, Grid} from "@radix-ui/themes";
 import {MessageSidebarProvider} from "../providers/MessageSidebarProvider.tsx";
 
