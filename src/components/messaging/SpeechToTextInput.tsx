@@ -105,6 +105,7 @@ export default function SpeechToTextInput({onRecognizedText}: Props) {
             await new Promise(resolve => setTimeout(resolve, 200));
             returnRecognizedText();
             setIsStoppingRecognition(false);
+            setIsRecognizing(false);
             return;
         }
 
