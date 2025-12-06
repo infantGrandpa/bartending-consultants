@@ -1,6 +1,6 @@
 import {ApiKeyProvider} from "./providers/ApiKeyProvider.tsx";
 import "@radix-ui/themes/styles.css";
-import {Box, Container, Theme} from "@radix-ui/themes";
+import {Container, Theme} from "@radix-ui/themes";
 import {BartenderProvider} from "./providers/BartenderProvider.tsx";
 import {DevSettingsProvider} from "./providers/DevSettingsProvider.tsx";
 import {ConversationProvider} from "./providers/ConversationProvider.tsx";
@@ -18,18 +18,13 @@ export default function App() {
                     <ApiKeyProvider>
                         <BartenderProvider>
                             <ConversationProvider>
-                                <Container
-                                    size={{initial: "1", sm: "2", md: "3", xl: "4"}}
-                                    p={{initial: "3", md: "6"}}
-                                    pt="9"
-                                >
-                                    <Box width="100%" mt="2">
+                                <Container size={{initial: "1", sm: "2", md: "3", xl: "4"}} px="3">
                                         <Routes>
                                             <Route path="/" element={<SelectionPage/>}/>
                                             <Route path="/chat" element={<ChatPage/>}/>
                                             <Route path="/setup" element={<SetupPage/>}/>
                                         </Routes>
-                                    </Box>
+
                                 </Container>
                             </ConversationProvider>
                         </BartenderProvider>
