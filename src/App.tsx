@@ -7,6 +7,7 @@ import {ConversationProvider} from "./providers/ConversationProvider.tsx";
 import {BrowserRouter, Route, Routes} from "react-router";
 import SelectionPage from "./pages/SelectionPage.tsx";
 import ChatPage from "./pages/ChatPage.tsx";
+import SetupPage from "./pages/SetupPage.tsx";
 
 export default function App() {
     return (
@@ -21,6 +22,7 @@ export default function App() {
                                     <Routes>
                                         <Route path="/" element={<SelectionPage/>}/>
                                         <Route path="/chat" element={<ChatPage/>}/>
+                                        <Route path="/setup" element={<SetupPage/>}/>
                                     </Routes>
                                 </Container>
                             </ConversationProvider>
