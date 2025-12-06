@@ -11,7 +11,6 @@ import type {Drink} from "../../types/drinks.ts";
 import {useConversation} from "../../providers/ConversationProvider.tsx";
 import MessagingControls from "./MessagingControls.tsx";
 import MessageLog from "./MessageLog.tsx";
-import {useMessageSidebar} from "../../providers/MessageSidebarProvider.tsx";
 import MessageSidebar from "./MessageSidebar.tsx";
 import Header from "../blocks/Header.tsx";
 import {IconButton} from "@radix-ui/themes";
@@ -23,7 +22,6 @@ export default function MessagingPanel() {
     const {conversation, setConversationId, addMessage, clearConversation} = useConversation();
     const {openaiKey, elevenLabsKey} = useApiKeys();
     const {settings} = useDevSettings()
-    const {isSidebarOpen} = useMessageSidebar();
     let navigate = useNavigate();
 
     useEffect(() => {
@@ -113,7 +111,6 @@ export default function MessagingPanel() {
             />
 
             <MessageLog conversation={conversation}/>
-            {isSidebarOpen && <MessageSidebar/>}
             <MessagingControls onSendMessage={handleSendMessage}/>
         </>
     );
