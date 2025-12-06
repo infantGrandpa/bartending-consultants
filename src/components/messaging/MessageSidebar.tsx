@@ -77,10 +77,10 @@ export default function MessageSidebar() {
                         </IconButton>
                     </Dialog.Close>
                     <Flex direction="row" gap="2">
-                        <IconButton size="1" variant="soft" onClick={handlePreviousDrink}  disabled={isFirstDrink}>
+                        <IconButton size="1" variant="soft" onMouseDown={handlePreviousDrink}  disabled={isFirstDrink}>
                             <i className="fa-solid fa-chevron-left"></i>
                         </IconButton>
-                        <IconButton size="1" variant="soft" onClick={handleNextDrink} disabled={isLastDrink}>
+                        <IconButton size="1" variant="soft" onMouseDown={handleNextDrink} disabled={isLastDrink}>
                             <i className="fa-solid fa-chevron-right"></i>
                         </IconButton>
                     </Flex>
