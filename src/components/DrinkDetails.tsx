@@ -13,7 +13,7 @@ export default function DrinkDetails({drink}: Props) {
     return (
         <>
             <Flex direction="row" gap="2" pb="2">
-                <Heading as="h3" size="5" mb="2">{drink.name}</Heading>
+                <Heading as="h3" size="5" mb="2" style={{flexGrow: "1"}}>{drink.name}</Heading>
                 <Avatar variant="solid" size="5" fallback={drink.name.charAt(0)} />
             </Flex>
 
