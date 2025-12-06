@@ -14,7 +14,7 @@ import MessageLog from "./MessageLog.tsx";
 import {useMessageSidebar} from "../../providers/MessageSidebarProvider.tsx";
 import MessageSidebar from "./MessageSidebar.tsx";
 import Header from "../blocks/Header.tsx";
-import {Heading, IconButton} from "@radix-ui/themes";
+import {IconButton} from "@radix-ui/themes";
 import {useNavigate} from "react-router";
 
 
@@ -104,15 +104,13 @@ export default function MessagingPanel() {
 
     return (
         <>
-            <Header>
-                <IconButton onClick={handleReturn} variant="ghost" style={{paddingLeft: "8px"}}>
+            <Header
+                leftSlot={<IconButton onClick={handleReturn} variant="ghost" style={{paddingLeft: "8px"}}>
                     <i className="fa-solid fa-chevron-left"></i>
-                </IconButton>
-                <Heading as="h1" size="5" style={{lineHeight: "0"}}>
-                    {selectedBartender ? selectedBartender.profile.displayName : "Nickname"}
-                </Heading>
-                <MessageSidebar/>
-            </Header>
+                </IconButton>}
+                headerText={selectedBartender ? selectedBartender.profile.displayName : "Nickname"}
+                rightSlot={<MessageSidebar/>}
+            />
 
             <MessageLog conversation={conversation}/>
             {isSidebarOpen && <MessageSidebar/>}
