@@ -11,10 +11,11 @@ import type {Drink} from "../../types/drinks.ts";
 import {useConversation} from "../../providers/ConversationProvider.tsx";
 import MessagingControls from "./MessagingControls.tsx";
 import MessageLog from "./MessageLog.tsx";
-import MessageSidebar from "./MessageSidebar.tsx";
 import Header from "../blocks/Header.tsx";
-import {IconButton} from "@radix-ui/themes";
+import {Box, Grid, IconButton} from "@radix-ui/themes";
 import {useNavigate} from "react-router";
+import SidebarDialog from "../sidebar/SidebarDialog.tsx";
+import DrinkDetailsSidebar from "../sidebar/DrinkDetailsSidebar.tsx";
 
 
 export default function MessagingPanel() {
@@ -100,6 +101,8 @@ export default function MessagingPanel() {
         navigate("/");
     }
 
+    //TODO: figure out how tf to hide the sidebar dialog without breaking everything or it looking like shit
+
     return (
         <>
             <Header
@@ -107,10 +110,21 @@ export default function MessagingPanel() {
                     <i className="fa-solid fa-chevron-left"></i>
                 </IconButton>}
                 headerText={selectedBartender ? selectedBartender.profile.displayName : "Nickname"}
-                rightSlot={<MessageSidebar/>}
+                rightSlot={<SidebarDialog/>}
             />
 
-            <MessageLog conversation={conversation}/>
+            <Grid columns={{initial: "8", md: "12"}} gap="4">
+                <Box style={{gridColumn: "span 8"}}>
+                    <MessageLog conversation={conversation}/>
+                </Box>
+                <Box display={{initial: "none", md: "block"}} style={{gridColumn: "span 4"}}>
+                    <Box pl="4" position="sticky"
+                         style={{insetBlockStart: "82px", borderLeft: "1px solid var(--gray-6)"}}
+                    >
+                        <DrinkDetailsSidebar showCloseButton={false}/>
+                    </Box>
+                </Box>
+            </Grid>
             <MessagingControls onSendMessage={handleSendMessage}/>
         </>
     );
