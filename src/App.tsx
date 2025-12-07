@@ -11,20 +11,25 @@ import SetupPage from "./pages/SetupPage.tsx";
 
 export default function App() {
     return (
-        <Theme accentColor="gold" appearance="dark" grayColor="mauve" radius="medium" scaling="110%"
-               panelBackground="translucent">
+        <Theme
+            accentColor="gold"
+            appearance="dark"
+            grayColor="mauve"
+            radius="medium"
+            scaling="110%"
+            panelBackground="translucent"
+        >
             <BrowserRouter>
                 <DevSettingsProvider>
                     <ApiKeyProvider>
                         <BartenderProvider>
                             <ConversationProvider>
                                 <Container size={{initial: "1", sm: "2", md: "3", xl: "4"}} px="3">
-                                        <Routes>
-                                            <Route path="/" element={<SelectionPage/>}/>
-                                            <Route path="/chat" element={<ChatPage/>}/>
-                                            <Route path="/setup" element={<SetupPage/>}/>
-                                        </Routes>
-
+                                    <Routes>
+                                        <Route path="/" element={<SelectionPage/>}/>
+                                        <Route path="/chat" element={<ChatPage/>}/>
+                                        <Route path="/setup" element={<SetupPage/>}/>
+                                    </Routes>
                                 </Container>
                             </ConversationProvider>
                         </BartenderProvider>
