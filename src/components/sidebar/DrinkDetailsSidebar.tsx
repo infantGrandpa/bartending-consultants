@@ -46,7 +46,7 @@ export default function DrinkDetailsSidebar() {
     }
 
     return (
-        <Flex direction="column" justify="between" height="100%">
+        <Flex direction="column" justify="between" minHeight="75vh">
             <Flex direction="row" width="100%" justify="between" align="center" pb="4">
                 <IconButton variant="ghost" onClick={closeSidebar}>
                     <i className="fa-solid fa-martini-glass"></i>
