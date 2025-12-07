@@ -12,9 +12,10 @@ import {useConversation} from "../../providers/ConversationProvider.tsx";
 import MessagingControls from "./MessagingControls.tsx";
 import MessageLog from "./MessageLog.tsx";
 import Header from "../blocks/Header.tsx";
-import {IconButton} from "@radix-ui/themes";
+import {Box, Grid, IconButton} from "@radix-ui/themes";
 import {useNavigate} from "react-router";
 import SidebarDialog from "../sidebar/SidebarDialog.tsx";
+import DrinkDetailsSidebar from "../sidebar/DrinkDetailsSidebar.tsx";
 
 
 export default function MessagingPanel() {
@@ -110,7 +111,16 @@ export default function MessagingPanel() {
                 rightSlot={<SidebarDialog/>}
             />
 
-            <MessageLog conversation={conversation}/>
+            <Grid columns={{initial: "8", md: "12"}} gap="4">
+                <Box style={{gridColumn: "span 8"}}>
+                    <MessageLog conversation={conversation}/>
+                </Box>
+                <Box display={{initial: "none", md: "block"}} style={{gridColumn: "span 4"}}>
+                    <Box position="sticky" style={{insetBlockStart: "82px"}}>
+                        <DrinkDetailsSidebar/>
+                    </Box>
+                </Box>
+            </Grid>
             <MessagingControls onSendMessage={handleSendMessage}/>
         </>
     );
