@@ -17,11 +17,13 @@ export default function BartenderCard({bartender}: Props) {
             <Flex direction="column" gap="3" height="100%">
                 <Flex direction="row" gap="3">
                     <Avatar size="7" radius="small" src={imageUrl} fallback={profile.firstName.charAt(0)}/>
-                    <Flex direction="column" gap="1">
+                    <Flex direction="column" height="100%" justify="between">
                         <Heading as="h3" size="5">{profile.displayName}</Heading>
-                        <Text size="1">{profile.firstName}, {profile.age}</Text>
-                        <Text size="1">{profile.hometown}</Text>
-                        <Text size="1">{profile.pronouns}</Text>
+                        <Flex direction="column" gap="1">
+                            <Text size="1">{profile.firstName}, {profile.age}</Text>
+                            <Text size="1">{profile.hometown}</Text>
+                            <Text size="1">{profile.pronouns}</Text>
+                        </Flex>
                     </Flex>
                 </Flex>
                 <Text as="p" size="2" style={{flexGrow: "1"}}>{profile.aboutMe}</Text>
