@@ -11,10 +11,10 @@ import type {Drink} from "../../types/drinks.ts";
 import {useConversation} from "../../providers/ConversationProvider.tsx";
 import MessagingControls from "./MessagingControls.tsx";
 import MessageLog from "./MessageLog.tsx";
-import MessageSidebar from "../sidebar/MessageSidebar.tsx";
 import Header from "../blocks/Header.tsx";
 import {IconButton} from "@radix-ui/themes";
 import {useNavigate} from "react-router";
+import SidebarDialog from "../sidebar/SidebarDialog.tsx";
 
 
 export default function MessagingPanel() {
@@ -107,7 +107,7 @@ export default function MessagingPanel() {
                     <i className="fa-solid fa-chevron-left"></i>
                 </IconButton>}
                 headerText={selectedBartender ? selectedBartender.profile.displayName : "Nickname"}
-                rightSlot={<MessageSidebar/>}
+                rightSlot={<SidebarDialog/>}
             />
 
             <MessageLog conversation={conversation}/>
