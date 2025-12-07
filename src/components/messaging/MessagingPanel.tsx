@@ -116,7 +116,9 @@ export default function MessagingPanel() {
                     <MessageLog conversation={conversation}/>
                 </Box>
                 <Box display={{initial: "none", md: "block"}} style={{gridColumn: "span 4"}}>
-                    <Box position="sticky" style={{insetBlockStart: "82px"}}>
+                    <Box pl="4" position="sticky"
+                         style={{insetBlockStart: "82px", borderLeft: "1px solid var(--gray-6)"}}
+                    >
                         <DrinkDetailsSidebar/>
                     </Box>
                 </Box>
