@@ -6,7 +6,11 @@ import {useEffect, useState} from "react";
 import {type Drink} from "../../types/drinks.ts";
 import CopyDrinkButton from "./CopyDrinkButton.tsx";
 
-export default function DrinkDetailsSidebar() {
+interface Props {
+    showCloseButton?: boolean;
+}
+
+export default function DrinkDetailsSidebar({showCloseButton = true}: Props) {
     const {isSidebarOpen, closeSidebar, currentDrink, setCurrentDrink} = useMessageSidebar();
     const {conversation, getMostRecentDrink, getAllDrinks} = useConversation();
     const [isFirstDrink, setIsFirstDrink] = useState<boolean>();
@@ -47,10 +51,12 @@ export default function DrinkDetailsSidebar() {
 
     return (
         <Flex direction="column" justify="between" minHeight="75vh">
-            <Flex direction="row" width="100%" justify="between" align="center" pb="4">
-                <IconButton variant="ghost" onClick={closeSidebar}>
-                    <i className="fa-solid fa-martini-glass"></i>
-                </IconButton>
+            <Flex direction="row" width="100%" justify={showCloseButton ? "between": "end"} align="center" pb="4">
+                {showCloseButton &&
+                    <IconButton variant="ghost" onClick={closeSidebar}>
+                        <i className="fa-solid fa-martini-glass"></i>
+                    </IconButton>
+                }
                 <CopyDrinkButton drink={currentDrink}/>
             </Flex>
             <Box style={{flexGrow: "1"}}>

@@ -119,7 +119,7 @@ export default function MessagingPanel() {
                     <Box pl="4" position="sticky"
                          style={{insetBlockStart: "82px", borderLeft: "1px solid var(--gray-6)"}}
                     >
-                        <DrinkDetailsSidebar/>
+                        <DrinkDetailsSidebar showCloseButton={false}/>
                     </Box>
                 </Box>
             </Grid>
