@@ -44,6 +44,7 @@ export default function MessageSidebar() {
         }
     }
 
+    //TODO: Make copy button actually do something!!
     return (
         <Dialog.Root open={isSidebarOpen}>
             <Dialog.Trigger>
@@ -77,6 +78,8 @@ export default function MessageSidebar() {
                                 <i className="fa-solid fa-martini-glass"></i>
                             </IconButton>
                         </Dialog.Close>
+                        <IconButton variant="ghost" disabled={!currentDrink}>
+                            <i className="fa-solid fa-clone"></i>
                         </IconButton>
                     </Flex>
                     <Box style={{flexGrow: "1"}}>
