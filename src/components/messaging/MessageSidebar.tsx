@@ -1,4 +1,4 @@
-﻿import {Dialog, Flex, IconButton, VisuallyHidden} from "@radix-ui/themes";
+﻿import {Box, Button, Dialog, Flex, IconButton, VisuallyHidden} from "@radix-ui/themes";
 import DrinkDetails from "../DrinkDetails.tsx";
 import {useMessageSidebar} from "../../providers/MessageSidebarProvider.tsx";
 import {useConversation} from "../../providers/ConversationProvider.tsx";
@@ -70,22 +70,27 @@ export default function MessageSidebar() {
                     </Dialog.Title>
                 </VisuallyHidden>
 
-                <Flex direction="row" width="100%" justify="between" align="center" pb="2">
-                    <Dialog.Close>
-                        <IconButton variant="ghost" onClick={closeSidebar}>
-                            <i className="fa-solid fa-martini-glass"></i>
-                        </IconButton>
-                    </Dialog.Close>
-                    <Flex direction="row" gap="2">
-                        <IconButton size="1" variant="soft" onMouseDown={handlePreviousDrink}  disabled={isFirstDrink}>
-                            <i className="fa-solid fa-chevron-left"></i>
-                        </IconButton>
-                        <IconButton size="1" variant="soft" onMouseDown={handleNextDrink} disabled={isLastDrink}>
-                            <i className="fa-solid fa-chevron-right"></i>
+                <Flex direction="column" justify="between" height="100%">
+                    <Flex direction="row" width="100%" justify="between" align="center" pb="4">
+                        <Dialog.Close>
+                            <IconButton variant="ghost" onClick={closeSidebar}>
+                                <i className="fa-solid fa-martini-glass"></i>
+                            </IconButton>
+                        </Dialog.Close>
                         </IconButton>
                     </Flex>
+                    <Box style={{flexGrow: "1"}}>
+                        {currentDrink && <DrinkDetails drink={currentDrink}/>}
+                    </Box>
+                    <Flex direction="row" gap="9" justify="between">
+                        <Button size="2" variant="soft" onMouseDown={handlePreviousDrink} disabled={isFirstDrink}>
+                            <i className="fa-solid fa-chevron-left"></i>Previous
+                        </Button>
+                        <Button size="2" variant="soft" onMouseDown={handleNextDrink} disabled={isLastDrink}>
+                            Next<i className="fa-solid fa-chevron-right"></i>
+                        </Button>
+                    </Flex>
                 </Flex>
-                {currentDrink && <DrinkDetails drink={currentDrink}/>}
             </Dialog.Content>
         </Dialog.Root>
     )
