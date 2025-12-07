@@ -18,7 +18,7 @@ export default function MessageSidebar() {
         }
 
         setCurrentDrink(getMostRecentDrink())
-    }, []);
+    }, [isSidebarOpen]);
 
     useEffect(() => {
         const allDrinks: Drink[] = getAllDrinks();
