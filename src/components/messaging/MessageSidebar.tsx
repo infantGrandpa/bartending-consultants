@@ -3,7 +3,7 @@ import DrinkDetails from "../DrinkDetails.tsx";
 import {useMessageSidebar} from "../../providers/MessageSidebarProvider.tsx";
 import {useConversation} from "../../providers/ConversationProvider.tsx";
 import {useEffect, useState} from "react";
-import type {Drink} from "../../types/drinks.ts";
+import {copyDrinkToClipboard, type Drink} from "../../types/drinks.ts";
 
 export default function MessageSidebar() {
     const {isSidebarOpen, openSidebar, closeSidebar, currentDrink, setCurrentDrink} = useMessageSidebar();
@@ -44,6 +44,14 @@ export default function MessageSidebar() {
         }
     }
 
+    const handleCopyDrink = async () => {
+        if (!currentDrink) {
+            return;
+        }
+        const output = await copyDrinkToClipboard(currentDrink);
+        console.log(output)
+    }
+
     //TODO: Make copy button actually do something!!
     return (
         <Dialog.Root open={isSidebarOpen}>
@@ -78,7 +86,7 @@ export default function MessageSidebar() {
                                 <i className="fa-solid fa-martini-glass"></i>
                             </IconButton>
                         </Dialog.Close>
-                        <IconButton variant="ghost" disabled={!currentDrink}>
+                        <IconButton variant="ghost" disabled={!currentDrink} onMouseDown={handleCopyDrink}>
                             <i className="fa-solid fa-clone"></i>
                         </IconButton>
                     </Flex>
