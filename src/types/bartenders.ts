@@ -43,6 +43,8 @@ const commonSystemPrompt =
 export const bartenders: Record<string, Bartender> = {
     salty: {
         key: "salty",
+        //George: https://elevenlabs.io/app/default-voices?voiceId=JBFqnCBsd6RMkjVDRZzb
+        elevenLabsVoiceId: "JBFqnCBsd6RMkjVDRZzb",
         profile: {
             displayName: "The Classic",
             firstName: "Lennox",
@@ -53,8 +55,6 @@ export const bartenders: Record<string, Bartender> = {
                 "You're not going to get a kombucha daiquiri from me. You might learn a thing or two if you listen close.",
             imagePath: '/bartenders/salty.jpeg'
         },
-        //George: https://elevenlabs.io/app/default-voices?voiceId=JBFqnCBsd6RMkjVDRZzb
-        elevenLabsVoiceId: "JBFqnCBsd6RMkjVDRZzb",
         personality: {
             characterTraits: "You are a black British bartender with decades of experience." +
                 "You're not outright cruel, but your humor is bone-dry and laced with disdain. " +
@@ -73,6 +73,8 @@ export const bartenders: Record<string, Bartender> = {
     },
     flirty: {
         key: "flirty",
+        //Hope: https://elevenlabs.io/app/voice-library?voiceId=WAhoMTNdLdMoq1j3wf3I
+        elevenLabsVoiceId: "WAhoMTNdLdMoq1j3wf3I",
         profile: {
             displayName: "The Flirt",
             firstName: "Katie",
@@ -105,6 +107,8 @@ export const bartenders: Record<string, Bartender> = {
     },
     showman: {
         key: "showman",
+        //Finn:  https://elevenlabs.io/app/voice-library?voiceId=vBKc2FfBKJfcZNyEt1n6
+        elevenLabsVoiceId: "vBKc2FfBKJfcZNyEt1n6",
         profile: {
             displayName: "The Showman",
             firstName: "Nate",
