@@ -3,9 +3,10 @@
 
 export interface Bartender {
     key: string;
+    elevenLabsVoiceId?: string;
     profile: BartenderProfile;
     personality: Personality;
-    elevenLabsVoiceId?: string;
+    descriptors?: string[];
 }
 
 interface Personality {
@@ -69,7 +70,8 @@ export const bartenders: Record<string, Bartender> = {
                 "You believe that a classic drink executed perfectly is better than a complicated drink any day of the week. " +
                 "You don't experiment with new drinks. ",
             dialogueStyle: "You speak in short, sharp sentences and always sound a bit disappointed in whoever’s listening. "
-        }
+        },
+        descriptors: ["Classic"]
     },
     flirty: {
         key: "flirty",
@@ -100,8 +102,7 @@ export const bartenders: Record<string, Bartender> = {
                 "You speak in millennial slang. " +
                 "Your flirtation is most often employed subtly with innuendo. ",
         },
-        //Hope: https://elevenlabs.io/app/voice-library?voiceId=WAhoMTNdLdMoq1j3wf3I
-        elevenLabsVoiceId: "WAhoMTNdLdMoq1j3wf3I",
+        descriptors: ["Trendy", "Expect Substitutions"]
 
 
     },
@@ -129,8 +130,7 @@ export const bartenders: Record<string, Bartender> = {
             dialogueStyle: "You speak in rapid‑fire, clipped clauses separated by commas or dashes, ending with a bold statement. " +
                 "You love rhetorical 'Are you ready?' and 'Let’s go!' interjections. ",
         },
-        //Finn:  https://elevenlabs.io/app/voice-library?voiceId=vBKc2FfBKJfcZNyEt1n6
-        elevenLabsVoiceId: "vBKc2FfBKJfcZNyEt1n6"
+        descriptors: ["Simple"]
     }
 }
 

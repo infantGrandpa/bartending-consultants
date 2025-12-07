@@ -1,4 +1,4 @@
-﻿import {Avatar, Card, Flex, Heading, Text} from "@radix-ui/themes";
+﻿import {Avatar, Badge, Card, Flex, Heading, Text} from "@radix-ui/themes";
 import type {Bartender} from "../../types/bartenders.ts";
 
 interface Props {
@@ -14,7 +14,7 @@ export default function BartenderCard({bartender}: Props) {
 
     return (
         <Card>
-            <Flex direction="column">
+            <Flex direction="column" gap="3">
                 <Flex direction="row" gap="3">
                     <Avatar size="7" radius="small" src={imageUrl} fallback={profile.firstName.charAt(0)}/>
                     <Flex direction="column" gap="1">
@@ -24,7 +24,12 @@ export default function BartenderCard({bartender}: Props) {
                         <Text size="1">{profile.pronouns}</Text>
                     </Flex>
                 </Flex>
-                <Text as="p" size="2" mt={"3"}>{profile.aboutMe}</Text>
+                <Text as="p" size="2">{profile.aboutMe}</Text>
+                <Flex direction="row" gap="2">
+                    {bartender.descriptors?.map((descriptor, index) =>
+                        <Badge key={index} color="gray">{descriptor}</Badge>
+                    )}
+                </Flex>
             </Flex>
         </Card>
     );
