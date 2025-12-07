@@ -101,6 +101,8 @@ export default function MessagingPanel() {
         navigate("/");
     }
 
+    //TODO: figure out how tf to hide the sidebar dialog without breaking everything or it looking like shit
+
     return (
         <>
             <Header
