@@ -116,7 +116,7 @@ export const bartenders: Record<string, Bartender> = {
             displayName: "The Showman",
             firstName: "Nate",
             age: "24",
-            hometown: "Fresno",
+            hometown: "Fresno, California",
             pronouns: "he/him",
             aboutMe: "I live for big moves, sharp smiles, and the sound of bottles cutting through the air. " +
                 "My cocktails keep it simple so the flair can go wild. " +
