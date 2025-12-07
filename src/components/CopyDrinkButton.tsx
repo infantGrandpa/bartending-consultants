@@ -13,8 +13,7 @@ export default function CopyDrinkButton({drink}: Props) {
         if (!drink) {
             return;
         }
-        const output = await copyDrinkToClipboard(drink);
-        console.log(output)
+        await copyDrinkToClipboard(drink);
         setDrinkWasCopied(true);
 
         setTimeout(() => {
