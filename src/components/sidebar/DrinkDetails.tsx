@@ -1,5 +1,5 @@
 ﻿import {Avatar, DataList, Flex, Heading, Text} from "@radix-ui/themes";
-import type {Drink, Ingredient} from "../types/drinks.ts";
+import type {Drink, Ingredient} from "../../types/drinks.ts";
 
 interface Props {
     drink: Drink;

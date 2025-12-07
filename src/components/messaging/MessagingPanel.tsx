@@ -11,7 +11,7 @@ import type {Drink} from "../../types/drinks.ts";
 import {useConversation} from "../../providers/ConversationProvider.tsx";
 import MessagingControls from "./MessagingControls.tsx";
 import MessageLog from "./MessageLog.tsx";
-import MessageSidebar from "./MessageSidebar.tsx";
+import MessageSidebar from "../sidebar/MessageSidebar.tsx";
 import Header from "../blocks/Header.tsx";
 import {IconButton} from "@radix-ui/themes";
 import {useNavigate} from "react-router";

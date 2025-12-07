@@ -1,5 +1,5 @@
 ﻿import {IconButton, Popover, Text} from "@radix-ui/themes";
-import {copyDrinkToClipboard, type Drink} from "../types/drinks.ts";
+import {copyDrinkToClipboard, type Drink} from "../../types/drinks.ts";
 import {useState} from "react";
 
 interface Props {

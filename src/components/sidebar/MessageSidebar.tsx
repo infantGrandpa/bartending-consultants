@@ -1,10 +1,10 @@
 ﻿import {Box, Button, Dialog, Flex, IconButton, VisuallyHidden} from "@radix-ui/themes";
-import DrinkDetails from "../DrinkDetails.tsx";
+import DrinkDetails from "./DrinkDetails.tsx";
 import {useMessageSidebar} from "../../providers/MessageSidebarProvider.tsx";
 import {useConversation} from "../../providers/ConversationProvider.tsx";
 import {useEffect, useState} from "react";
 import {type Drink} from "../../types/drinks.ts";
-import CopyDrinkButton from "../CopyDrinkButton.tsx";
+import CopyDrinkButton from "./CopyDrinkButton.tsx";
 
 export default function MessageSidebar() {
     const {isSidebarOpen, openSidebar, closeSidebar, currentDrink, setCurrentDrink} = useMessageSidebar();
