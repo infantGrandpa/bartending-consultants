@@ -22,7 +22,7 @@ export default function DrinkDetailsSidebar({showCloseButton = true}: Props) {
         }
 
         setCurrentDrink(getMostRecentDrink())
-    }, [isSidebarOpen]);
+    }, [isSidebarOpen, conversation]);
 
     useEffect(() => {
         const allDrinks: Drink[] = getAllDrinks();
