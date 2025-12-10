@@ -24,7 +24,7 @@ export default function App() {
                     <ApiKeyProvider>
                         <BartenderProvider>
                             <ConversationProvider>
-                                <Container size={{initial: "1", sm: "2", md: "3", xl: "4"}} px="3">
+                                <Container size={{initial: "1", sm: "3", md: "4"}} px="3">
                                     <Routes>
                                         <Route path="/" element={<SelectionPage/>}/>
                                         <Route path="/chat" element={<ChatPage/>}/>
