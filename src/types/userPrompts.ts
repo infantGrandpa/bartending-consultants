@@ -2,7 +2,7 @@
 
 export const genericPrompts: string[] = [
     "What spirits do you like?",
-    "Do you like smokey, sour, fruity, or other flavors?",
+    "Do you like smoky, sour, fruity, or other flavors?",
     "Do you want something light, balanced, or spirit-forward?",
     "What kind of mood are you in tonight?",
     "Are you looking for something new or familiar?",
