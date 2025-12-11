@@ -122,7 +122,10 @@ export default function MessagingPanel() {
 
             <Grid columns={{initial: "8", md: "12"}} gap="4">
                 <Box style={{gridColumn: "span 8"}}>
-                    {conversation.messages.length === 0 ? <UserPrompts/> : <MessageLog conversation={conversation}/>}
+                    {conversation.messages.length === 0 ?
+                        <UserPrompts bartender={selectedBartender}/> :
+                        <MessageLog conversation={conversation}/>
+                    }
                 </Box>
                 <Box display={{initial: "none", md: "block"}} style={{gridColumn: "span 4"}}>
                     <Box pl="4" position="sticky"
