@@ -8,7 +8,7 @@ export default function UserPrompts() {
     return (
         <Flex direction="column" justify="between" align="center" my="6" gap="5" p="3">
             {userPrompts.map((thisPrompt: string, index: number)=> (
-                <Badge key={index} size="3" variant="soft" asChild>
+                <Badge key={index} size="3" variant="soft" radius="large" asChild>
                     <Text wrap="wrap" align="center">{thisPrompt}</Text>
                 </Badge>
             ))}
