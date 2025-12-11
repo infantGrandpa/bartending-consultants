@@ -74,7 +74,7 @@ export const bartenders: Record<string, Bartender> = {
         },
         descriptors: ["Classic"],
         customPrompts: [
-            "You know what your base spirit should be?",
+            "What's your base spirit tonight?",
             "Do you want to sip a drink or toss it back?"
         ]
     },
