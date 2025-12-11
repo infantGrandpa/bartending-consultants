@@ -20,6 +20,7 @@ import UserPrompts from "./UserPrompts.tsx";
 
 
 export default function MessagingPanel() {
+    //TODO: Preserve selected bartender between refreshes
     const {selectedBartender, setSelectedBartender} = useBartender();
     const {conversation, setConversationId, addMessage, clearConversation} = useConversation();
     const {openaiKey, elevenLabsKey} = useApiKeys();
@@ -102,6 +103,11 @@ export default function MessagingPanel() {
         navigate("/");
     }
 
+    if (!selectedBartender) {
+        handleReturn();
+        return;
+    }
+
     //TODO: figure out how tf to hide the sidebar dialog without breaking everything or it looking like shit
 
     return (
@@ -110,7 +116,7 @@ export default function MessagingPanel() {
                 leftSlot={<IconButton onClick={handleReturn} variant="ghost" style={{paddingLeft: "8px"}}>
                     <i className="fa-solid fa-chevron-left"></i>
                 </IconButton>}
-                headerText={selectedBartender ? selectedBartender.profile.displayName : "Nickname"}
+                headerText={selectedBartender.profile.displayName}
                 rightSlot={<SidebarDialog/>}
             />
 
