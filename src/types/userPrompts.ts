@@ -9,6 +9,7 @@
 ]
 
 
-export function getBartenderPrompts(): string[] {
-    return genericPrompts;
+export function getRandomUserPrompts(promptsToGet: number): string[] {
+    const shuffledPrompts: string[] = [...genericPrompts].sort(() => Math.random() - 0.5);
+    return shuffledPrompts.slice(0, promptsToGet);
 }
