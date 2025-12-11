@@ -1,4 +1,6 @@
-﻿export const genericPrompts: string[] = [
+﻿import type {Bartender} from "./bartenders.ts";
+
+export const genericPrompts: string[] = [
     "What spirits do you like?",
     "Do you like smokey, sour, fruity, or other flavors?",
     "Do you want something light, balanced, or spirit-forward?",
@@ -8,7 +10,19 @@
     "What flavors do you hate?"
 ]
 
-export function getRandomUserPrompts(promptsToGet: number): string[] {
-    const shuffledPrompts: string[] = [...genericPrompts].sort(() => Math.random() - 0.5);
+export function getRandomGenericUserPrompts(promptsToGet: number): string[] {
+    return getRandomPromptsFromArray(genericPrompts, promptsToGet);
+}
+
+export function getRandomBartenderUserPrompts(bartender: Bartender, promptsToGet: number): string[] | null {
+    if (!bartender.customPrompts) {
+        return null;
+    }
+
+    return getRandomPromptsFromArray(bartender.customPrompts, promptsToGet);
+}
+
+function getRandomPromptsFromArray(array: string[], promptsToGet: number): string[] {
+    const shuffledPrompts: string[] = [...array].sort(() => Math.random() - 0.5);
     return shuffledPrompts.slice(0, promptsToGet);
 }
