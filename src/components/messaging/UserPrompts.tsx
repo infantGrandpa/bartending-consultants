@@ -26,8 +26,8 @@ export default function UserPrompts({bartender}: Props) {
             ))}
 
 
-            {userPrompts.map((thisPrompt: string, index: number)=> (
-                <Badge key={index} size="3" variant="soft" radius="large" asChild>
+            {userPrompts.map((thisPrompt: string, index: number) => (
+                <Badge key={index} size="3" variant="soft" radius="large" color="gray" asChild>
                     <Text wrap="wrap" align="center">{thisPrompt}</Text>
                 </Badge>
             ))}
