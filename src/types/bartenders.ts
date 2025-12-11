@@ -7,6 +7,7 @@ export interface Bartender {
     profile: BartenderProfile;
     personality: Personality;
     descriptors?: string[];
+    customPrompts?: string[];
 }
 
 interface Personality {
@@ -71,7 +72,11 @@ export const bartenders: Record<string, Bartender> = {
                 "You don't experiment with new drinks. ",
             dialogueStyle: "You speak in short, sharp sentences and always sound a bit disappointed in whoever’s listening. "
         },
-        descriptors: ["Classic"]
+        descriptors: ["Classic"],
+        customPrompts: [
+            "You know what your base spirit should be?",
+            "Do you want to sip a drink or toss it back?"
+        ]
     },
     flirty: {
         key: "flirty",
@@ -104,7 +109,12 @@ export const bartenders: Record<string, Bartender> = {
                 "You speak in millennial slang. " +
                 "Your flirtation is most often employed subtly with innuendo. ",
         },
-        descriptors: ["Trendy", "Expect Substitutions"]
+        descriptors: ["Trendy", "Expect Substitutions"],
+        customPrompts: [
+            "What color do you want your drink?",
+            "Are you feeling romantic, adventurous, or mysterious tonight?",
+            "Are you looking for a good Insta post or a drink just for us?"
+        ]
 
 
     },
@@ -135,7 +145,11 @@ export const bartenders: Record<string, Bartender> = {
             dialogueStyle: "You speak in rapid‑fire, clipped clauses separated by commas or dashes, ending with a bold statement. " +
                 "You love rhetorical 'Are you ready?' and 'Let’s go!' interjections. ",
         },
-        descriptors: ["Simple"]
+        descriptors: ["Simple"],
+        customPrompts: [
+            "Quick: Sipper or slammer?",
+            "You want smooth, strong, or showtime?"
+        ]
     }
 }
 
