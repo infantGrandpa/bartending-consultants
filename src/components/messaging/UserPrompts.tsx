@@ -7,10 +7,11 @@ interface Props {
 }
 
 export default function UserPrompts({bartender}: Props) {
-    const bartenderPrompts = getRandomBartenderUserPrompts( bartender, 1);
+    const bartenderPrompts = getRandomBartenderUserPrompts(bartender, 1);
 
     const userPromptCount = bartenderPrompts ? 2 : 3;
     const userPrompts = getRandomGenericUserPrompts(userPromptCount);
+
     return (
         <Flex direction="column" justify="between" align="center" gap="4" p="3">
             <Avatar
@@ -19,7 +20,7 @@ export default function UserPrompts({bartender}: Props) {
                 size="8"
                 radius="full"
             />
-            {bartenderPrompts && bartenderPrompts.map((thisPrompt: string, index: number)=> (
+            {bartenderPrompts && bartenderPrompts.map((thisPrompt: string, index: number) => (
                 <Text size="3" key={index} align="center">
                     <Quote>{thisPrompt}</Quote>
                 </Text>
