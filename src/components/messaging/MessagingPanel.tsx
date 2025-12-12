@@ -16,9 +16,11 @@ import {Box, Grid, IconButton} from "@radix-ui/themes";
 import {useNavigate} from "react-router";
 import SidebarDialog from "../sidebar/SidebarDialog.tsx";
 import DrinkDetailsSidebar from "../sidebar/DrinkDetailsSidebar.tsx";
+import UserPrompts from "./UserPrompts.tsx";
 
 
 export default function MessagingPanel() {
+    //TODO: Preserve selected bartender between refreshes
     const {selectedBartender, setSelectedBartender} = useBartender();
     const {conversation, setConversationId, addMessage, clearConversation} = useConversation();
     const {openaiKey, elevenLabsKey} = useApiKeys();
@@ -101,6 +103,11 @@ export default function MessagingPanel() {
         navigate("/");
     }
 
+    if (!selectedBartender) {
+        handleReturn();
+        return;
+    }
+
     //TODO: figure out how tf to hide the sidebar dialog without breaking everything or it looking like shit
 
     return (
@@ -109,13 +116,16 @@ export default function MessagingPanel() {
                 leftSlot={<IconButton onClick={handleReturn} variant="ghost" style={{paddingLeft: "8px"}}>
                     <i className="fa-solid fa-chevron-left"></i>
                 </IconButton>}
-                headerText={selectedBartender ? selectedBartender.profile.displayName : "Nickname"}
+                headerText={selectedBartender.profile.displayName}
                 rightSlot={<SidebarDialog/>}
             />
 
             <Grid columns={{initial: "8", md: "12"}} gap="4">
                 <Box style={{gridColumn: "span 8"}}>
-                    <MessageLog conversation={conversation}/>
+                    {conversation.messages.length === 0 ?
+                        <UserPrompts bartender={selectedBartender}/> :
+                        <MessageLog conversation={conversation}/>
+                    }
                 </Box>
                 <Box display={{initial: "none", md: "block"}} style={{gridColumn: "span 4"}}>
                     <Box pl="4" position="sticky"
