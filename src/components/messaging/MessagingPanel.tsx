@@ -114,7 +114,7 @@ export default function MessagingPanel() {
     return (
         <>
             <Header
-                leftSlot={<ExitChatAlert onClear={handleReturn}/>}
+                leftSlot={<ExitChatAlert onClear={handleReturn} conversation={conversation}/>}
                 headerText={selectedBartender.profile.displayName}
                 rightSlot={<SidebarDialog/>}
             />

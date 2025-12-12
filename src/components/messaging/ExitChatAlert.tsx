@@ -1,14 +1,22 @@
 ﻿import {AlertDialog, Button, Flex, IconButton} from "@radix-ui/themes";
+import type {Conversation} from "../../types/conversations.ts";
 
 interface Props {
     onClear: () => void;
+    conversation: Conversation;
 }
 
-export default function ExitChatAlert({onClear}: Props) {
+export default function ExitChatAlert({onClear, conversation}: Props) {
+    const handleExitOnEmptyConversation = () => {
+        if (!conversation.conversationId || conversation.messages.length === 0) {
+            onClear();
+        }
+    }
+
     return (
         <AlertDialog.Root>
             <AlertDialog.Trigger>
-                <IconButton variant="ghost" style={{paddingLeft: "8px"}}>
+                <IconButton variant="ghost" style={{paddingLeft: "8px"}} onClick={handleExitOnEmptyConversation}>
                     <i className="fa-solid fa-chevron-left"></i>
                 </IconButton>
             </AlertDialog.Trigger>
