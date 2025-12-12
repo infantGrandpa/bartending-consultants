@@ -50,6 +50,8 @@ export async function createConversation(systemPrompt: string, userMessage: stri
 export async function addResponseToConversation(message: string, conversationId: string, openAiKey: string, useDummyMessages: boolean) {
     if (useDummyMessages) {
         console.log('DEV MODE: Generating mock response...');
+        const delayInMilliseconds: number = Math.floor(Math.random() * 4000) + 1000;
+        await new Promise(resolve => setTimeout(resolve, delayInMilliseconds));
         return generateMockResponse(message);
     }
 
