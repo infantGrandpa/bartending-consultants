@@ -1,4 +1,4 @@
-﻿import {AlertDialog, Button, Flex, IconButton} from "@radix-ui/themes";
+﻿import {AlertDialog, Button, Flex, IconButton, Text} from "@radix-ui/themes";
 import type {Conversation} from "../../types/conversations.ts";
 
 interface Props {
@@ -24,9 +24,10 @@ export default function ExitChatAlert({onClear, conversation}: Props) {
             <AlertDialog.Content>
                 <AlertDialog.Title>Clear Chat History</AlertDialog.Title>
                 <AlertDialog.Description>
-                    Returning to the bartender selection page will clear chat and drink history. This cannot be undone.
+                    Returning to the bartender selection page will clear your chat and drink history.
                 </AlertDialog.Description>
-                <Flex direction="row" justify="end" gap="3" mt="4">
+                <Text mt="2" as="p">This cannot be undone.</Text>
+                <Flex direction="row" justify={{initial: "between", md: "end"}} gap="3" mt="4">
                     <AlertDialog.Cancel>
                         <Button variant="soft" color="gray">
                             Cancel
