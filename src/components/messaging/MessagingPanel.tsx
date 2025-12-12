@@ -12,11 +12,12 @@ import {useConversation} from "../../providers/ConversationProvider.tsx";
 import MessagingControls from "./MessagingControls.tsx";
 import MessageLog from "./MessageLog.tsx";
 import Header from "../blocks/Header.tsx";
-import {Box, Grid, IconButton} from "@radix-ui/themes";
+import {Box, Grid} from "@radix-ui/themes";
 import {useNavigate} from "react-router";
 import SidebarDialog from "../sidebar/SidebarDialog.tsx";
 import DrinkDetailsSidebar from "../sidebar/DrinkDetailsSidebar.tsx";
 import UserPrompts from "./UserPrompts.tsx";
+import ExitChatAlert from "./ExitChatAlert.tsx";
 
 
 export default function MessagingPanel() {
@@ -113,9 +114,7 @@ export default function MessagingPanel() {
     return (
         <>
             <Header
-                leftSlot={<IconButton onClick={handleReturn} variant="ghost" style={{paddingLeft: "8px"}}>
-                    <i className="fa-solid fa-chevron-left"></i>
-                </IconButton>}
+                leftSlot={<ExitChatAlert onClear={handleReturn} conversation={conversation}/>}
                 headerText={selectedBartender.profile.displayName}
                 rightSlot={<SidebarDialog/>}
             />
