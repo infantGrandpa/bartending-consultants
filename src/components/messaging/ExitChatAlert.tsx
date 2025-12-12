@@ -1,7 +1,10 @@
 ﻿import {AlertDialog, Button, Flex, IconButton} from "@radix-ui/themes";
 
+interface Props {
+    onClear: () => void;
+}
 
-export default function ExitChatAlert() {
+export default function ExitChatAlert({onClear}: Props) {
     return (
         <AlertDialog.Root>
             <AlertDialog.Trigger>
@@ -22,7 +25,7 @@ export default function ExitChatAlert() {
                         </Button>
                     </AlertDialog.Cancel>
                     <AlertDialog.Action>
-                        <Button color="red">
+                        <Button color="red" onClick={onClear}>
                             Clear History
                         </Button>
                     </AlertDialog.Action>
