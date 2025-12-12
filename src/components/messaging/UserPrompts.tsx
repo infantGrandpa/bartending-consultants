@@ -13,7 +13,7 @@ export default function UserPrompts({bartender}: Props) {
     const userPrompts = getRandomGenericUserPrompts(userPromptCount);
 
     return (
-        <Flex direction="column" justify="between" align="center" gap="4" p="3">
+        <Flex direction="column" justify="between" align="center" mt="6" gap="4" p="3">
             <Avatar
                 src={bartender.profile.imagePath}
                 fallback={bartender.profile.firstName.charAt(0)}
