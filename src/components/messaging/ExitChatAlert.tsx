@@ -15,14 +15,14 @@ export default function ExitChatAlert() {
                 <AlertDialog.Description>
                     Returning to the bartender selection page will clear chat and drink history. This cannot be undone.
                 </AlertDialog.Description>
-                <Flex direction="row">
+                <Flex direction="row" justify="end" gap="3" mt="4">
                     <AlertDialog.Cancel>
-                        <Button>
+                        <Button variant="soft" color="gray">
                             Cancel
                         </Button>
                     </AlertDialog.Cancel>
                     <AlertDialog.Action>
-                        <Button>
+                        <Button color="red">
                             Clear History
                         </Button>
                     </AlertDialog.Action>
