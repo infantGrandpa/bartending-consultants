@@ -26,7 +26,7 @@ export default function ApiKeysSetup() {
         }
 
         setTempAzureKeys(storedAzureKeys);
-    }, []);
+    }, [openaiKey, elevenLabsKey, azureKeys]);
 
     const handleSave = () => {
         if (!tempOpenaiKey) {

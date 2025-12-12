@@ -8,6 +8,7 @@ interface ConversationContextValue {
     addMessage: (message: Message) => void;
     clearConversation: () => void;
     getMostRecentDrink: () => Drink | undefined;
+    getAllDrinks: () => Drink[];
 }
 
 const ConversationContext= createContext<ConversationContextValue | undefined>(undefined);
@@ -44,13 +45,20 @@ export function ConversationProvider({children}: { children: ReactNode }) {
         return undefined;
     };
 
+    const getAllDrinks = (): Drink[] => {
+        return conversation.messages
+            .filter((message: Message) => message.drink !== undefined)
+            .map((message: Message) => message.drink as Drink);
+    };
+
     return (
         <ConversationContext.Provider value={{
             conversation,
             setConversationId,
             addMessage,
             clearConversation,
-            getMostRecentDrink
+            getMostRecentDrink,
+            getAllDrinks
         }}>
             {children}
         </ConversationContext.Provider>

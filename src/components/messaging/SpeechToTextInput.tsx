@@ -105,6 +105,7 @@ export default function SpeechToTextInput({onRecognizedText}: Props) {
             await new Promise(resolve => setTimeout(resolve, 200));
             returnRecognizedText();
             setIsStoppingRecognition(false);
+            setIsRecognizing(false);
             return;
         }
 
@@ -144,15 +145,21 @@ export default function SpeechToTextInput({onRecognizedText}: Props) {
 
     // We use an AlertDialog instead of a regular one because the AlertDialog is modal.
     // We can't make a Dialog modal (unless we use a primitive which is too much work).
+    //TODO: Remove the use of the Alert Dialog entirely.
+    // If audio transcription is meant to be our preferred form of interaction, then it shouldn't feel separate from the main experience.
     return (
         <AlertDialog.Root open={isRecognizing}>
             <AlertDialog.Trigger>
-                <IconButton
-                    variant="outline"
-                    loading={isStoppingRecognition}
-                    onClick={startContinuousSttFromMic}
+                <IconButton radius="full" variant="solid"
+                            style={{
+                                color: "var(--gray-3)",
+                                width: "64px",
+                                height: "64px"
+                            }}
+                            loading={isStoppingRecognition}
+                            onClick={startContinuousSttFromMic}
                 >
-                    <i className="fa-solid fa-microphone"></i>
+                    <i className="fa-solid fa-microphone fa-xl"></i>
                 </IconButton>
             </AlertDialog.Trigger>
 

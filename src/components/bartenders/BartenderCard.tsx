@@ -1,33 +1,37 @@
-﻿import {Box, Card, Flex, Heading, Inset, Text} from "@radix-ui/themes";
-import {useBartender} from "../../providers/BartenderProvider.tsx";
-import BartenderDataList from "./BartenderDataList.tsx";
+﻿import {Avatar, Badge, Card, Flex, Heading, Text} from "@radix-ui/themes";
+import type {Bartender} from "../../types/bartenders.ts";
 
-export default function BartenderCard() {
-    const {selectedBartender} = useBartender();
+interface Props {
+    bartender: Bartender;
+}
+
+export default function BartenderCard({bartender}: Props) {
+    const profile = bartender.profile;
 
     const placeholderImageUrl: string = "https://placehold.co/574x861/030712/white?text=Choose+a+Bartender&font=roboto"
-    const imageUrl: string = selectedBartender?.profile.imagePath ?? placeholderImageUrl;
+    const imageUrl: string = profile.imagePath ?? placeholderImageUrl;
+
 
     return (
-        <Card>
-            <Flex>
-                <Inset side="left" clip="padding-box" pr="current" style={{
-                    minWidth: "35%"
-                }}>
-                    <img
-                        src={imageUrl}
-                        alt={`${selectedBartender?.profile.displayName} Bartender`}
-                        style={{
-                            objectFit: "cover",
-                            height: "100%"
-                        }}
-                    />
-                </Inset>
-                <Box minWidth="65%">
-                    <Heading as="h3" size="4">{selectedBartender?.profile.displayName}</Heading>
-                    <BartenderDataList/>
-                    <Text as="p" size="2" mt={"3"}>{selectedBartender?.profile.aboutMe}</Text>
-                </Box>
+        <Card style={{flexGrow: "1"}}>
+            <Flex direction="column" gap="3" height="100%">
+                <Flex direction="row" gap="3">
+                    <Avatar size="7" radius="small" src={imageUrl} fallback={profile.firstName.charAt(0)}/>
+                    <Flex direction="column" height="100%" justify="between">
+                        <Heading as="h3" size="5">{profile.displayName}</Heading>
+                        <Flex direction="column" gap="1">
+                            <Text size="1">{profile.firstName}, {profile.age}</Text>
+                            <Text size="1">{profile.hometown}</Text>
+                            <Text size="1">{profile.pronouns}</Text>
+                        </Flex>
+                    </Flex>
+                </Flex>
+                <Text as="p" size="2" style={{flexGrow: "1"}}>{profile.aboutMe}</Text>
+                <Flex direction="row" gap="2">
+                    {bartender.descriptors?.map((descriptor, index) =>
+                        <Badge key={index} color="gray">{descriptor}</Badge>
+                    )}
+                </Flex>
             </Flex>
         </Card>
     );

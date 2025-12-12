@@ -14,7 +14,8 @@
     "microsoft-cognitiveservices-speech-sdk": "^1.46.0",
     "radix-ui": "^1.4.3",
     "react": "^19.1.1",
-    "react-dom": "^19.1.1"
+    "react-dom": "^19.1.1",
+    "react-router": "^7.9.6"
   },
   "devDependencies": {
     "@eslint/js": "^9.36.0",

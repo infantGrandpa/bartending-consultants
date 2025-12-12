@@ -158,8 +158,7 @@ export default function RecordingIndicator({onErrorChange}: Props) {
                 <>
                     <Box position="absolute" width={getCircleSize()} height={getCircleSize()} style={{
                         borderRadius: "100%",
-                        backgroundColor: "var(--ba-main-color)",
-                        opacity: "0.5",
+                        backgroundColor: "var(--accent-5)",
                         transition: "width 50ms ease-out, height 50ms ease-out",
                         zIndex: -1
                     }}/>

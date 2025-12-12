@@ -3,9 +3,11 @@
 
 export interface Bartender {
     key: string;
+    elevenLabsVoiceId?: string;
     profile: BartenderProfile;
     personality: Personality;
-    elevenLabsVoiceId?: string;
+    descriptors?: string[];
+    customPrompts?: string[];
 }
 
 interface Personality {
@@ -15,7 +17,7 @@ interface Personality {
     dialogueStyle?: string;
 }
 
-interface BartenderProfile {
+export interface BartenderProfile {
     displayName: string;
     firstName: string;
     age: string;
@@ -43,18 +45,18 @@ const commonSystemPrompt =
 export const bartenders: Record<string, Bartender> = {
     salty: {
         key: "salty",
+        //George: https://elevenlabs.io/app/default-voices?voiceId=JBFqnCBsd6RMkjVDRZzb
+        elevenLabsVoiceId: "JBFqnCBsd6RMkjVDRZzb",
         profile: {
             displayName: "The Classic",
             firstName: "Lennox",
             age: "55",
             hometown: "Brixton, London",
             pronouns: "he/him",
-            aboutMe: "I'm not here to share my life story. I make good drinks that you've actually heard of. " +
-                "You're not going to get a kombucha daiquiri from me. You might learn a thing or two if you listen close.",
+            aboutMe: "I’ve been behind the bar long enough to know what matters: precision, history, and leaving foolish trends to children. " +
+                "I perfect the classics, nothing more, nothing less. If you want substance over spectacle, I’ll pour it properly.",
             imagePath: '/bartenders/salty.jpeg'
         },
-        //George: https://elevenlabs.io/app/default-voices?voiceId=JBFqnCBsd6RMkjVDRZzb
-        elevenLabsVoiceId: "JBFqnCBsd6RMkjVDRZzb",
         personality: {
             characterTraits: "You are a black British bartender with decades of experience." +
                 "You're not outright cruel, but your humor is bone-dry and laced with disdain. " +
@@ -69,16 +71,25 @@ export const bartenders: Record<string, Bartender> = {
                 "You believe that a classic drink executed perfectly is better than a complicated drink any day of the week. " +
                 "You don't experiment with new drinks. ",
             dialogueStyle: "You speak in short, sharp sentences and always sound a bit disappointed in whoever’s listening. "
-        }
+        },
+        descriptors: ["Classic"],
+        customPrompts: [
+            "What's your base spirit tonight?",
+            "Do you want to sip a drink or toss it back?"
+        ]
     },
     flirty: {
         key: "flirty",
+        //Hope: https://elevenlabs.io/app/voice-library?voiceId=WAhoMTNdLdMoq1j3wf3I
+        elevenLabsVoiceId: "WAhoMTNdLdMoq1j3wf3I",
         profile: {
             displayName: "The Flirt",
             firstName: "Katie",
             age: "32",
             hometown: "Lower East Side, Manhattan",
             pronouns: "she/her",
+            aboutMe: "I mix drinks the way I live: bold, colorful, and fun. If a drink doesn’t have attitude, then Katie didn't pour it. " +
+                "Stick around and I’ll make something that suits your aesthetic perfectly.",
             imagePath: '/bartenders/flirt.jpeg'
         },
         personality: {
@@ -98,19 +109,28 @@ export const bartenders: Record<string, Bartender> = {
                 "You speak in millennial slang. " +
                 "Your flirtation is most often employed subtly with innuendo. ",
         },
-        //Hope: https://elevenlabs.io/app/voice-library?voiceId=WAhoMTNdLdMoq1j3wf3I
-        elevenLabsVoiceId: "WAhoMTNdLdMoq1j3wf3I",
+        descriptors: ["Trendy", "Expect Substitutions"],
+        customPrompts: [
+            "What color do you want your drink?",
+            "Are you feeling romantic, adventurous, or mysterious tonight?",
+            "Are you looking for a good Insta post or a drink just for us?"
+        ]
 
 
     },
     showman: {
         key: "showman",
+        //Finn:  https://elevenlabs.io/app/voice-library?voiceId=vBKc2FfBKJfcZNyEt1n6
+        elevenLabsVoiceId: "vBKc2FfBKJfcZNyEt1n6",
         profile: {
             displayName: "The Showman",
             firstName: "Nate",
             age: "24",
-            hometown: "Fresno",
+            hometown: "Fresno, California",
             pronouns: "he/him",
+            aboutMe: "I live for big moves, sharp smiles, and the sound of bottles cutting through the air. " +
+                "My cocktails keep it simple so the flair can go wild. " +
+                "If you want excitement with your pour, my hands are warmed up.",
             imagePath: '/bartenders/showman.jpeg'
         },
         personality: {
@@ -125,8 +145,11 @@ export const bartenders: Record<string, Bartender> = {
             dialogueStyle: "You speak in rapid‑fire, clipped clauses separated by commas or dashes, ending with a bold statement. " +
                 "You love rhetorical 'Are you ready?' and 'Let’s go!' interjections. ",
         },
-        //Finn:  https://elevenlabs.io/app/voice-library?voiceId=vBKc2FfBKJfcZNyEt1n6
-        elevenLabsVoiceId: "vBKc2FfBKJfcZNyEt1n6"
+        descriptors: ["Simple"],
+        customPrompts: [
+            "Quick: Sipper or slammer?",
+            "You want smooth, strong, or showtime?"
+        ]
     }
 }
 

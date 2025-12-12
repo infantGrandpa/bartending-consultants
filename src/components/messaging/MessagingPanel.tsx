@@ -1,7 +1,4 @@
-﻿import MessageLog from "./MessageLog.tsx";
-import MessageInput from "./MessageInput.tsx";
-import {Em, Flex, Text} from "@radix-ui/themes";
-import {useBartender} from "../../providers/BartenderProvider.tsx";
+﻿import {useBartender} from "../../providers/BartenderProvider.tsx";
 import {useEffect} from "react";
 import {getSystemPrompt} from "../../types/bartenders.ts";
 import {addResponseToConversation, createConversation} from "../../api/openai.ts";
@@ -12,13 +9,23 @@ import {speakMessage} from "../../api/elevenLabs.ts";
 import {useDevSettings} from "../../providers/DevSettingsProvider.tsx";
 import type {Drink} from "../../types/drinks.ts";
 import {useConversation} from "../../providers/ConversationProvider.tsx";
+import MessagingControls from "./MessagingControls.tsx";
+import MessageLog from "./MessageLog.tsx";
+import Header from "../blocks/Header.tsx";
+import {Box, Grid, IconButton} from "@radix-ui/themes";
+import {useNavigate} from "react-router";
+import SidebarDialog from "../sidebar/SidebarDialog.tsx";
+import DrinkDetailsSidebar from "../sidebar/DrinkDetailsSidebar.tsx";
+import UserPrompts from "./UserPrompts.tsx";
 
 
 export default function MessagingPanel() {
-    const {selectedBartender} = useBartender();
+    //TODO: Preserve selected bartender between refreshes
+    const {selectedBartender, setSelectedBartender} = useBartender();
     const {conversation, setConversationId, addMessage, clearConversation} = useConversation();
     const {openaiKey, elevenLabsKey} = useApiKeys();
     const {settings} = useDevSettings()
+    let navigate = useNavigate();
 
     useEffect(() => {
         clearConversation();
@@ -82,28 +89,53 @@ export default function MessagingPanel() {
             activeConversationId = await initializeConversation(messageContent);
         }
 
-        addMessage({sender: "You", content: messageContent, senderIsUser: true})
+        addMessage({content: messageContent})
 
         const {reply, drink} = await sendMessage(messageContent, activeConversationId);
 
         await speakReply(reply);
 
-        addMessage({sender: selectedBartender.profile.displayName, content: reply, senderIsUser: false, drink: drink})
+        addMessage({content: reply, sendingBartender: selectedBartender, drink: drink})
     }
 
+    const handleReturn = () => {
+        setSelectedBartender(null);
+        navigate("/");
+    }
+
+    if (!selectedBartender) {
+        handleReturn();
+        return;
+    }
+
+    //TODO: figure out how tf to hide the sidebar dialog without breaking everything or it looking like shit
+
     return (
-        <Flex direction="column" gridColumn="span 2" justify="end">
-            <MessageLog />
-            <Flex direction="column">
-                <MessageInput onSendMessage={handleSendMessage}/>
-                <Text as="p" size={"1"} align="right" style={{
-                    paddingTop: "0.25rem",
-                    color: "gray",
-                    fontSize: "0.7rem"
-                }}>
-                    <Em>ID: {conversation.conversationId}</Em>
-                </Text>
-            </Flex>
-        </Flex>
+        <>
+            <Header
+                leftSlot={<IconButton onClick={handleReturn} variant="ghost" style={{paddingLeft: "8px"}}>
+                    <i className="fa-solid fa-chevron-left"></i>
+                </IconButton>}
+                headerText={selectedBartender.profile.displayName}
+                rightSlot={<SidebarDialog/>}
+            />
+
+            <Grid columns={{initial: "8", md: "12"}} gap="4">
+                <Box style={{gridColumn: "span 8"}}>
+                    {conversation.messages.length === 0 ?
+                        <UserPrompts bartender={selectedBartender}/> :
+                        <MessageLog conversation={conversation}/>
+                    }
+                </Box>
+                <Box display={{initial: "none", md: "block"}} style={{gridColumn: "span 4"}}>
+                    <Box pl="4" position="sticky"
+                         style={{insetBlockStart: "82px", borderLeft: "1px solid var(--gray-6)"}}
+                    >
+                        <DrinkDetailsSidebar showCloseButton={false}/>
+                    </Box>
+                </Box>
+            </Grid>
+            <MessagingControls onSendMessage={handleSendMessage}/>
+        </>
     );
 }
