@@ -1,4 +1,4 @@
-﻿import {Avatar, Button, Card, Flex, Text} from "@radix-ui/themes";
+﻿import {Avatar, Button, Card, Flex, Skeleton, Text} from "@radix-ui/themes";
 import type {Message} from "../../types/conversations.ts";
 import type {Bartender} from "../../types/bartenders.ts";
 import {useMessageSidebar} from "../../providers/MessageSidebarProvider.tsx";
@@ -19,6 +19,12 @@ export default function MessageBubble({message}: Props) {
         openSidebar();
     }
 
+    const messageContent = message.content ? message.content :
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. " +
+        "Nunc condimentum diam non tellus elementum, vitae tristique massa tristique. " +
+        "Quisque lacinia eros in velit dignissim aliquam sed sed odio. " +
+        "Mauris volutpat hendrerit finibus. Cras sed metus nam."
+
     return (
         <Flex
             direction="row"
@@ -37,7 +43,11 @@ export default function MessageBubble({message}: Props) {
             }
             <Flex direction="column" gap="2" align="end">
                 <Card>
-                    <Text as="div" size="2" color="gray" align={onLeftSide ? "left" : "right"}>{message.content}</Text>
+                    <Skeleton loading={!message.content}>
+                        <Text as="div" size="2" color="gray" align={onLeftSide ? "left" : "right"}>
+                            {messageContent}
+                        </Text>
+                    </Skeleton>
                 </Card>
                 {message.drink ?
                     <Button size={"1"} variant="soft" style={{width: "fit-content"}}

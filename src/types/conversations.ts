@@ -2,7 +2,7 @@
 import type {Bartender} from "./bartenders.ts";
 
 export interface Message {
-    content: string;
+    content: string | null;
     sendingBartender?: Bartender;
     drink?: Drink;
 }

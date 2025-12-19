@@ -23,7 +23,7 @@ import ExitChatAlert from "./ExitChatAlert.tsx";
 export default function MessagingPanel() {
     //TODO: Preserve selected bartender between refreshes
     const {selectedBartender, setSelectedBartender} = useBartender();
-    const {conversation, setConversationId, addMessage, clearConversation} = useConversation();
+    const {conversation, setConversationId, addMessage, clearConversation, removeEmptyMessages} = useConversation();
     const {openaiKey, elevenLabsKey} = useApiKeys();
     const {settings} = useDevSettings()
     let navigate = useNavigate();
@@ -91,11 +91,13 @@ export default function MessagingPanel() {
         }
 
         addMessage({content: messageContent})
+        addMessage({content: null, sendingBartender: selectedBartender})
 
         const {reply, drink} = await sendMessage(messageContent, activeConversationId);
 
         await speakReply(reply);
 
+        removeEmptyMessages();
         addMessage({content: reply, sendingBartender: selectedBartender, drink: drink})
     }
 
