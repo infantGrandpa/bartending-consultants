@@ -7,6 +7,7 @@ interface ConversationContextValue {
     setConversationId: (conversationId: string) => void;
     addMessage: (message: Message) => void;
     clearConversation: () => void;
+    removeEmptyMessages: () => void;
     getMostRecentDrink: () => Drink | undefined;
     getAllDrinks: () => Drink[];
 }
@@ -36,6 +37,16 @@ export function ConversationProvider({children}: { children: ReactNode }) {
         setConversation(defaultConversation);
     }
 
+    // To show that we're waiting on a response from the API, we create a message with content set to null.
+    // That way, we can create a skeleton to show feedback to the user.
+    // Once that message comes in, we need to remove it. This was a nice quick and easy way to do so.
+    const removeEmptyMessages = () => {
+        setConversation(previousConversation => ({
+            ...previousConversation,
+            messages: previousConversation.messages.filter(message => message.content !== null)
+        }));
+    };
+
     const getMostRecentDrink = (): Drink | undefined => {
         for (let i = conversation.messages.length - 1; i >= 0; i--) {
             if (conversation.messages[i].drink) {
@@ -57,6 +68,7 @@ export function ConversationProvider({children}: { children: ReactNode }) {
             setConversationId,
             addMessage,
             clearConversation,
+            removeEmptyMessages,
             getMostRecentDrink,
             getAllDrinks
         }}>
